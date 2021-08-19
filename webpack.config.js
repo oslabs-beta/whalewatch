@@ -1,11 +1,12 @@
 const path = require('path');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 
 module.exports = {
-  entry: path.join(__dirname, './server/index.js'),
+  entry: path.join(__dirname, './client/index.js'),
   devServer: {
     historyApiFallback: true,
-    hot: true,
     proxy: {
       '/graphql': {
         target: 'http://localhost:3000',
@@ -13,8 +14,11 @@ module.exports = {
       }
     }
   },
-  plugins:[
-    new NodePolyfillPlugin()
+  plugins: [
+    new NodePolyfillPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./client/index.html",
+    }),
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -49,10 +53,13 @@ module.exports = {
       }
     ]
   },
-  target: 'node',
-  externals: {
-    express: 'require(express)'
-  }
-  
+  // target: 'node',
+  // externals: {
+  //   express: 'require(express)'
+  // },
+  resolve: {
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: [".js", ".jsx"],
+  },
 }
 
