@@ -4,11 +4,15 @@ const app = express();
 const graphqlHTTP = require('express-graphql');
 const PORT = 3000;
 
+//need cors to connect our front end + back
 app.use(express.json());
 
+//use our graphql middleware. only to one endpoint
 // app.use('/graphql', graphqlHTTP({
-
+//   schema,
+//   graphiql:true
 // }))
+
 
 //allow access to our index.html folder
 app.use('/', express.static(path.join(__dirname, '../client')));
