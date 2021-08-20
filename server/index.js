@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const graphqlHTTP = require('express-graphql');
 const PORT = 3000;
+//make sure to import schema 
 
 //need cors to connect our front end + back
 app.use(express.json());
