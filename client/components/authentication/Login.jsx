@@ -8,9 +8,10 @@ import {
 } from '@apollo/client';
 
 
-const Authentication = (props) => {
+const Login = (props) => {
   //add state
   const [userData, setUserData] = useState({ username: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState({ value: '' });
   const history = useHistory();
   //function to handle changing username
   const handleUsernameInputChange = (e) => {
@@ -35,29 +36,37 @@ const Authentication = (props) => {
   };
 
   return (
-    <div className='login-page'>
+    <div className='login-page text-center'>
+      <h2>Log In</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          id="username"
-          className="form-field"
-          type="text"
-          name="username"
-          placeholder="username"
-          value={userData.username}
-          onChange={handleUsernameInputChange}
-        />
-        <input
-          id="password"
-          className="form-field"
-          type="password"
-          name="username"
-          placeholder="password"
-          value={userData.password}
-          onChange={handlePasswordInputChange}
-        />
-        <input className="form-button" type="submit" value="login" />
+        <div className='form-group'>
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            className="form-field form-control"
+            type="text"
+            name="username"
+            placeholder="username"
+            value={userData.username}
+            onChange={handleUsernameInputChange}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            className="form-field form-control"
+            type="password"
+            name="username"
+            placeholder="password"
+            value={userData.password}
+            onChange={handlePasswordInputChange}
+          />
+        </div>
+        <input className="form-button btn btn-primary" type="submit" value="Log in" />
       </form>
-      <Link className="signup-or-login" to='/signup'>Sign up</Link>
+      <div>
+        <Link className="signup-or-login" to='/signup'>Sign up</Link></div>
     </div>
   )
 
@@ -67,4 +76,4 @@ const Authentication = (props) => {
 
 
 
-export default Authentication;
+export default Login;
