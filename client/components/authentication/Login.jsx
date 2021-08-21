@@ -38,9 +38,10 @@ const Login = (props) => {
   };
 
   return (
-    <div className='login-page text-center'>
+    <div className='login-page text-center container'>
       <h2>Log In</h2>
       <form onSubmit={handleSubmit}>
+
         <div className='form-group'>
           <label htmlFor="username">Username</label>
           <input
@@ -66,6 +67,7 @@ const Login = (props) => {
           />
         </div>
         <input className="form-button btn btn-primary" type="submit" value="Log in" />
+
       </form>
       <div>
         <Link className="signup-or-login" to='/signup'>Sign up</Link></div>
