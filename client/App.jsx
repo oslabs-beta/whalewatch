@@ -6,6 +6,7 @@ import authentication from './components/authentication/authentication';
 // import listOfContainers from './components/afterLogin/listOfContainers';
 // import dashBoard from './components/afterLogin/dashBoard';
 // import notification from './components/afterLogin/notification';
+import Form from './components/authentication/SignUp/form'
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <Switch>
           {/* //     <ProtectedRoute exact={true} path="/"> <container /> </ProtectedRoute> */}
           <Route path="/authentication" component={authentication} />
+          <Route path="/signup" component={Form} />
           {/* //     <Route path="/listOfContainers" component={listOfContainers} />
     //     <Route path="/dashBoard" component={dashBoard} />
     //     <Route path="/notification" component={notification} /> */}
