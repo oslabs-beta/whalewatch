@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
+import Auth from "../../Auth";
 //unsure if we need the below - more research required
 import {
   useQuery,
@@ -31,7 +32,8 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //do some graphql request here
-
+    //if successful, invoke authenticate
+    Auth.authenticate();
     history.push('/');
   };
 
