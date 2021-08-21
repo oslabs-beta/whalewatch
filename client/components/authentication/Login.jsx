@@ -7,7 +7,16 @@ import {
   useQuery,
   gql
 } from '@apollo/client';
-
+//   const LOGIN_MUTATION = gql`
+//   mutation LoginMutation(
+//     $username: String!
+//     $password: String!
+//   ) {
+//     login(email: $email, password: $password) {
+//       token
+//     }
+//   }
+// `;
 
 const Login = (props) => {
   //add state
@@ -28,6 +37,18 @@ const Login = (props) => {
       ...userData, password: e.target.value,
     }));
   };
+
+  // const [login] = useMutation(LOGIN_MUTATION, {
+  //   variables: {
+  //     email: userData.email,
+  //     password: userData.password
+  //   },
+  //   onCompleted: ({ login }) => {
+  //     //something with cookies here
+  //     Auth.isAuthenticated();
+  //     history.push('/');
+  //   }
+  // });
 
   const handleSubmit = (e) => {
     e.preventDefault();
