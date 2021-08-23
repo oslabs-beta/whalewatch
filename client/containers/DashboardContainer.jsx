@@ -8,12 +8,21 @@ import NetIOChart from "../components/dashboard/NetIOChart";
 
 const DashboardContainer = (props) => {
 
+  const [listOfContainers, setListOfContainers] = useState([]);
+  //need piece of state for stats
+
+  //functionality to grab list of containers here
+
+  //functionality to grab stats here
+
   return (
     <>
+      {/* render navbar here */}
       <div>
-        <WhaleChart />
+        <WhaleChart listOfContainers={listOfContainers} />
       </div>
       <div>
+        {/* the below need to be passed the appropriate stats */}
         <AverageCPUChart />
         <AverageMemoryChart />
         <NetIOChart />
