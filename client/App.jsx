@@ -4,7 +4,8 @@ import Login from './components/authentication/Login';
 import DashboardContainer from './containers/DashboardContainer';
 import ContainersContainer from './containers/ContainersContainer';
 import NotificationsContainer from './containers/NotificationsContainer';
-// import navBar from './components/afterLogin/navBar'
+import NavBar from './components/NavBar/NavBar';
+
 // import listOfContainers from './components/afterLogin/listOfContainers';
 // import dashBoard from './components/afterLogin/dashBoard';
 // import notification from './components/afterLogin/notification';
@@ -15,8 +16,8 @@ const App = () => {
   return (
     <>
       <Router>
-        <h1>WhaleWatch</h1>
         <Switch>
+          <Route exact path="/nav" component={NavBar} />
           <Route exact path="/dashboard" component={DashboardContainer} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Form} />
