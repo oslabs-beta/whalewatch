@@ -44,13 +44,18 @@ module.exports = {
       },
       {
         test: /\.(sa|sc|c)ss$/,
+        // test: /\.css$/i,
         use: [
           'style-loader',
           'css-loader',
           'postcss-loader',
           'sass-loader',
         ],
-      }
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
     ]
   },
   // target: 'node',
