@@ -5,19 +5,19 @@ import Auth from "../../Auth";
 
 //unsure if we need the below - more research required
 import {
-  useQuery,
+  useMutation,
   gql
 } from '@apollo/client';
-//   const LOGIN_MUTATION = gql`
-//   mutation LoginMutation(
-//     $username: String!
-//     $password: String!
-//   ) {
-//     login(email: $email, password: $password) {
-//       token
-//     }
-//   }
-// `;
+const LOGIN_MUTATION = gql`
+  mutation LoginMutation(
+    $username: String!
+    $password: String!
+  ) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
 
 const Login = (props) => {
   //add state
@@ -39,17 +39,17 @@ const Login = (props) => {
     }));
   };
 
-  // const [login] = useMutation(LOGIN_MUTATION, {
-  //   variables: {
-  //     email: userData.email,
-  //     password: userData.password
-  //   },
-  //   onCompleted: ({ login }) => {
-  //     //something with cookies here
-  //     Auth.isAuthenticated();
-  //     history.push('/');
-  //   }
-  // });
+  const [login] = useMutation(LOGIN_MUTATION, {
+    variables: {
+      email: userData.email,
+      password: userData.password
+    },
+    onCompleted: ({ login }) => {
+      //something with cookies here
+      Auth.isAuthenticated();
+      history.push('/');
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
