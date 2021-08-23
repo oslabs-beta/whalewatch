@@ -4,6 +4,7 @@ const Auth = {
   isAuthenticated: false,
   authenticate() {
     this.isAuthenticated = true;
+    //set cookies???
   },
   signout() {
     this.isAuthenticated = false;
