@@ -9,12 +9,12 @@ import {
   gql
 } from '@apollo/client';
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation(
+  mutation validateUser(
     $username: String!
     $password: String!
   ) {
     login(email: $email, password: $password) {
-      token
+      id
     }
   }
 `;
@@ -56,7 +56,7 @@ const Login = (props) => {
     //do some graphql request here
     //if successful, invoke authenticate
     Auth.authenticate();
-    history.push('/');
+    history.push('/dashboard');
   };
 
   return (
@@ -88,7 +88,7 @@ const Login = (props) => {
             onChange={handlePasswordInputChange}
           />
         </div>
-        <input className="form-button btn btn-primary" type="submit" value="Log in" />
+        <input className="form-button btn btn-primary" type="submit" value="Log in" onClick={login} />
 
       </form>
       <div>
