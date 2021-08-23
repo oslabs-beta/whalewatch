@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import SignUpForm from './signUpForm.js';
+import SignUpForm from './SignUpForm.js';
 import SignUpSuccess from './signUpSuccess.js';
 
 const Form = () => {
@@ -13,7 +13,8 @@ const Form = () => {
         <div>
             {/* if user sign up sucessfully, we show the message of: Your Account Is Created! from the signUpSuccess; else give the form again */}
             {/* need to understand the passing props of submitForm={submitForm} */}
-            {!formIsSubmit ? <SignUpForm submitForm={submitForm} /> : <SignUpSuccess />}
+            {/* {!formIsSubmit ? <SignUpForm submitForm={submitForm} /> : <SignUpSuccess />} */}
+            <SignUpForm submitForm={submitForm} /> 
         </div>
     )
 };
