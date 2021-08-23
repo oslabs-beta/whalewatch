@@ -8,12 +8,13 @@ import DashboardContainer from './containers/DashboardContainer';
 // import listOfContainers from './components/afterLogin/listOfContainers';
 // import dashBoard from './components/afterLogin/dashBoard';
 // import notification from './components/afterLogin/notification';
-
+import Form from './components/authentication/form'
+import './styles.scss';
 
 const App = () => {
   return (
     <>
-      <h1>WhaleWatch</h1>
+
       <Router>
         {/* <navBar /> */}
 
@@ -21,6 +22,7 @@ const App = () => {
         <Switch>
           <ProtectedRoute exact path="/" component={DashboardContainer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Form} />
           {/* //     <Route path="/listOfContainers" component={listOfContainers} />
     //     <Route path="/dashBoard" component={dashBoard} />
     //     <Route path="/notification" component={notification} /> */}
