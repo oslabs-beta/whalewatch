@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Validation from './validation.js';
 import {useMutation,gql} from '@apollo/client';
 import { Link, useHistory } from "react-router-dom";
-import logo from './logo.gif';
+import logo from '../../assets/logo.gif';
 
 const REGISTER_USER = gql`
 mutation addUser (
@@ -66,6 +66,7 @@ const SignUpForm = (props) => {
 
     return (
         <div className='login-page text-center container'>
+            <div className='board'>
           <img src={logo} className='logo'/>
             <h1 className='test'>Welcome! Create Your Account.</h1>
             <form className='form-group col-md-5 col-lg-5 mx-auto'>
@@ -89,6 +90,7 @@ const SignUpForm = (props) => {
                 </div>
             </form>
             <Link className="signup-or-login" to='/login'>Already Have An Account?</Link>
+        </div>
         </div>
 
 

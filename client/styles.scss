@@ -2,14 +2,90 @@
 margin-top: 8%;
 margin-bottom:3%;
 font-size: 30px;
-color:rgb(0, 0, 0);
+color:#292b36;
 font-family: 'Nunito Sans', sans-serif;
 font-weight:semi-bold;
 }
 
 .logo{
-    margin-top: 20%;
+    margin-top: 5%;
     width:198px;
-height: 151px;
+    height: 151px;
 }
 
+.board {
+     margin-top: 10%;
+     border: 1px solid rgb(232, 238, 248);
+     border-radius:15px;
+    //  background-color:rgb(199, 214, 243)
+}
+
+
+
+
+// Nav Bar 
+
+.vertical-nav{
+    margin-top:3%;
+    margin-left: 1%;
+    width: 25%;
+    height: max-content;
+}
+
+//logo real size: 294 × 189
+.logo-no-text{
+    margin-top:3%;
+    margin-left:3%;
+    margin-bottom: 5%;
+    width:176.4px;
+    height:113.4px
+}
+
+.menulist{
+    margin:50px;
+    margin-bottom: 200px;
+}
+
+li {
+    margin-top: 25px;
+  
+}
+
+a:link {
+    color:#404253;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size:1.2em;
+    text-decoration: none;
+}
+
+a:visited {
+    color:#404253;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size:1.2em;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#48A1F8;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size:1.2em;
+    text-decoration: none;
+}
+
+// a:active {
+//     color:#404253;
+//     font-family: 'Nunito Sans', sans-serif;
+//     font-weight: 500;
+//     font-size:1.2em;
+// }
+
+//397 × 49
+.logo-text-only{
+    margin-top:90%;
+    margin-left:5%;
+    width:158.8px;
+    height:19.6px;
+}
