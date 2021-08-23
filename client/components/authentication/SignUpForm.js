@@ -53,6 +53,7 @@ const SignUpForm = (props) => {
 
     return (
         <div className='login-page text-center container'>
+            <div className='board'>
           <img src={logo} className='logo'/>
             <h1 className='test'>Welcome! Create Your Account.</h1>
             <form className='form-group col-md-5 col-lg-5 mx-auto'>
@@ -76,6 +77,7 @@ const SignUpForm = (props) => {
                 </div>
             </form>
             <Link className="signup-or-login" to='/login'>Already Have An Account?</Link>
+            </div>
         </div>
 
 
