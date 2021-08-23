@@ -1,10 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import Validation from './validation.js';
-import {useQuery,gql} from '@apollo/client';
+import {useMutation,gql} from '@apollo/client';
 import { Link, useHistory } from "react-router-dom";
 import logo from '../../assets/logo.gif';
 
-
+const REGISTER_USER = gql`
+mutation addUser (
+  $username: String!
+  $email: String!
+  $password: String!
+) {
+  addUser(
+      username: $username
+      email: $email
+      password: $password
+    )
+}
+`
 
 const SignUpForm = (props) => {
     const {submitForm} = props;
@@ -26,12 +38,13 @@ const SignUpForm = (props) => {
 
     };
 
-    // const [addUser, {laoding}] = useMutation(REGISTER_USER, {
-    //   update(_,result){
-    //     conosle.log(result)
-    //   },
-    //   variables: inputValues
-    // })
+    const [addUser] = useMutation(REGISTER_USER, {
+      variables: inputValues,
+      onCompleted:({signup}) => {
+        Auth.isAuthenticated();
+      history.push('/');
+      }
+    })
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -84,20 +97,6 @@ const SignUpForm = (props) => {
     )
 }
 
-// const REGISTER_USER = gql`
-// mutation register (
-//   $username: String!
-//   $email: String!
-//   $password: String!
-// ) {
-//   register(
-//     registerInput:{
-//       username: $username
-//       email: $email
-//       password: $password
-//     }
-//   )
-// }
-// `
+
 
 export default SignUpForm

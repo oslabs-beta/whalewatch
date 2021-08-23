@@ -25,5 +25,5 @@ CREATE TABLE IF NOT EXISTS stats (
   pids integer NOT NULL,
   reqPerMin integer
 )
-
+ 
 module.exports = tables;
