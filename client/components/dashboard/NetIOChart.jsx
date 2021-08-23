@@ -6,7 +6,7 @@ const NetIOChart = (props) => {
   //stats will be received from the container
 
   return (
-    <h3>Average Net IO</h3>
+    <h3>Average Net I/O</h3>
     //render a chart here
   )
 
