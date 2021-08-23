@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS stats (
   timestamp date NOT NULL,
   cpuUsage integer NOT NULL,
   memUsage integer NOT NULL,
-  netIo varchar(50) NOT NULL
+  netIo varchar(50) NOT NULL,
   blockIo varchar(50) NOT NULL,
   pids integer NOT NULL,
   reqPerMin integer
