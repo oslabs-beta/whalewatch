@@ -1,30 +1,32 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import container from './containers/container'
-import authentication from './components/authentication/authentication';
+import Login from './components/authentication/Login';
+import DashboardContainer from './containers/DashboardContainer';
+
+import ContainersContainer from './containers/ContainersContainer';
+import NotificationsContainer from './containers/NotificationsContainer';
+
+
 // import navBar from './components/afterLogin/navBar'
 // import listOfContainers from './components/afterLogin/listOfContainers';
 // import dashBoard from './components/afterLogin/dashBoard';
 // import notification from './components/afterLogin/notification';
-
+import Form from './components/authentication/form'
+import './styles.scss';
 
 const App = () => {
   return (
     <>
-      <h1>WhaleWatch</h1>
+
+
       <Router>
-        {/* <navBar /> */}
-
-        {/* Do I still need switch here if using protect Route */}
+        <h1>WhaleWatch</h1>
         <Switch>
-          {/* //     <ProtectedRoute exact={true} path="/"> <container /> </ProtectedRoute> */}
-          <Route path="/authentication" component={authentication} />
-          {/* //     <Route path="/listOfContainers" component={listOfContainers} />
-    //     <Route path="/dashBoard" component={dashBoard} />
-    //     <Route path="/notification" component={notification} /> */}
+          <Route exact path="/dashboard" component={DashboardContainer} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/containers" component={ContainersContainer} />
+          <Route path="/notification" component={NotificationsContainer} />
         </Switch>
-
-
       </Router>
     </>
   );
