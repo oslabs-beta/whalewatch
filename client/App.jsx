@@ -2,11 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/authentication/Login';
 import DashboardContainer from './containers/DashboardContainer';
-
 import ContainersContainer from './containers/ContainersContainer';
 import NotificationsContainer from './containers/NotificationsContainer';
 import NavBar from './components/NavBar/NavBar';
-
 
 // import listOfContainers from './components/afterLogin/listOfContainers';
 // import dashBoard from './components/afterLogin/dashBoard';
@@ -17,8 +15,6 @@ import './styles.scss';
 const App = () => {
   return (
     <>
-
-
       <Router>
         <Switch>
           <Route exact path="/nav" component={NavBar} />
@@ -32,7 +28,5 @@ const App = () => {
     </>
   );
 };
-
-
 
 export default App;
