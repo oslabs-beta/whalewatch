@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Validation from './validation.js';
 import {useQuery,gql} from '@apollo/client';
 import { Link, useHistory } from "react-router-dom";
-import logo from './logo.gif';
+import logo from '../../assets/logo.gif';
 
 
 
@@ -77,7 +77,7 @@ const SignUpForm = (props) => {
                 </div>
             </form>
             <Link className="signup-or-login" to='/login'>Already Have An Account?</Link>
-            </div>
+        </div>
         </div>
 
 

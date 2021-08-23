@@ -5,9 +5,9 @@ import DashboardContainer from './containers/DashboardContainer';
 
 import ContainersContainer from './containers/ContainersContainer';
 import NotificationsContainer from './containers/NotificationsContainer';
+import NavBar from './components/NavBar/NavBar';
 
 
-// import navBar from './components/afterLogin/navBar'
 // import listOfContainers from './components/afterLogin/listOfContainers';
 // import dashBoard from './components/afterLogin/dashBoard';
 // import notification from './components/afterLogin/notification';
@@ -20,10 +20,11 @@ const App = () => {
 
 
       <Router>
-        <h1>WhaleWatch</h1>
         <Switch>
+          <Route exact path="/nav" component={NavBar} />
           <Route exact path="/dashboard" component={DashboardContainer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Form} />
           <Route exact path="/containers" component={ContainersContainer} />
           <Route path="/notification" component={NotificationsContainer} />
         </Switch>
