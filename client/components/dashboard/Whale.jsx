@@ -1,4 +1,5 @@
 import React from "react";
+import whaleBlue from "../../assets/whaleBlue.png"
 
 const Whale = ({ info }) => {
   //each whale will represent a container
@@ -6,7 +7,7 @@ const Whale = ({ info }) => {
   //should they include names?
   return (
     // put appropriate stuff here
-    <p>I am a whale</p>
+    <p><img src={whaleBlue} />My name is {info.name}</p>
   )
 }
 

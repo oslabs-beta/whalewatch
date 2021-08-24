@@ -53,11 +53,11 @@ const Login = (props) => {
     }
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log('in handle submit')
     //do some graphql request here
-    await login;
+    login;
   };
 
   return (
