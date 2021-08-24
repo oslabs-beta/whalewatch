@@ -1,6 +1,8 @@
 
 
 const Auth = {
+  //make sure to change this
+
   isAuthenticated: true,
   authenticate() {
     this.isAuthenticated = true;

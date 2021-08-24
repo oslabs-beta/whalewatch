@@ -26,19 +26,21 @@ font-weight:semi-bold;
 // Nav Bar 
 
 .vertical-nav{
-    margin-top:3%;
-    margin-left: 1%;
-    width: 25%;
+
+
+    width: 20%;
     height: max-content;
+    background-color: white;
 }
 
-//logo real size: 294 × 189
+//logo real size: 294 × 189 (35%)
 .logo-no-text{
     margin-top:3%;
     margin-left:3%;
     margin-bottom: 5%;
-    width:117.6px;
-    height:75.6px;
+    width:102.9px;
+    height:66.15px
+
 }
 
 .menulist{
@@ -75,17 +77,17 @@ a:hover {
     text-decoration: none;
 }
 
-// a:active {
-//     color:#404253;
-//     font-family: 'Nunito Sans', sans-serif;
-//     font-weight: 500;
-//     font-size:1.2em;
-// }
 
-//397 × 49
+//logo real size: 397 × 49
 .logo-text-only{
     margin-top:90%;
     margin-left:5%;
     width:158.8px;
     height:19.6px;
+}
+
+
+.dashbaordContainer {
+    background-color: #EEF2F8;
+
 }

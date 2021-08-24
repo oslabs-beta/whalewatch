@@ -4,12 +4,25 @@ import { Link, useHistory } from "react-router-dom";
 
 //likely importing some kind of graphing library pieces here
 
-const AverageCPUChart = (props) => {
-  //stats will be received from the container
+const AverageCPUChart = ({ data }) => {
+  const array = data.container;
+  const cpuUsageArr = [];
+  array.forEach(container => {
+    const stats = container.stats;
+    stats.forEach(stat => {
+      cpuUsageArr.push(stat.cpuusage);
+    })
+  })
+  let total = 0;
+  cpuUsageArr.forEach(usage => total += usage);
+  const avg = (total / cpuUsageArr.length).toFixed(2);
+
 
   return (
-    <h3>Average CPU Usage</h3>
-    //render a chart here
+    <>
+      <h3>Average CPU Usage</h3>
+      <p>Here is the average cpu usage: {avg}</p>
+    </>
   )
 
 }

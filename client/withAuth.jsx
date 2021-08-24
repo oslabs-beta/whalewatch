@@ -1,4 +1,6 @@
 import Auth from "./Auth";
+import React from 'react';
+
 export const withAuth = (Component) => {
   return () => {
     // Check if Authenticated

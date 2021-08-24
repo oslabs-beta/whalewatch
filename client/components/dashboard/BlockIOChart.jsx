@@ -2,28 +2,28 @@ import React from "react";
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 
-const NetIOChart = ({ data }) => {
+const BlockIOChart = ({ data }) => {
   //stats will be received from the container
   const array = data.container;
-  const netIOArr = [];
+  const blockIOArr = [];
   array.forEach(container => {
     const stats = container.stats;
     stats.forEach(stat => {
-      netIOArr.push(stat.netio);
+      blockIOArr.push(stat.blockio);
     })
   })
   let total = 0;
-  netIOArr.forEach(usage => total += usage);
-  const avg = (total / netIOArr.length).toFixed(2);
+  blockIOArr.forEach(usage => total += usage);
+  const avg = (total / blockIOArr.length).toFixed(2);
 
   return (
     <>
-      <h3>Average Net I/O</h3>
+      <h3>Average Block I/O</h3>
 
-      <p>Average net IO: {avg}</p>
+      <p>Average block IO: {avg}</p>
     </>
   )
 
 }
 
-export default NetIOChart;
+export default BlockIOChart;

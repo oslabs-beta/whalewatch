@@ -1,25 +1,40 @@
 import React from "react";
-import { useState } from 'react';
-import { withAuth } from "../withAuth";
+import { useState, useEffect } from 'react';
+//reimplement withauth
+// import { withAuth } from "../withAuth";
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
 import NetIOChart from "../components/dashboard/NetIOChart";
+import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
+<<<<<<< HEAD
+=======
+import PIDChart from "../components/dashboard/PIDChart";
+>>>>>>> dev
 
-//complete this query
-// const GET_CONTAINERS = gql`
-//   query GetContainers() {
+const GET_CONTAINERS = gql`
+    query containers {
+    container {
+      id
+      dockerid
+      name
+      size
+      status
+      stats {
+        cpuusage
+        memusage
+        netio
+        blockio
+        pids
+        reqpermin
+      }
+    }
+  }
+  
+`;
 
-//   }
-// `;
-// //complete this query
-// const GET_STATS = gql`
-//   query GetContainers() {
-
-//   }
-// `;
 
 const DashboardContainer = (props) => {
 
@@ -31,47 +46,35 @@ const DashboardContainer = (props) => {
   //   netIO: ''
   // })
 
-  //functionality to grab list of containers here
-  // const getContainers = useQuery(GET_CONTAINERS, {
-  //   onCompleted: (data) => {
-  //     setListOfContainers(data);
-  //   }
-  // })
-
-  //functionality to grab stats here
-  // const getStats = useQuery(GET_STATS, {
-  //   //use list of containers to get the appropriate stats
-  //   // variables: id,
-  //   onCompleted: (data) => {
-  //     setStats({ ...stats, cpuUsage: data.cpuUsage, memUsage: data.memUsage, netIO: data.netIO });
-  //   }
-  // })
-
-  //invoke get containers and get stats
-
-  //functionality to update stats state on click to represent just one container should go here and get passed to Whale Chart
-  // const clickWhale = (e) => {
-  //   const id = e.target.id;
-  //   //invoke get stats but just using the one whale id
-  // }
+  const { loading, error, data } = useQuery(GET_CONTAINERS);
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+  console.log(data)
 
 
   return (
+<<<<<<< HEAD
     <>
       {/* render navbar here */}
       <NavBar/>
+=======
+    <div className='dashbaordContainer'>
+      <NavBar />
+>>>>>>> dev
       <div>
-        <WhaleChart listOfContainers={listOfContainers} clickWhale={clickWhale} />
+        <WhaleChart listOfContainers={data} />
       </div>
       <div>
         {/* the below need to be passed the appropriate stats */}
-        <AverageCPUChart />
-        <AverageMemoryChart />
-        <NetIOChart />
+        <AverageCPUChart data={data} />
+        <AverageMemoryChart data={data} />
+        <NetIOChart data={data} />
+        <BlockIOChart data={data} />
+        <PIDChart data={data} />
       </div>
-    </>
+    </div>
   )
-
 }
 
-export default withAuth(DashboardContainer)
+export default DashboardContainer
+
