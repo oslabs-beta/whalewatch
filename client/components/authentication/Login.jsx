@@ -92,7 +92,7 @@ const Login = (props) => {
 
       </form>
       <div>
-        <Link className="signup-or-login" to='/signup'> Don't have an Account?</Link></div>
+        <Link className="signup-or-login" to='/signup'> Don't have an account?</Link></div>
     </div>
   )
 

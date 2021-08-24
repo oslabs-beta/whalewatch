@@ -89,7 +89,7 @@ const SignUpForm = (props) => {
                     <button className='form-button btn btn-primary' onClick={handleFormSubmit}>Sign Up</button>
                 </div>
             </form>
-            <Link className="signup-or-login" to='/login'>Already Have An Account?</Link>
+            <Link className="signup-or-login" to='/login'>Already have an cccount?</Link>
         </div>
         </div>
 

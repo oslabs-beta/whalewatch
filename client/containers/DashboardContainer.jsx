@@ -6,6 +6,7 @@ import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
 import NetIOChart from "../components/dashboard/NetIOChart";
 import { useQuery, gql } from '@apollo/client';
+import NavBar from "../components/NavBar/NavBar";
 
 //complete this query
 // const GET_CONTAINERS = gql`
@@ -58,6 +59,7 @@ const DashboardContainer = (props) => {
   return (
     <>
       {/* render navbar here */}
+      <NavBar/>
       <div>
         <WhaleChart listOfContainers={listOfContainers} clickWhale={clickWhale} />
       </div>
