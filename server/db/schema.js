@@ -11,7 +11,9 @@ const {
   GraphQLString,
   GraphQLID, // more flexible to use for IDs than strings
   GraphQLSchema,
-  GraphQLList
+  GraphQLList,
+  GraphQLScalarType,
+  Kind
    // needed to export our schema  
 } = graphql;
 
@@ -66,8 +68,8 @@ const StatsType = new GraphQLObjectType ({
   description: 'Stats data',
   fields: () => ({
     id: { type: GraphQLID},
-    container: { type: GraphQLID},
-    // timestamp: { type: }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
+    container: { type: GraphQLID },
+    timestamp: { type: GraphQLInt }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
     cpuusage: { type: GraphQLInt },
     memusage: { type: GraphQLInt },
     netio: { type: GraphQLInt },
@@ -166,6 +168,7 @@ const RootMutationType = new GraphQLObjectType({
           const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
           const res = await pool.query(query, user);
           console.log('this is response to adding a user', res);
+          return res.rows[0];
           //return res.rows;
       }
     },
@@ -184,16 +187,39 @@ const RootMutationType = new GraphQLObjectType({
         const username = [args.username]
         const query = `SELECT password from users WHERE username = $1`;
         const result = await pool.query(query, username)
-        console.log('this is user password', result.rows[0].password)
+        // console.log('this is user password', result.rows[0].password)
         //bcrypt.compare(args.password, 10) 
         const comparingPassword = await bcrypt.compare(args.password, result.rows[0].password);
-        console.log('iam comparing', comparingPassword)
+        // console.log('iam comparing', comparingPassword)
         //return comparingPassword;
         if(comparingPassword === true){
           const finalResult = await pool.query(`SELECT * from users where username = $1`, username);
           return finalResult.rows[0];
         }
       } 
+    },
+     addStat: {
+      type: StatsType,
+      description: 'Adding dummy stats to database',
+      args: {
+        id: { type: GraphQLID},
+        container: { type: GraphQLInt},
+        timestamp: { type: GraphQLInt}, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
+        cpuusage: { type: GraphQLInt },
+        memusage: { type: GraphQLInt },
+        netio: { type: GraphQLInt },
+        blockio: { type: GraphQLInt },
+        pids: { type: GraphQLInt },
+        reqpermin: { type: GraphQLInt },
+      }, 
+      resolve: async (parent, args) => {
+        // args.container, args.timestamp, args.cpuusage, args.memusage, args.netio, args.blockio, args.pids, args.reqpermin
+        const statEntry = [args.container, args.timestamp, args.cpuusage, args.memusage, args.netio, args.blockio, args.pids, args.reqpermin]
+        const query = 'INSERT INTO stats (container, timestamp, cpuusage, memusage, netio, blockio, pids, reqpermin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
+        const res = await pool.query(query, statEntry);
+        console.log('this is response to adding a stat', res[0]);
+        return res.rows[0];
+      }
     }
   })
 

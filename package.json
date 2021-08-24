@@ -27,9 +27,10 @@
   "homepage": "https://github.com/oslabs-beta/whalewatch#readme",
   "dependencies": {
     "@apollo/client": "^3.4.8",
+    "apollo": "^2.33.6",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
-    "electron": "^13.2.1",
+    "electron": "^13.2.2",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.5.1",
