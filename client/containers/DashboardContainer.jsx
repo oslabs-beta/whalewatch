@@ -20,6 +20,7 @@ const GET_CONTAINERS = gql`
       size
       status
       stats {
+        timestamp
         cpuusage
         memusage
         netio
