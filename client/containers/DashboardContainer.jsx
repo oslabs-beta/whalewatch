@@ -9,10 +9,7 @@ import NetIOChart from "../components/dashboard/NetIOChart";
 import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
-<<<<<<< HEAD
-=======
 import PIDChart from "../components/dashboard/PIDChart";
->>>>>>> dev
 
 const GET_CONTAINERS = gql`
     query containers {
@@ -53,14 +50,8 @@ const DashboardContainer = (props) => {
 
 
   return (
-<<<<<<< HEAD
-    <>
-      {/* render navbar here */}
-      <NavBar/>
-=======
     <div className='dashbaordContainer'>
       <NavBar />
->>>>>>> dev
       <div>
         <WhaleChart listOfContainers={data} />
       </div>
