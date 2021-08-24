@@ -27,6 +27,7 @@ const Login = (props) => {
   //function to handle changing username
   const handleUsernameInputChange = (e) => {
     e.persist();
+    console.log('hi from handle username')
     setUserData((userData) => ({
       ...userData, username: e.target.value,
     }));
@@ -46,23 +47,23 @@ const Login = (props) => {
     },
     onCompleted: ({ login }) => {
       //something with cookies here
+      console.log('in login')
       Auth.isAuthenticated();
-      history.push('/');
+      history.push('/dashboard');
     }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('in handle submit')
     //do some graphql request here
-    //if successful, invoke authenticate
-    Auth.authenticate();
-    history.push('/dashboard');
+    await login;
   };
 
   return (
     <div className='login-page text-center container'>
       <h2>Log In</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
 
         <div className='form-group'>
           <label htmlFor="username">Username</label>
@@ -88,7 +89,7 @@ const Login = (props) => {
             onChange={handlePasswordInputChange}
           />
         </div>
-        <input className="form-button btn btn-primary" type="submit" value="Log in" onClick={login} />
+        <input className="form-button btn btn-primary" type="submit" value="Log in" onSubmit={login} />
 
       </form>
       <div>
