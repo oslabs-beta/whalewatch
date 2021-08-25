@@ -12,32 +12,34 @@ const {
   GraphQLID, // more flexible to use for IDs than strings
   GraphQLSchema,
   GraphQLList,
+  GraphQLFloat,
   GraphQLScalarType,
   Kind
-   // needed to export our schema  
+  // needed to export our schema  
 } = graphql;
 
 //graphqlobjecttype is function from graphql
 const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'Users data in our app',
-    fields: () => ({
-      id: {type: GraphQLInt,//resolve is what is invoked so graphql knows how to get data 
-      },
-      username: {type: GraphQLString},
-      email: {type: GraphQLString},
-      password: {type: GraphQLString},
-      containerName: {
-        type: new GraphQLList(ContainerType),
-        resolve: async (parent) => {
-          const vals = [parent.id];
-          const query = `SELECT * from containers WHERE owner=$1`;
-          //return containerData.filter(container => container.user_id  === parent.id);
-          const res = await pool.query(query,vals);
-          return res.rows;
-        }
-      },
-    })
+  fields: () => ({
+    id: {
+      type: GraphQLInt,//resolve is what is invoked so graphql knows how to get data 
+    },
+    username: { type: GraphQLString },
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+    containerName: {
+      type: new GraphQLList(ContainerType),
+      resolve: async (parent) => {
+        const vals = [parent.id];
+        const query = `SELECT * from containers WHERE owner=$1`;
+        //return containerData.filter(container => container.user_id  === parent.id);
+        const res = await pool.query(query, vals);
+        return res.rows;
+      }
+    },
+  })
 })
 
 //query for containers 
@@ -45,31 +47,31 @@ const ContainerType = new GraphQLObjectType({
   name: 'Containers',
   description: 'Our containers',
   fields: () => ({
-    id: {type: GraphQLInt},
-    dockerid: {type: GraphQLInt},
-    name: {type: GraphQLString},
-    size: {type: GraphQLInt},
-    status: {type: GraphQLString},
+    id: { type: GraphQLInt },
+    dockerid: { type: GraphQLInt },
+    name: { type: GraphQLString },
+    size: { type: GraphQLInt },
+    status: { type: GraphQLString },
     stats: {
       type: new GraphQLList(StatsType),
       resolve: async (parent) => {
         const vals = [parent.id];
         const query = `SELECT * from stats WHERE container=$1`;
         //return containerData.filter(container => container.user_id  === parent.id);
-        const res = await pool.query(query,vals);
+        const res = await pool.query(query, vals);
         return res.rows;
       }
     }
   })
 })
 
-const StatsType = new GraphQLObjectType ({
+const StatsType = new GraphQLObjectType({
   name: 'Stats',
   description: 'Stats data',
   fields: () => ({
-    id: { type: GraphQLID},
+    id: { type: GraphQLID },
     container: { type: GraphQLID },
-    timestamp: { type: GraphQLInt }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
+    timestamp: { type: GraphQLFloat }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
     cpuusage: { type: GraphQLInt },
     memusage: { type: GraphQLInt },
     netio: { type: GraphQLInt },
@@ -90,15 +92,16 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async () => {
         const res = await pool.query(`SELECT * from "users"`);
         return res.rows;
-    },},
+      },
+    },
     oneUser: {
       type: UserType,
       description: 'A single user',
       args: {
-        id: {type: GraphQLInt}
+        id: { type: GraphQLInt }
       },
       //resolve: (parent, args) => usersData.find(oneUser => oneUser.id === args.id)
-      
+
       resolve: async (parent, args) => {
         const vals = [args.id]
         const query = `SELECT * from "users" WHERE id = $1`
@@ -118,7 +121,7 @@ const RootQueryType = new GraphQLObjectType({
       type: ContainerType,
       description: 'a single container',
       args: {
-        container_id: {type: GraphQLInt}
+        container_id: { type: GraphQLInt }
       },
       resolve: async (parent, args) => {
         const vals = [args.id]
@@ -146,10 +149,10 @@ const RootMutationType = new GraphQLObjectType({
       type: UserType,
       description: 'Add a user',
       args: {
-        id: {type: GraphQLInt},//resolve is what is invoked so graphql knows how to get data 
-        username: {type: GraphQLString},
-        email: {type: GraphQLString},
-        password: {type: GraphQLString},
+        id: { type: GraphQLInt },//resolve is what is invoked so graphql knows how to get data 
+        username: { type: GraphQLString },
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
         // containerName: {
         //   type: new GraphQLList(ContainerType),
         //   resolve: async (parent) => {
@@ -161,25 +164,25 @@ const RootMutationType = new GraphQLObjectType({
         //   }
         // },
       },
-        resolve: async (parent, args) => {
-          // console.log(parent)
-          const password = await bcrypt.hash(args.password, 10);
-          const user = [args.username, args.email, password]
-          const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
-          const res = await pool.query(query, user);
-          console.log('this is response to adding a user', res);
-          return res.rows[0];
-          //return res.rows;
+      resolve: async (parent, args) => {
+        // console.log(parent)
+        const password = await bcrypt.hash(args.password, 10);
+        const user = [args.username, args.email, password]
+        const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
+        const res = await pool.query(query, user);
+        console.log('this is response to adding a user', res);
+        return res.rows[0];
+        //return res.rows;
       }
     },
     validateUser: {
       type: UserType,
       description: 'Make sure username + pw match',
       args: {
-        username: {type: GraphQLString},
-        password: {type: GraphQLString}
+        username: { type: GraphQLString },
+        password: { type: GraphQLString }
       },
-      resolve: async (parent, args) =>{
+      resolve: async (parent, args) => {
         // const username = [args.username]
         // const query = `SELECT * from users WHERE username = $1`;
         // const userpass = await pool.query(query, username);
@@ -192,28 +195,27 @@ const RootMutationType = new GraphQLObjectType({
         const comparingPassword = await bcrypt.compare(args.password, result.rows[0].password);
         // console.log('iam comparing', comparingPassword)
         //return comparingPassword;
-        if(comparingPassword === true){
+        if (comparingPassword === true) {
           const finalResult = await pool.query(`SELECT * from users where username = $1`, username);
           console.log('TESTING TESTING 123')
           return finalResult.rows[0];
         }
-        console.log('comparing did not match')
-      } 
+      }
     },
-     addStat: {
+    addStat: {
       type: StatsType,
       description: 'Adding dummy stats to database',
       args: {
-        id: { type: GraphQLID},
-        container: { type: GraphQLInt},
-        timestamp: { type: GraphQLInt}, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
+        id: { type: GraphQLID },
+        container: { type: GraphQLInt },
+        timestamp: { type: GraphQLInt }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
         cpuusage: { type: GraphQLInt },
         memusage: { type: GraphQLInt },
         netio: { type: GraphQLInt },
         blockio: { type: GraphQLInt },
         pids: { type: GraphQLInt },
         reqpermin: { type: GraphQLInt },
-      }, 
+      },
       resolve: async (parent, args) => {
         // args.container, args.timestamp, args.cpuusage, args.memusage, args.netio, args.blockio, args.pids, args.reqpermin
         const statEntry = [args.container, args.timestamp, args.cpuusage, args.memusage, args.netio, args.blockio, args.pids, args.reqpermin]
@@ -269,7 +271,7 @@ module.exports = schema;
 //   // { stats_id: 3, container_id: 3, timestamp: 20210823, cpu_usage: 25, mem_usage: 25, net_io: 25, block_io: 5, p_id: 5, req_per_min: 50},
 //   { id: 1, container_id: 1, cpu_usage: 100, mem_usage: 100, net_io: 100, block_io: 20, p_id: 15, req_per_min: 50},
 //   { id: 2, container_id: 2, cpu_usage: 50, mem_usage: 50, net_io: 50, block_io: 10, p_id: 10, req_per_min: 50},
-//   { id: 3, container_id: 3, cpu_usage: 25, mem_usage: 25, net_io: 25, block_io: 5, p_id: 5, req_per_min: 50},  
+//   { id: 3, container_id: 3, cpu_usage: 25, mem_usage: 25, net_io: 25, block_io: 5, p_id: 5, req_per_min: 50},
 // ]
 
 // const containerData = [
