@@ -1,16 +1,16 @@
 
 .welcome {
-margin-top: 2%;
+margin-top: 8%;
 margin-bottom:1%;
 font-size: 23px;
-color: #0275d8;
+color:#404253;
 font-family: 'Nunito Sans', sans-serif;
-font-weight: 600;
+font-weight: 700;
 }
 
 // logo real size 396 × 302
 .logo{
-    margin-top: 10%;
+    margin-top: 8%;
     margin-bottom: 3%;
     width: 138.6px;
     height: 105.7px;
@@ -27,6 +27,7 @@ font-weight: 600;
     align-items: center;
     // background-color:#EEF2F8;
     height: 100%;
+    margin-top:3%;
 }
 
 .signup-or-login {
@@ -57,15 +58,23 @@ font-weight: 600;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 
 }
 
-//logo real size: 396 × 302
+//logo real size: 396 × 302 (25%)
 .logo-small{
-    margin-top:18%;
+    margin-top:3%;
     margin-bottom: 10%;
-    width:118.8px;
-    height: 90.6px;
+    width: 99px;
+    height: 75.5px;
+    position: fixed;
+    
+}
+
+
+.logo-no-text{
+    //
 }
 
 .menulist{
@@ -74,7 +83,7 @@ font-weight: 600;
 }
 
 li {
-    margin-top: 25px;
+    margin-top: 40px;
     width: 100%;
   
 }
@@ -87,8 +96,11 @@ a:link {
     color:#404253;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 500;
-    font-size:1em;
+    font-size:0.9em;
     text-decoration: none;
+    position: fixed;
+    margin-top:10%;
+    margin-left: -3.75%;
 }
 
 a:visited {
@@ -97,6 +109,7 @@ a:visited {
     font-weight: 500;
     font-size:1em;
     text-decoration: none;
+    position: fixed;
 }
 
 a:hover {
@@ -105,6 +118,7 @@ a:hover {
     font-weight: 500;
     font-size:1em;
     text-decoration: none;
+    position: fixed;
 }
 
 .version {
@@ -136,8 +150,10 @@ a:hover {
     width: 375%;
     height: 350%;
     margin-left:12%;
-    border-radius: 15px;
-    box-shadow: 10px 10px 3px rgb(240, 240, 240);
+    // border-radius: 15px;
+    // box-shadow: 10px 10px 3px rgb(240, 240, 240);
+        border-radius: 15px;
+    box-shadow: 8px 8px 8px 3px rgb(207, 204, 204);
 }
 
 .dashbaord-header {

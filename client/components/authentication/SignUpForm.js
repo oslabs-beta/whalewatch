@@ -66,14 +66,15 @@ const SignUpForm = (props) => {
 
     return (
         <div className='authen-box '>
-                        <div className='authen-box-color'>
+            <div className='authen-box-color'>
             <img src={logo} className='logo'/>
             <h1 className='welcome'>Welcome! Create Your Account.</h1>
 
         <div className='login-page container'>
 
-            <form className='form-group col-md-8 col-lg-8 mx-auto text-center text-primary'>
-                <div className='form-control-sm rounded'>
+            <form className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+                
+                <div className='form-control-sm'>
                     <label className='label'>Username</label>
                     <input className='form-field form-control' type='text' name='username' value={inputValues.username} onChange={handleChange}/>
                     {errors.username && <p className='error-message'>{errors.username}</p>}
@@ -89,6 +90,7 @@ const SignUpForm = (props) => {
                     {errors.password && <p className='error-message'>{errors.password}</p>}
                 </div>
                 <br/>
+
                 <div>
                     <button className='form-button btn btn-primary' onClick={handleFormSubmit}>Sign Up</button>
                 </div>

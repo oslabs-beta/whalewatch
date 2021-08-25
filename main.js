@@ -16,9 +16,5 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({});
   // Load HTML file into the window
   console.log(__dirname)
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '/client/index.html'),
-    protocol: 'file',
-    slashes: true,
-  })); 
+  mainWindow.loadURL('http://localhost:8080');
 })
