@@ -12,15 +12,15 @@ const NavBar = () => {
           <ul className="nav flex-column bg-white mb-0">
 
             <li className="nav-item">
-              <a href="/login" className="menulist"><i className="bi bi-graph-up"></i>  Dashboard</a>
+              <a href="/dashboard" className="menulist"><i className="bi bi-graph-up"></i>  Dashboard</a>
             </li>
 
             <li className="nav-item">
-              <a href="/login" className="menulist"><i className="bi bi-box"></i>  Containers</a>
+              <a href="/containers" className="menulist"><i className="bi bi-box"></i>  Containers</a>
             </li>
 
             <li className="nav-item">
-              <a href="/login" className="menulist"><i className="bi bi-menu-down"></i>  Notification</a>
+              <a href="/notification" className="menulist"><i className="bi bi-menu-down"></i>  Notification</a>
             </li>
 
             <li className="nav-item">
