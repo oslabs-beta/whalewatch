@@ -1,5 +1,6 @@
 import Auth from "./Auth";
 import React from 'react';
+import Login from "./components/authentication/Login";
 
 export const withAuth = (Component) => {
   return () => {
@@ -10,7 +11,7 @@ export const withAuth = (Component) => {
     if (user) {
       return <Component user={user} />;
     } else {
-      return <LoginComponent />
+      return <Login />
     }
   };
 };
