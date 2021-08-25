@@ -194,8 +194,10 @@ const RootMutationType = new GraphQLObjectType({
         //return comparingPassword;
         if(comparingPassword === true){
           const finalResult = await pool.query(`SELECT * from users where username = $1`, username);
+          console.log('TESTING TESTING 123')
           return finalResult.rows[0];
         }
+        console.log('comparing did not match')
       } 
     },
      addStat: {
