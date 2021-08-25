@@ -97,7 +97,7 @@ const SignUpForm = (props) => {
             </form>
             
         </div>
-        <Link className="h6 text-primary" to='/login'>Already have an cccount?</Link>
+        <Link className="signup-or-login" to='/login'>Already have an cccount?</Link>
         </div>
         </div>
     )

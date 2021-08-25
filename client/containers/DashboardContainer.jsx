@@ -82,36 +82,99 @@ const DashboardContainer = (props) => {
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Dashboard</div>
         
-{/* test */}
-<div class="card">
+{/* Whale Chart */}
+<div class="card1">
    {/* <!-- Card header --> */}
    <div class="card-header">
-      {/* <!-- Title --> */}
-      <div class="data-type">Container Health Overview</div>
+   {/* <!-- Title --> */}
+    <div class="metric-type">Container Health Overview</div>
    </div>
    {/* <!-- Card body --> */}
    <div class="card-body">
-      <div class="chart">
-         {/* <!-- Chart wrapper --> */}
-         <canvas id="chart-line" class="chart-canvas"></canvas>
-      </div>
+    {/* <!-- Chart wrapper --> */}
+    <WhaleChart className='whalechart' listOfContainers={data} />
+   </div>
+</div>
+
+{/* AverageCPUChart */}
+<div class="card1">
+   {/* <!-- Card header --> */}
+   <div class="card-header">
+   {/* <!-- Title --> */}
+    <div class="metric-type">Average CPU Usage</div>
+   </div>
+   {/* <!-- Card body --> */}
+   <div class="card-body">
+    {/* <!-- Chart wrapper --> */}
+    <AverageCPUChart data={data} populateChart={populateChart} />
+   </div>
+</div>
+
+{/* AverageMemoryChart */}
+<div class="card1">
+   {/* <!-- Card header --> */}
+   <div class="card-header">
+   {/* <!-- Title --> */}
+    <div class="metric-type">Average Memory Usage</div>
+   </div>
+   {/* <!-- Card body --> */}
+   <div class="card-body">
+    {/* <!-- Chart wrapper --> */}
+    <AverageMemoryChart data={data} populateChart={populateChart} />
+   </div>
+</div>
+
+{/* Average Net I/O */}
+<div class="card1">
+   {/* <!-- Card header --> */}
+   <div class="card-header">
+   {/* <!-- Title --> */}
+    <div class="metric-type">Average Net I/O</div>
+   </div>
+   {/* <!-- Card body --> */}
+   <div class="card-body">
+    {/* <!-- Chart wrapper --> */}
+    <NetIOChart data={data} populateChart={populateChart} />
+   </div>
+</div>
+
+{/* BlockIOChart */}
+<div class="card1">
+   {/* <!-- Card header --> */}
+   <div class="card-header">
+   {/* <!-- Title --> */}
+    <div class="metric-type">Average Block I/O</div>
+   </div>
+   {/* <!-- Card body --> */}
+   <div class="card-body">
+    {/* <!-- Chart wrapper --> */}
+    <BlockIOChart data={data} populateChart={populateChart} />
+   </div>
+</div>
+
+{/* PIDChart */}
+<div class="card1">
+   {/* <!-- Card header --> */}
+   <div class="card-header">
+   {/* <!-- Title --> */}
+    <div class="metric-type">Average PIDs</div>
+   </div>
+   {/* <!-- Card body --> */}
+   <div class="card-body">
+    {/* <!-- Chart wrapper --> */}
+    <PIDChart data={data} populateChart={populateChart} />
    </div>
 </div>
 
 
 
         <div>
-          <div className='whaleChartContainer'>
-            <WhaleChart listOfContainers={data} />
-          </div>
-        </div>
-        <div>
           {/* the below need to be passed the appropriate stats */}
-          <AverageCPUChart data={data} populateChart={populateChart} />
-          <AverageMemoryChart data={data} populateChart={populateChart} />
-          <NetIOChart data={data} populateChart={populateChart} />
-          <BlockIOChart data={data} populateChart={populateChart} />
-          <PIDChart data={data} populateChart={populateChart} />
+          {/* <AverageCPUChart data={data} populateChart={populateChart} /> */}
+          {/* <AverageMemoryChart data={data} populateChart={populateChart} /> */}
+          {/* <NetIOChart data={data} populateChart={populateChart} /> */}
+          {/* <BlockIOChart data={data} populateChart={populateChart} />
+          <PIDChart data={data} populateChart={populateChart} /> */}
           
         </div>
         

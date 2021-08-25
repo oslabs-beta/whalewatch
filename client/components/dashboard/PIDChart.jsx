@@ -11,7 +11,7 @@ const PIDChart = ({ data, populateChart }) => {
 
   return (
     <>
-      <h3>Average PIDs</h3>
+      {/* <h3>Average PIDs</h3> */}
 
       <LineChart width={600} height={300} data={dataArr} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
         <Line type="monotone" dataKey="datatype" stroke="#149ce4" />
