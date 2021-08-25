@@ -15,7 +15,6 @@ const WhaleChart = ({ listOfContainers }) => {
 
   return (
     <div id="whale-chart">
-      <p>Test from whale container</p>
       {whales}
     </div>
   )
