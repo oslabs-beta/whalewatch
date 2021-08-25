@@ -22,14 +22,4 @@ app.on('ready', function () {
   console.log(__dirname)
   mainWindow.loadURL('http://localhost:8080');
 })
-<<<<<<< HEAD
-=======
 
-/* removed from loadurl:
-url.format({
-    pathname: path.join(__dirname, '/client/index.html'),
-    protocol: 'file',
-    slashes: true,
-  })
-  */
->>>>>>> dev

@@ -16,6 +16,7 @@ const WhaleChart = ({ listOfContainers }) => {
   return (
     <div id="whale-chart">
       {whales}
+      
     </div>
   )
 }

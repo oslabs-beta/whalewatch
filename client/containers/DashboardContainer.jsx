@@ -81,6 +81,25 @@ const DashboardContainer = (props) => {
       <NavBar />
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Dashboard</div>
+        
+{/* test */}
+<div class="card">
+   {/* <!-- Card header --> */}
+   <div class="card-header">
+      {/* <!-- Title --> */}
+      <div class="data-type">Container Health Overview</div>
+   </div>
+   {/* <!-- Card body --> */}
+   <div class="card-body">
+      <div class="chart">
+         {/* <!-- Chart wrapper --> */}
+         <canvas id="chart-line" class="chart-canvas"></canvas>
+      </div>
+   </div>
+</div>
+
+
+
         <div>
           <div className='whaleChartContainer'>
             <WhaleChart listOfContainers={data} />
@@ -93,7 +112,9 @@ const DashboardContainer = (props) => {
           <NetIOChart data={data} populateChart={populateChart} />
           <BlockIOChart data={data} populateChart={populateChart} />
           <PIDChart data={data} populateChart={populateChart} />
+          
         </div>
+        
       </div>
     </div>
   )

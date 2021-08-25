@@ -32,7 +32,8 @@ font-weight: 700;
 
 .signup-or-login {
     font-size:20px;
-    color: #0275d8;
+    color: #5bc0de;
+
 }
 
 .authen-box-color{
@@ -58,13 +59,15 @@ font-weight: 700;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);
     
 
 }
 
 //logo real size: 396 × 302 (25%)
 .logo-small{
-    margin-top:3%;
+    margin-top:50px;
     margin-bottom: 10%;
     width: 99px;
     height: 75.5px;
@@ -73,9 +76,7 @@ font-weight: 700;
 }
 
 
-.logo-no-text{
-    //
-}
+
 
 .menulist{
     // margin:50px;
@@ -99,26 +100,30 @@ a:link {
     font-size:0.9em;
     text-decoration: none;
     position: fixed;
-    margin-top:10%;
-    margin-left: -3.75%;
+    margin-top: 150px;
+    margin-left: -50px;
 }
 
 a:visited {
     color:#404253;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 500;
-    font-size:1em;
+    font-size:0.9em;
     text-decoration: none;
     position: fixed;
+    margin-top: 150px;
+    margin-left: -50px;
 }
 
 a:hover {
     color:#48A1F8;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 500;
-    font-size:1em;
+    font-size:0.9em;
     text-decoration: none;
     position: fixed;
+    margin-top: 150px;
+    margin-left: -50px;
 }
 
 .version {
@@ -152,14 +157,12 @@ a:hover {
     margin-left:12%;
     // border-radius: 15px;
     // box-shadow: 10px 10px 3px rgb(240, 240, 240);
-        border-radius: 15px;
+    border-radius: 15px;
     box-shadow: 8px 8px 8px 3px rgb(207, 204, 204);
 }
 
 .dashbaord-header {
-    margin-left: 175%;
-    margin-right: auto;
-    margin-top: 8%;
+    margin-top:50px;
     margin-bottom: 10%;
     color:#404253;
     font-family: 'Nunito Sans', sans-serif;
@@ -178,4 +181,36 @@ a:hover {
 .whale{
     width: 75.6px;
     height: 61.8px;
+}
+
+// test
+.card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: .375rem;
+    background-color: #fff;
+    background-clip: border-box;
+    width:900px;
+    margin-left: 15px;
+    box-shadow: 8px 8px 8px 5px rgb(209, 208, 208);
+    border-radius: 1rem;
+}
+
+
+.card-header{
+    background-color: white;
+    border-radius: 1rem;
+    
+}
+
+.data-type {
+    color:#404253;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 650;
+    font-size:18px;
+
 }

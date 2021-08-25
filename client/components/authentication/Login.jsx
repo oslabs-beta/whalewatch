@@ -127,7 +127,7 @@ const Login = (props) => {
         </div>
       </form>
       </div>
-      <Link className="h6 text-primary" to='/signup'> Don't have an account?</Link>
+      <Link className="signup-or-login" to='/signup'> Don't have an account?</Link>
     </div>
     </div>
   )
