@@ -45,7 +45,7 @@ const Login = (props) => {
   //on submitting login info 
   
 
-  const [login, {data,loading, called, error}] = 
+  const [login, {data,loading, error}] = 
   useMutation(LOGIN_MUTATION, {
     variables: {
     username: userData.username,
