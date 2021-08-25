@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 //reimplement withauth
-// import { withAuth } from "../withAuth";
+import { withAuth } from "../withAuth";
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -78,26 +78,26 @@ const DashboardContainer = (props) => {
 
   return (
     <div className='dashbaordContainer'>
-      <NavBar/>
+      <NavBar />
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Dashboard</div>
-      <div>
-        <div className='whaleChartContainer'>
-        <WhaleChart listOfContainers={data} />
+        <div>
+          <div className='whaleChartContainer'>
+            <WhaleChart listOfContainers={data} />
+          </div>
         </div>
-      </div>
-      <div>
-        {/* the below need to be passed the appropriate stats */}
-        <AverageCPUChart data={data} populateChart={populateChart} />
-        <AverageMemoryChart data={data} populateChart={populateChart} />
-        <NetIOChart data={data} populateChart={populateChart} />
-        <BlockIOChart data={data} populateChart={populateChart} />
-        <PIDChart data={data} populateChart={populateChart} />
-      </div>
+        <div>
+          {/* the below need to be passed the appropriate stats */}
+          <AverageCPUChart data={data} populateChart={populateChart} />
+          <AverageMemoryChart data={data} populateChart={populateChart} />
+          <NetIOChart data={data} populateChart={populateChart} />
+          <BlockIOChart data={data} populateChart={populateChart} />
+          <PIDChart data={data} populateChart={populateChart} />
+        </div>
       </div>
     </div>
   )
 }
 
-export default DashboardContainer
+export default withAuth(DashboardContainer)
 

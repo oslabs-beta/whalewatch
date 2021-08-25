@@ -1,7 +1,7 @@
 const Auth = {
   //make sure to change this
   //initially not authenticated
-  isAuthenticated: false,
+  isAuthenticated: true,
   authenticate() {
     this.isAuthenticated = true;
     //set cookies???

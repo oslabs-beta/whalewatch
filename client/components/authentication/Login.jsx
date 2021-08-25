@@ -43,43 +43,43 @@ const Login = (props) => {
 
   //const { loading, error, data } = useQuery(GET_CONTAINERS);
   //on submitting login info 
-  
 
-  const [login, {data,loading, called, error}] = 
-  useMutation(LOGIN_MUTATION, {
-    variables: {
-    username: userData.username,
-    password: userData.password
-    },
-    onError: () => console.log('there is an error'),
-    onCompleted: (data) => {
-      console.log('this is data inside oncompleted', data)
-      Auth.authenticate();
-      history.push('/dashboard')
-    }  
-  })
+
+  const [login, { data, loading, called, error }] =
+    useMutation(LOGIN_MUTATION, {
+      variables: {
+        username: userData.username,
+        password: userData.password
+      },
+      onError: () => console.log('there is an error'),
+      onCompleted: (data) => {
+        console.log('this is data inside oncompleted', data)
+        Auth.authenticate();
+        history.push('/dashboard')
+      }
+    })
   //console.log('this is username', userData.username)
-    // //NEVER ACTUALLY INVOKE THIS FUNCTION 
-    // //if auth is validated, change url using history.push
-    // //onError: () => console.log('there is an error'),
-    // onCompleted: (data) => {
-    //   // console.log('this is user', userData.email)
-    //   // console.log('thisis pw', userData.password)
-    //   // //something with cookies here
-    //   // console.log('in login')
-    //   // Auth.isAuthenticated();
-    //   // history.push('/dashboard');
-    //   console.log('this is data inside on completed', data)
-    // }
+  // //NEVER ACTUALLY INVOKE THIS FUNCTION 
+  // //if auth is validated, change url using history.push
+  // //onError: () => console.log('there is an error'),
+  // onCompleted: (data) => {
+  //   // console.log('this is user', userData.email)
+  //   // console.log('thisis pw', userData.password)
+  //   // //something with cookies here
+  //   // console.log('in login')
+  //   // Auth.isAuthenticated();
+  //   // history.push('/dashboard');
+  //   console.log('this is data inside on completed', data)
+  // }
 
 
-    //console.log('this is the return query result from login', )
+  //console.log('this is the return query result from login', )
   // if (loading) return 'Loading...';
   // if (error) return `Error! ${error.message}`;
   // console.log('this is data', data)
   // console.log('this is user', userData.email)
   // console.log('thisis pw', userData.password)
-      //something with cookies here
+  //something with cookies here
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   login({username: userData.username, password: userData.password})
@@ -88,7 +88,7 @@ const Login = (props) => {
   return (
     <div className='login-page text-center container'>
       <h2>Log In</h2>
-      <form onSubmit={e => {e.preventDefault();login()}}>
+      <form onSubmit={e => { e.preventDefault(); login() }}>
 
         <div className='form-group'>
           <label htmlFor="username">Username</label>
