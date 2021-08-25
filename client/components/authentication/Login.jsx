@@ -92,7 +92,7 @@ const Login = (props) => {
     <img src={logo} className='logo'/>
     <h1 className='welcome'>Welcome back! Please login.</h1>
     
-    <div className='login-page container'>
+    <div className='login-page container text-center'>
 
       <form onSubmit={e => {e.preventDefault();login()}} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
 
@@ -126,8 +126,9 @@ const Login = (props) => {
           <input className="form-button btn btn-primary" type="submit" value="Log in" />
         </div>
       </form>
+      {/* <Link className="signup-or-login" to='/signup'> Don't have an account?</Link> */}
       </div>
-      <Link className="signup-or-login" to='/signup'> Don't have an account?</Link>
+   
     </div>
     </div>
   )
