@@ -8,13 +8,13 @@ import {
   useMutation,
   gql
 } from '@apollo/client';
+
 const LOGIN_MUTATION = gql`
-  mutation validateUser(
-    $username: String!
-    $password: String!
-  ) {
-    login(email: $email, password: $password) {
+  mutation login($username: String!, $password: String!){
+    validateUser(username: $username, password: $password){
       id
+      username
+      password
     }
   }
 `;
@@ -31,6 +31,7 @@ const Login = (props) => {
     setUserData((userData) => ({
       ...userData, username: e.target.value,
     }));
+    console.log('this is username', userData.username)
   };
 
   const handlePasswordInputChange = (e) => {
@@ -40,30 +41,54 @@ const Login = (props) => {
     }));
   };
 
-  const [login] = useMutation(LOGIN_MUTATION, {
-    variables: {
-      email: userData.email,
-      password: userData.password
-    },
-    onCompleted: ({ login }) => {
-      //something with cookies here
-      console.log('in login')
-      Auth.isAuthenticated();
-      history.push('/dashboard');
-    }
-  });
+  //const { loading, error, data } = useQuery(GET_CONTAINERS);
+  //on submitting login info 
+  
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('in handle submit')
-    //do some graphql request here
-    login;
-  };
+  const [login, {data,loading, called, error}] = 
+  useMutation(LOGIN_MUTATION, {
+    variables: {
+    username: userData.username,
+    password: userData.password
+    },
+    onError: () => console.log('there is an error'),
+    onCompleted: (data) => {
+      console.log('this is data inside oncompleted', data)
+      Auth.authenticate();
+      history.push('/dashboard')
+    }  
+  })
+  //console.log('this is username', userData.username)
+    // //NEVER ACTUALLY INVOKE THIS FUNCTION 
+    // //if auth is validated, change url using history.push
+    // //onError: () => console.log('there is an error'),
+    // onCompleted: (data) => {
+    //   // console.log('this is user', userData.email)
+    //   // console.log('thisis pw', userData.password)
+    //   // //something with cookies here
+    //   // console.log('in login')
+    //   // Auth.isAuthenticated();
+    //   // history.push('/dashboard');
+    //   console.log('this is data inside on completed', data)
+    // }
+
+
+    //console.log('this is the return query result from login', )
+  // if (loading) return 'Loading...';
+  // if (error) return `Error! ${error.message}`;
+  // console.log('this is data', data)
+  // console.log('this is user', userData.email)
+  // console.log('thisis pw', userData.password)
+      //something with cookies here
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   login({username: userData.username, password: userData.password})
+  // };
 
   return (
     <div className='login-page text-center container'>
       <h2>Log In</h2>
-      <form>
+      <form onSubmit={e => {e.preventDefault();login()}}>
 
         <div className='form-group'>
           <label htmlFor="username">Username</label>
@@ -89,8 +114,7 @@ const Login = (props) => {
             onChange={handlePasswordInputChange}
           />
         </div>
-        <input className="form-button btn btn-primary" type="submit" value="Log in" onSubmit={login} />
-
+        <input className="form-button btn btn-primary" type="submit" value="Log in" />
       </form>
       <div>
         <Link className="signup-or-login" to='/signup'> Don't have an account?</Link></div>
