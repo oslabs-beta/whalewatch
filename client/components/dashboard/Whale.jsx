@@ -1,5 +1,6 @@
 import React from "react";
 import whaleBlue from "../../assets/whaleBlue.png"
+import whaleRed from "../../assets/whaleRed.png"
 
 const Whale = ({ info }) => {
   //each whale will represent a container
@@ -7,7 +8,13 @@ const Whale = ({ info }) => {
   //should they include names?
   return (
     // put appropriate stuff here
-    <p><img src={whaleBlue} />My name is {info.name}</p>
+    
+    <div className="whale-display">
+      <img src={whaleBlue} className="whale"/><br/>Container {info.name} <br/>{info.size} MB
+      {/* <img src={whaleRed} /><br/>My name is {info.name} */}
+    
+    </div>
+    
   )
 }
 

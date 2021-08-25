@@ -1,12 +1,13 @@
 import React from 'react'
 import logoNoText from '../../assets/logoNoText.png';
 import logoTextOnly from '../../assets/logoTextOnly.png';
+import logo from '../../assets/logo.gif';
 
 const NavBar = () => {
   return (
     <div>
       <nav className="vertical-nav" id="sidebar">
-        <img src={logoNoText} className='logo-no-text' />
+        <img src={logo} className='logo-small' />
         <div className="media d-flex">
           <ul className="nav flex-column bg-white mb-0">
 
@@ -28,10 +29,10 @@ const NavBar = () => {
 
           </ul>
         </div>
-        <img src={logoTextOnly} className='logo-text-only' />
+        <div className='version'>Version 1.0</div>
       </nav>
     </div>
   )
 }
 
-export default NavBar;
+export default NavBar

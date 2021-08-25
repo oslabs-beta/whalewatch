@@ -51,9 +51,13 @@ const DashboardContainer = (props) => {
 
   return (
     <div className='dashbaordContainer'>
-      <NavBar />
+      <NavBar/>
+      <div className='dashbaordData'>
+        <div className='dashbaord-header'>Dashboard</div>
       <div>
+        <div className='whaleChartContainer'>
         <WhaleChart listOfContainers={data} />
+        </div>
       </div>
       <div>
         {/* the below need to be passed the appropriate stats */}
@@ -62,6 +66,7 @@ const DashboardContainer = (props) => {
         <NetIOChart data={data} />
         <BlockIOChart data={data} />
         <PIDChart data={data} />
+      </div>
       </div>
     </div>
   )
