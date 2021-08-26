@@ -3,20 +3,21 @@ import Validation from './validation.js';
 import {useMutation,gql} from '@apollo/client';
 import { Link, useHistory } from "react-router-dom";
 import logo from '../../assets/logo.gif';
+import Auth from '../../Auth.js';
 
 const REGISTER_USER = gql`
-mutation addUser (
-  $username: String!
-  $email: String!
-  $password: String!
-) {
+mutation addUser ($username: String!, $email: String!, $password: String!) {
   addUser(
       username: $username
       email: $email
       password: $password
-    )
+    ){
+      username
+      email
+      password  
+    }
 }
-`
+`;
 
 const SignUpForm = (props) => {
     const {submitForm} = props;
@@ -28,8 +29,10 @@ const SignUpForm = (props) => {
 
     const [errors, setErrors] = useState({});
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
+    const history = useHistory();
 
     const handleChange = (event) => {
+        //same as writing setValues({username: e.target.value})
         setValues({
             ...inputValues,
             // Note: need to understand this line better to match Rachel's
@@ -38,11 +41,12 @@ const SignUpForm = (props) => {
 
     };
 
-    const [addUser] = useMutation(REGISTER_USER, {
+    const [addUser, {data,loading,error}] = useMutation(REGISTER_USER, {
       variables: inputValues,
       onCompleted:({signup}) => {
-        Auth.isAuthenticated();
-      history.push('/');
+        Auth.login( () =>{
+            history.push('/dashboard')
+        })
       }
     })
 
