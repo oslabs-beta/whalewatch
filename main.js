@@ -23,10 +23,3 @@ app.on('ready', function () {
   mainWindow.loadURL('http://localhost:8080');
 })
 
-/* removed from loadurl:
-url.format({
-    pathname: path.join(__dirname, '/client/index.html'),
-    protocol: 'file',
-    slashes: true,
-  })
-  */

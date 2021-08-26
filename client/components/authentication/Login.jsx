@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../../Auth";
+import logo from '../../assets/logo.gif';
 
 //unsure if we need the below - more research required
 import {
@@ -63,10 +64,16 @@ const Login = (props) => {
   // };
 
   return (
-    <div className='login-page text-center container'>
-      <h2>Log In</h2>
-      <form onSubmit={e => { e.preventDefault(); login() }}>
-        <div className='form-group'>
+    <div className='authen-box'>
+    <div className='authen-box-color'>
+    <img src={logo} className='logo'/>
+    <h1 className='welcome'>Welcome back! Please login.</h1>
+    
+    <div className='login-page container text-center'>
+
+      <form onSubmit={e => {e.preventDefault();login()}} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+
+        <div className='form-control-sm'>
           <label htmlFor="username">Username</label>
           <input
             id="username"
@@ -78,7 +85,7 @@ const Login = (props) => {
             onChange={handleUsernameInputChange}
           />
         </div>
-        <div className='form-group'>
+        <div className='form-control-sm'>
           <label htmlFor="password">Password</label>
           <input
             id="password"
@@ -90,10 +97,16 @@ const Login = (props) => {
             onChange={handlePasswordInputChange}
           />
         </div>
-        <input className="form-button btn btn-primary" type="submit" value="Log in" />
+        <br/>
+
+        <div>
+          <input className="form-button btn btn-primary" type="submit" value="Log in" />
+        </div>
       </form>
-      <div>
-        <Link className="signup-or-login" to='/signup'> Don't have an account?</Link></div>
+      {/* <Link className="signup-or-login" to='/signup'> Don't have an account?</Link> */}
+      </div>
+   
+    </div>
     </div>
   )
 }

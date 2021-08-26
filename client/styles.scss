@@ -1,16 +1,16 @@
 
 .welcome {
-margin-top: 2%;
+margin-top: 8%;
 margin-bottom:1%;
 font-size: 23px;
-color: #0275d8;
+color:#404253;
 font-family: 'Nunito Sans', sans-serif;
-font-weight: 600;
+font-weight: 700;
 }
 
 // logo real size 396 × 302
 .logo{
-    margin-top: 10%;
+    margin-top: 8%;
     margin-bottom: 3%;
     width: 138.6px;
     height: 105.7px;
@@ -27,11 +27,13 @@ font-weight: 600;
     align-items: center;
     // background-color:#EEF2F8;
     height: 100%;
+    margin-top:3%;
 }
 
 .signup-or-login {
-    font-size:20px;
-    color: #0275d8;
+    font-size:30px;
+    color: #5bc0de;
+
 }
 
 .authen-box-color{
@@ -57,16 +59,24 @@ font-weight: 600;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);
+    
 
 }
 
-//logo real size: 396 × 302
+//logo real size: 396 × 302 (25%)
 .logo-small{
-    margin-top:18%;
+    margin-top:50px;
     margin-bottom: 10%;
-    width:118.8px;
-    height: 90.6px;
+    width: 99px;
+    height: 75.5px;
+    position: fixed;
+    
 }
+
+
+
 
 .menulist{
     // margin:50px;
@@ -74,7 +84,7 @@ font-weight: 600;
 }
 
 li {
-    margin-top: 25px;
+    margin-top: 40px;
     width: 100%;
   
 }
@@ -87,24 +97,33 @@ a:link {
     color:#404253;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 500;
-    font-size:1em;
+    font-size:0.95em;
     text-decoration: none;
+    position: fixed;
+    margin-top: 150px;
+    margin-left: -50px;
 }
 
 a:visited {
     color:#404253;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 500;
-    font-size:1em;
+    font-size:0.95em;
     text-decoration: none;
+    position: fixed;
+    margin-top: 150px;
+    margin-left: -50px;
 }
 
 a:hover {
     color:#48A1F8;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 500;
-    font-size:1em;
+    font-size:0.95em;
     text-decoration: none;
+    position: fixed;
+    margin-top: 150px;
+    margin-left: -50px;
 }
 
 .version {
@@ -116,12 +135,13 @@ a:hover {
     bottom: 15px;
 }
 
-
 //logo real size: 
 // .logo-text-only {
 //     margin-top:90%;
 //     margin-left:10%;
 // }
+
+
 
 // Data Section
 .dashbaordContainer {
@@ -131,20 +151,55 @@ a:hover {
     align-items: stretch;
 }
 
-.whaleChartContainer {
-    background-color: white;
-    width: 375%;
-    height: 350%;
-    margin-left:12%;
-    border-radius: 15px;
-    box-shadow: 10px 10px 3px rgb(240, 240, 240);
+.dashbaordData{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left:100px;
+    background-image: url('./assets/sea.gif')
 }
 
+// test
+.card1{
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid rgba(180, 74, 74, 0.05);
+    background-color: rgb(255, 255, 255);
+    background-clip: border-box;
+    width:1100px;
+    // margin-left: 15px;
+    // box-shadow: 0px 5px 5px 5px rgb(209, 209, 209);
+    border-radius: 0px 0px 15px 15px ;
+    margin-bottom: 30px;
+}
+
+.whalechart{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+
+.card-header{
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+}
+
+.metric-type {
+    color:#404253;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 650;
+    font-size:18px;
+    margin:3.5px;
+
+}
+
+
+
+
 .dashbaord-header {
-    margin-left: 175%;
-    margin-right: auto;
-    margin-top: 8%;
-    margin-bottom: 10%;
+    margin-top:30px;
+    margin-bottom: 20px;
     color:#404253;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 800;
@@ -156,6 +211,7 @@ a:hover {
     flex-direction: row;
     // align-items: flex-start;
     padding: 25px;
+    font-size:16px;
 }
 
 // whale display 126 x 103
@@ -163,3 +219,4 @@ a:hover {
     width: 75.6px;
     height: 61.8px;
 }
+
