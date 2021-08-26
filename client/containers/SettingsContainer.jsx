@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from 'react';
-import { withAuth } from "../withAuth";
-import NavBar from "../components/NavBar/NavBar";
+// import React from "react";
+// import { useState } from 'react';
+// import { withAuth } from "../withAuth";
+// import NavBar from "../components/NavBar/NavBar";
 
 // import {View, Text} from 'react-native';
 // import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
@@ -90,4 +90,4 @@ const SettingsContainer = (props) => {
   )
 }
 
-export default withAuth(SettingsContainer)
+// export default withAuth(SettingsContainer)
