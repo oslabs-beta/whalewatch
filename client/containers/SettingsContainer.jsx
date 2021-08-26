@@ -70,25 +70,24 @@ const SettingsContainer = (props) => {
   // };
 
 
-  // const SettingsContainer = (props) => {
-  //   const [settingsList, setSettingsList] = useState([]);
-  //   return (
-  //     <div className='dashbaordContainer'>
-  //       <NavBar />
-  //       <div className='whaleChartContainer'>
-  //         <p> This is the {settingsList} right here</p>
-  //         <p> Save</p>
-  //         <p> This is the {settingsList} right here</p>
-  //         <p> This is the {settingsList} right here</p>
-  //         <p> This is the {settingsList} right here</p>
 
-  //         <button onClick={() => setSettingsList(settingsList + ' hello')}>
-  //           Click me
-  //         </button>
-  //       </div>
+  return (
+    <div className='settingsContainer'>
+      <NavBar />
+      {/* <div className='whaleChartContainer'>
+          <p> This is the {settingsList} right here</p>
+          <p> Save</p>
+          <p> This is the {settingsList} right here</p>
+          <p> This is the {settingsList} right here</p>
+          <p> This is the {settingsList} right here</p>
 
-  //     </div>
-  //   )
+          <button onClick={() => setSettingsList(settingsList + ' hello')}>
+            Click me
+          </button>
+        </div> */}
+
+    </div>
+  )
 }
 
 export default withAuth(SettingsContainer)
