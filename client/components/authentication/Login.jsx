@@ -10,6 +10,17 @@ import {
   gql
 } from '@apollo/client';
 
+
+const style = {
+  signupOrLogin: {
+    top: '-120px',
+    right: '40px',
+    color:'#0275d8',
+    size:'15px',
+  }
+};
+
+
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
     validateUser(username: $username, password: $password){
@@ -64,9 +75,13 @@ const Login = (props) => {
   // };
 
   return (
+    <div>
+       <Link className="signupOrLogin" to='/signup' style={style.signupOrLogin}> Don't have an account?</Link>
     <div className='authen-box'>
+     
       <div className='authen-box-color'>
         <img src={logo} className='logo' />
+        
         <h1 className='welcome'>Welcome back! Please login.</h1>
 
         <div className='login-page container text-center'>
@@ -103,10 +118,11 @@ const Login = (props) => {
               <input className="form-button btn btn-primary" type="submit" value="Log in" />
             </div>
           </form>
-          <Link className="signup-or-login" to='/signup'> Don't have an account?</Link>
         </div>
-
+        
       </div>
+      
+    </div>
     </div>
   )
 }
