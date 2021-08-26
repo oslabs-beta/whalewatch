@@ -20,11 +20,11 @@ const NavBar = () => {
             </li>
 
             <li className="nav-item">
-              <a href="/notification" className="menulist"><i className="bi bi-menu-down"></i>  Notification</a>
+              <a href="/notification" className="menulist"><i className="bi bi-menu-down"></i>  Notifications</a>
             </li>
 
             <li className="nav-item">
-              <a href="/login" className="menulist"><i className="bi bi-sliders"></i>  Settings</a>
+              <a href="/settings" className="menulist"><i className="bi bi-sliders"></i>  Settings</a>
             </li>
 
           </ul>
