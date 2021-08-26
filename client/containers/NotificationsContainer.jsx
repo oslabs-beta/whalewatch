@@ -8,7 +8,7 @@ const NotificationsContainer = (props) => {
   return (
     <div className="notification-container" style={{ display: 'flex' }}>
       <NavBar />
-      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5rem', marginLeft: '5rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5rem', marginLeft: '250px' }}>
         <h3>Notifications <i class="bi bi-bell-fill"></i></h3>
         <Notification />
       </div>
