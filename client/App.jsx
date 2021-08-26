@@ -4,6 +4,7 @@ import Login from './components/authentication/Login';
 import DashboardContainer from './containers/DashboardContainer';
 import ContainersContainer from './containers/ContainersContainer';
 import NotificationsContainer from './containers/NotificationsContainer';
+import SettingsContainer from './containers/SettingsContainer';
 import NavBar from './components/NavBar/NavBar';
 
 // import listOfContainers from './components/afterLogin/listOfContainers';
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Form} />
           <Route exact path="/containers" component={ContainersContainer} />
+          <Route exact path="/settings" component={SettingsContainer} />
           <Route path="/notification" component={NotificationsContainer} />
         </Switch>
       </Router>

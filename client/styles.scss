@@ -163,3 +163,10 @@ a:hover {
     width: 75.6px;
     height: 61.8px;
 }
+
+// Settings
+.settingsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
