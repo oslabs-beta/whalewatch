@@ -43,20 +43,20 @@ const Login = (props) => {
   };
 
   //on submitting login info 
-  const [login, {data,loading, error}] = 
-  useMutation(LOGIN_MUTATION, {
-    variables: {
-    username: userData.username,
-    password: userData.password
-    },
-    onError: () => console.log('there is an error'),
-    onCompleted: (data) => {
-      console.log('this is data inside oncompleted', data)
-      Auth.login( () =>{
-        history.push('/dashboard')
-      })
-    }  
-  })
+  const [login, { data, loading, error }] =
+    useMutation(LOGIN_MUTATION, {
+      variables: {
+        username: userData.username,
+        password: userData.password
+      },
+      onError: () => console.log('there is an error'),
+      onCompleted: (data) => {
+        console.log('this is data inside oncompleted', data)
+        Auth.login(() => {
+          history.push('/dashboard')
+        })
+      }
+    })
   //something with cookies here
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -65,48 +65,48 @@ const Login = (props) => {
 
   return (
     <div className='authen-box'>
-    <div className='authen-box-color'>
-    <img src={logo} className='logo'/>
-    <h1 className='welcome'>Welcome back! Please login.</h1>
-    
-    <div className='login-page container text-center'>
+      <div className='authen-box-color'>
+        <img src={logo} className='logo' />
+        <h1 className='welcome'>Welcome back! Please login.</h1>
 
-      <form onSubmit={e => {e.preventDefault();login()}} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+        <div className='login-page container text-center'>
 
-        <div className='form-control-sm'>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            className="form-field form-control"
-            type="text"
-            name="username"
-            placeholder="username"
-            value={userData.username}
-            onChange={handleUsernameInputChange}
-          />
-        </div>
-        <div className='form-control-sm'>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            className="form-field form-control"
-            type="password"
-            name="username"
-            placeholder="password"
-            value={userData.password}
-            onChange={handlePasswordInputChange}
-          />
-        </div>
-        <br/>
+          <form onSubmit={e => { e.preventDefault(); login() }} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
 
-        <div>
-          <input className="form-button btn btn-primary" type="submit" value="Log in" />
+            <div className='form-control-sm'>
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                className="form-field form-control"
+                type="text"
+                name="username"
+                placeholder="username"
+                value={userData.username}
+                onChange={handleUsernameInputChange}
+              />
+            </div>
+            <div className='form-control-sm'>
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                className="form-field form-control"
+                type="password"
+                name="username"
+                placeholder="password"
+                value={userData.password}
+                onChange={handlePasswordInputChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <input className="form-button btn btn-primary" type="submit" value="Log in" />
+            </div>
+          </form>
+          <Link className="signup-or-login" to='/signup'> Don't have an account?</Link>
         </div>
-      </form>
-      {/* <Link className="signup-or-login" to='/signup'> Don't have an account?</Link> */}
+
       </div>
-   
-    </div>
     </div>
   )
 }
