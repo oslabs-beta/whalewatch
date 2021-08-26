@@ -32,13 +32,13 @@ const ContainersContainer = (props) => {
     console.log('this is container,', container)
     containers.push(
     <ul id = "containersList">
-        <li> container_id : {container.id} </li>
-        <li> container_name : {container.name} </li>
-        <li> container_dockerid: {container.dockerid}</li>
-        <li> container_size: {container.size} </li>
-        <li> container_status: {container.status}</li>
+        <li> ID: <p className = 'value'>{container.id} </p> </li>
+        <li> Name: <p className = 'value'>{container.name} </p> </li>
+        <li> DockerID: <p className = 'value'>{container.id} </p></li>
+        <li> Size: <p className = 'value'>{container.size} </p></li>
+        <li> Status: <p className = 'value'>{container.status} </p></li>
     </ul>
-  )
+  ) 
     })
   return (
     <>
@@ -49,16 +49,18 @@ const ContainersContainer = (props) => {
         <div className = 'containers'>
           {containers}
         </div>
-        <div>
+        <div id = "inactiveContainer">
           <span className = 'containerTitle'>Inactive Containers</span>
         </div>
       </div>
       <div id = "actions">
-          Actions
+        <div id = 'icons'>
+          <p>Actions</p>
           <img src = {deleteContainer}/>
           <img src = {stopContainer}/>
           <img src = {restartContainer}/>
         </div>
+      </div>
     </div>
     </>
   )
