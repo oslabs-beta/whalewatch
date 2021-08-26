@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../../Auth";
+import logo from '../../assets/logo.gif';
 
 //unsure if we need the below - more research required
 import {
@@ -41,44 +42,21 @@ const Login = (props) => {
     }));
   };
 
-  //const { loading, error, data } = useQuery(GET_CONTAINERS);
   //on submitting login info 
-
-
-  const [login, { data, loading, called, error }] =
-    useMutation(LOGIN_MUTATION, {
-      variables: {
-        username: userData.username,
-        password: userData.password
-      },
-      onError: () => console.log('there is an error'),
-      onCompleted: (data) => {
-        console.log('this is data inside oncompleted', data)
-        Auth.authenticate();
+  const [login, {data,loading, error}] = 
+  useMutation(LOGIN_MUTATION, {
+    variables: {
+    username: userData.username,
+    password: userData.password
+    },
+    onError: () => console.log('there is an error'),
+    onCompleted: (data) => {
+      console.log('this is data inside oncompleted', data)
+      Auth.login( () =>{
         history.push('/dashboard')
-      }
-    })
-  //console.log('this is username', userData.username)
-  // //NEVER ACTUALLY INVOKE THIS FUNCTION 
-  // //if auth is validated, change url using history.push
-  // //onError: () => console.log('there is an error'),
-  // onCompleted: (data) => {
-  //   // console.log('this is user', userData.email)
-  //   // console.log('thisis pw', userData.password)
-  //   // //something with cookies here
-  //   // console.log('in login')
-  //   // Auth.isAuthenticated();
-  //   // history.push('/dashboard');
-  //   console.log('this is data inside on completed', data)
-  // }
-
-
-  //console.log('this is the return query result from login', )
-  // if (loading) return 'Loading...';
-  // if (error) return `Error! ${error.message}`;
-  // console.log('this is data', data)
-  // console.log('this is user', userData.email)
-  // console.log('thisis pw', userData.password)
+      })
+    }  
+  })
   //something with cookies here
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -86,11 +64,16 @@ const Login = (props) => {
   // };
 
   return (
-    <div className='login-page text-center container'>
-      <h2>Log In</h2>
-      <form onSubmit={e => { e.preventDefault(); login() }}>
+    <div className='authen-box'>
+    <div className='authen-box-color'>
+    <img src={logo} className='logo'/>
+    <h1 className='welcome'>Welcome back! Please login.</h1>
+    
+    <div className='login-page container text-center'>
 
-        <div className='form-group'>
+      <form onSubmit={e => {e.preventDefault();login()}} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+
+        <div className='form-control-sm'>
           <label htmlFor="username">Username</label>
           <input
             id="username"
@@ -102,7 +85,7 @@ const Login = (props) => {
             onChange={handleUsernameInputChange}
           />
         </div>
-        <div className='form-group'>
+        <div className='form-control-sm'>
           <label htmlFor="password">Password</label>
           <input
             id="password"
@@ -114,17 +97,18 @@ const Login = (props) => {
             onChange={handlePasswordInputChange}
           />
         </div>
-        <input className="form-button btn btn-primary" type="submit" value="Log in" />
+        <br/>
+
+        <div>
+          <input className="form-button btn btn-primary" type="submit" value="Log in" />
+        </div>
       </form>
-      <div>
-        <Link className="signup-or-login" to='/signup'> Don't have an account?</Link></div>
+      {/* <Link className="signup-or-login" to='/signup'> Don't have an account?</Link> */}
+      </div>
+   
+    </div>
     </div>
   )
-
 }
-
-
-
-
 
 export default Login;
