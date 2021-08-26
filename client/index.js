@@ -6,6 +6,7 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+import styles from './scss/Application.scss';
 
 const enhancedFetch = (url, init) => {
 

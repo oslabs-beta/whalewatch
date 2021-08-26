@@ -31,30 +31,36 @@ const ContainersContainer = (props) => {
   activeContainers.map(container =>{
     console.log('this is container,', container)
     containers.push(
-    <div className = 'activeContainers' style = {{display: 'flex', borderStyle: 'solid'}}>
-    <ul style = {{listStyleType: 'none', margin: 'none', padding: 'none'}}>
+    <ul id = "containersList">
         <li> container_id : {container.id} </li>
         <li> container_name : {container.name} </li>
         <li> container_dockerid: {container.dockerid}</li>
         <li> container_size: {container.size} </li>
         <li> container_status: {container.status}</li>
     </ul>
-    </div>
   )
     })
   return (
-    <div id = 'containersContainer' style = {{color: 'green', display: 'flex'}}>
+    <>
+    <div id = 'allContainers'>
       <NavBar />
-      {containers}
-      <div>Inactive Containers</div>
-      <div>
-        Actions
-        <img src = {deleteContainer}/>
-        <img src = {stopContainer}/>
-        <img src = {restartContainer}/>
+      <div id = 'containersPage'>
+        <span className = 'containerTitle'>Active Containers</span>
+        <div className = 'containers'>
+          {containers}
+        </div>
+        <div>
+          <span className = 'containerTitle'>Inactive Containers</span>
+        </div>
       </div>
-
+      <div id = "actions">
+          Actions
+          <img src = {deleteContainer}/>
+          <img src = {stopContainer}/>
+          <img src = {restartContainer}/>
+        </div>
     </div>
+    </>
   )
 }
 
