@@ -41,10 +41,7 @@ const Login = (props) => {
     }));
   };
 
-  //const { loading, error, data } = useQuery(GET_CONTAINERS);
   //on submitting login info 
-  
-
   const [login, {data,loading, error}] = 
   useMutation(LOGIN_MUTATION, {
     variables: {
@@ -54,31 +51,11 @@ const Login = (props) => {
     onError: () => console.log('there is an error'),
     onCompleted: (data) => {
       console.log('this is data inside oncompleted', data)
-      Auth.authenticate();
-      history.push('/dashboard')
+      Auth.login( () =>{
+        history.push('/dashboard')
+      })
     }  
   })
-  //console.log('this is username', userData.username)
-  // //NEVER ACTUALLY INVOKE THIS FUNCTION 
-  // //if auth is validated, change url using history.push
-  // //onError: () => console.log('there is an error'),
-  // onCompleted: (data) => {
-  //   // console.log('this is user', userData.email)
-  //   // console.log('thisis pw', userData.password)
-  //   // //something with cookies here
-  //   // console.log('in login')
-  //   // Auth.isAuthenticated();
-  //   // history.push('/dashboard');
-  //   console.log('this is data inside on completed', data)
-  // }
-
-
-  //console.log('this is the return query result from login', )
-  // if (loading) return 'Loading...';
-  // if (error) return `Error! ${error.message}`;
-  // console.log('this is data', data)
-  // console.log('this is user', userData.email)
-  // console.log('thisis pw', userData.password)
   //something with cookies here
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -89,7 +66,6 @@ const Login = (props) => {
     <div className='login-page text-center container'>
       <h2>Log In</h2>
       <form onSubmit={e => { e.preventDefault(); login() }}>
-
         <div className='form-group'>
           <label htmlFor="username">Username</label>
           <input
@@ -120,11 +96,6 @@ const Login = (props) => {
         <Link className="signup-or-login" to='/signup'> Don't have an account?</Link></div>
     </div>
   )
-
 }
-
-
-
-
 
 export default Login;
