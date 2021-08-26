@@ -1,3 +1,5 @@
+$containerBlue:rgb(98, 189, 222);
+
 #allContainers{
   display: flex;
   height: 100%;
@@ -7,35 +9,68 @@
   width: 65%;
   display: flex;
   flex-direction: column;
-  outline: 1px solid black;
   align-items: center;
 }
 
 #containersList{
   list-style-type: none;
-  outline: 1px solid black;
-  
+  border: 1px solid $containerBlue;
+  padding: 20px;
+  margin: 0 0 0 30px;
+  border-radius: 5px;
+  background-color: $containerBlue;
+  width: 30%;
+  text-align: center;
 }
+
+#containersList > li{
+  margin: 0px;
+ 
+}
+.value{
+  display: inline;
+}
+
 
 #actions{
   display: flex;
-  flex-direction: column;
-  outline: 1px solid black;
+  width: 35%;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
 .containers{
-  margin: 30px;
+  margin: 30px 0 30px 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+  width: 80%;
+  height: 50%;
+  align-items: flex-start;
+}
+#icons{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  border: 2px solid $containerBlue;
+  padding: 20px;
+  border-radius: 10%;
 }
 
-.activeContainers{
-  background-color: green;
-  
+#icons > img {
+  margin-bottom: 10px;
 }
+
 .containerTitle{
   margin-top: 30px;
+}
+
+.value{
+  color: white;
+}
+
+#inactiveContainer{
+  height: 50%;
 }

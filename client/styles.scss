@@ -53,15 +53,13 @@ font-weight: 700;
 // Nav Bar Section
 .vertical-nav{
     width: 200px;
-    height: 100vh;
+    height: 100%;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     // border-radius: 15px;
     box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);
-    
-
 }
 
 //logo real size: 396 × 302 (25%)
