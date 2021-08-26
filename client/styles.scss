@@ -60,6 +60,8 @@ font-weight: 700;
     align-items: center;
     // border-radius: 15px;
     box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);
+    position:fixed;
+
 }
 
 //logo real size: 396 × 302 (25%)
@@ -146,13 +148,14 @@ a:hover {
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    
 }
 
 .dashbaordData{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left:100px;
+    margin-left:225px;
     background-image: url('./assets/sea.gif')
 }
 
