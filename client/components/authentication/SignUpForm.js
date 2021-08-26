@@ -80,7 +80,7 @@ const SignUpForm = (props) => {
 
     return (
         <div>
-        <Link className="signup-or-login" to='/login' style={style.signupOrLogin}>Already have an cccount?</Link>
+        <Link className="signup-or-login" to='/login' style={style.signupOrLogin}>Already have an account?</Link>
         <div className='authen-box '>
             <div className='authen-box-color'>
             <img src={logo} className='logo'/>
