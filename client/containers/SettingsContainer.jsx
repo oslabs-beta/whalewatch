@@ -1,7 +1,7 @@
-// import React from "react";
-// import { useState } from 'react';
-// import { withAuth } from "../withAuth";
-// import NavBar from "../components/NavBar/NavBar";
+import React from "react";
+import { useState } from 'react';
+import { withAuth } from "../withAuth";
+import NavBar from "../components/NavBar/NavBar";
 
 // import {View, Text} from 'react-native';
 // import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
@@ -85,9 +85,12 @@ const SettingsContainer = (props) => {
             Click me
           </button>
         </div> */}
-
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5rem', marginLeft: '250px' }}>
+        <h3>Settings</h3>
+        <p>Here are the settings.</p>
+      </div>
     </div>
   )
 }
 
-// export default withAuth(SettingsContainer)
+export default withAuth(SettingsContainer)
