@@ -5,6 +5,16 @@ import { Link, useHistory } from "react-router-dom";
 import logo from '../../assets/logo.gif';
 import Auth from '../../Auth.js';
 
+
+const style = {
+    signupOrLogin: {
+      top: '-120px',
+      right: '40px',
+      color:'#0275d8',
+      size:'15px',
+    }
+  };
+
 const REGISTER_USER = gql`
 mutation addUser ($username: String!, $email: String!, $password: String!) {
   addUser(
@@ -69,6 +79,8 @@ const SignUpForm = (props) => {
 
 
     return (
+        <div>
+        <Link className="signup-or-login" to='/login' style={style.signupOrLogin}>Already have an account?</Link>
         <div className='authen-box '>
             <div className='authen-box-color'>
             <img src={logo} className='logo'/>
@@ -99,9 +111,9 @@ const SignUpForm = (props) => {
                     <button className='form-button btn btn-primary' onClick={handleFormSubmit}>Sign Up</button>
                 </div>
             </form>
-            <Link className="signup-or-login" to='/login'>Already have an cccount?</Link>
+            
         </div>
-        
+        </div>
         </div>
         </div>
     )
