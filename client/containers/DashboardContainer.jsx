@@ -11,6 +11,7 @@ import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
 
+
 const GET_CONTAINERS = gql`
     query containers {
     container {
@@ -81,19 +82,82 @@ const DashboardContainer = (props) => {
       <NavBar />
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Dashboard</div>
-        <div>
-          <div className='whaleChartContainer'>
-            <WhaleChart listOfContainers={data} />
+
+        {/* Whale Chart */}
+        <div className="card1">
+          {/* <!-- Card header --> */}
+          <div className="card-header">
+            {/* <!-- Title --> */}
+            <div className="metric-type">Container Health Overview</div>
+          </div>
+          {/* <!-- Card body --> */}
+          <div className="card-body">
+            {/* <!-- Chart wrapper --> */}
+            <WhaleChart className='whalechart' listOfContainers={data} />
           </div>
         </div>
-        <div>
-          {/* the below need to be passed the appropriate stats */}
-          <AverageCPUChart data={data} populateChart={populateChart} />
-          <AverageMemoryChart data={data} populateChart={populateChart} />
-          <NetIOChart data={data} populateChart={populateChart} />
-          <BlockIOChart data={data} populateChart={populateChart} />
-          <PIDChart data={data} populateChart={populateChart} />
+
+        {/* AverageCPUChart */}
+        <div className="card1">
+          <div className="card-header">
+            <div className="metric-type">Average CPU Usage</div>
+          </div>
+          <div className="card-body">
+            <AverageCPUChart data={data} populateChart={populateChart} />
+          </div>
         </div>
+
+        {/* AverageMemoryChart */}
+        <div className="card1">
+          <div className="card-header">
+            <div className="metric-type">Average Memory Usage</div>
+          </div>
+          <div className="card-body">
+            <AverageMemoryChart data={data} populateChart={populateChart} />
+          </div>
+        </div>
+
+        {/* Average Net I/O */}
+        <div className="card1">
+          <div className="card-header">
+            <div className="metric-type">Average Net I/O</div>
+          </div>
+          <div className="card-body">
+            <NetIOChart data={data} populateChart={populateChart} />
+          </div>
+        </div>
+
+        {/* BlockIOChart */}
+        <div className="card1">
+          <div className="card-header">
+            <div className="metric-type">Average Block I/O</div>
+          </div>
+          <div className="card-body">
+            <BlockIOChart data={data} populateChart={populateChart} />
+          </div>
+        </div>
+
+        {/* PIDChart */}
+        <div className="card1">
+          <div className="card-header">
+            <div className="metric-type">Average PIDs</div>
+          </div>
+          <div className="card-body">
+            <PIDChart data={data} populateChart={populateChart} />
+          </div>
+        </div>
+
+
+
+
+        {/* the below need to be passed the appropriate stats */}
+        {/* <AverageCPUChart data={data} populateChart={populateChart} /> */}
+        {/* <AverageMemoryChart data={data} populateChart={populateChart} /> */}
+        {/* <NetIOChart data={data} populateChart={populateChart} /> */}
+        {/* <BlockIOChart data={data} populateChart={populateChart} />
+          <PIDChart data={data} populateChart={populateChart} /> */}
+
+
       </div>
     </div>
   )

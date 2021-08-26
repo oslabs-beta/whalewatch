@@ -2,12 +2,24 @@ import React from "react";
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../../Auth";
+import logo from '../../assets/logo.gif';
 
 //unsure if we need the below - more research required
 import {
   useMutation,
   gql
 } from '@apollo/client';
+
+
+const style = {
+  signupOrLogin: {
+    top: '-120px',
+    right: '40px',
+    color:'#0275d8',
+    size:'15px',
+  }
+};
+
 
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
@@ -41,11 +53,8 @@ const Login = (props) => {
     }));
   };
 
-  //const { loading, error, data } = useQuery(GET_CONTAINERS);
   //on submitting login info 
-
-
-  const [login, { data, loading, called, error }] =
+  const [login, { data, loading, error }] =
     useMutation(LOGIN_MUTATION, {
       variables: {
         username: userData.username,
@@ -54,31 +63,11 @@ const Login = (props) => {
       onError: () => console.log('there is an error'),
       onCompleted: (data) => {
         console.log('this is data inside oncompleted', data)
-        Auth.authenticate();
-        history.push('/dashboard')
+        Auth.login(() => {
+          history.push('/dashboard')
+        })
       }
     })
-  //console.log('this is username', userData.username)
-  // //NEVER ACTUALLY INVOKE THIS FUNCTION 
-  // //if auth is validated, change url using history.push
-  // //onError: () => console.log('there is an error'),
-  // onCompleted: (data) => {
-  //   // console.log('this is user', userData.email)
-  //   // console.log('thisis pw', userData.password)
-  //   // //something with cookies here
-  //   // console.log('in login')
-  //   // Auth.isAuthenticated();
-  //   // history.push('/dashboard');
-  //   console.log('this is data inside on completed', data)
-  // }
-
-
-  //console.log('this is the return query result from login', )
-  // if (loading) return 'Loading...';
-  // if (error) return `Error! ${error.message}`;
-  // console.log('this is data', data)
-  // console.log('this is user', userData.email)
-  // console.log('thisis pw', userData.password)
   //something with cookies here
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -86,45 +75,56 @@ const Login = (props) => {
   // };
 
   return (
-    <div className='login-page text-center container'>
-      <h2>Log In</h2>
-      <form onSubmit={e => { e.preventDefault(); login() }}>
+    <div>
+       <Link className="signupOrLogin" to='/signup' style={style.signupOrLogin}> Don't have an account?</Link>
+    <div className='authen-box'>
+     
+      <div className='authen-box-color'>
+        <img src={logo} className='logo' />
+        
+        <h1 className='welcome'>Welcome back! Please login.</h1>
 
-        <div className='form-group'>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            className="form-field form-control"
-            type="text"
-            name="username"
-            placeholder="username"
-            value={userData.username}
-            onChange={handleUsernameInputChange}
-          />
+        <div className='login-page container text-center'>
+
+          <form onSubmit={e => { e.preventDefault(); login() }} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+
+            <div className='form-control-sm'>
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                className="form-field form-control"
+                type="text"
+                name="username"
+                placeholder="username"
+                value={userData.username}
+                onChange={handleUsernameInputChange}
+              />
+            </div>
+            <div className='form-control-sm'>
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                className="form-field form-control"
+                type="password"
+                name="username"
+                placeholder="password"
+                value={userData.password}
+                onChange={handlePasswordInputChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <input className="form-button btn btn-primary" type="submit" value="Log in" />
+            </div>
+          </form>
         </div>
-        <div className='form-group'>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            className="form-field form-control"
-            type="password"
-            name="username"
-            placeholder="password"
-            value={userData.password}
-            onChange={handlePasswordInputChange}
-          />
-        </div>
-        <input className="form-button btn btn-primary" type="submit" value="Log in" />
-      </form>
-      <div>
-        <Link className="signup-or-login" to='/signup'> Don't have an account?</Link></div>
+        
+      </div>
+      
+    </div>
     </div>
   )
-
 }
-
-
-
-
 
 export default Login;

@@ -3,10 +3,25 @@ import { useState } from 'react';
 import { Route, Redirect } from "react-router-dom";
 import Auth from "./Auth";
 
-const ProtectedRoute = ({ component: DashboardContainer, ...rest }) => {
+//returning a route with a comoponent that is passed in
+const ProtectedRoute = ({ component: Component, ...rest }) => {
 
   return (
-    <Route {...rest} render={(props) => Auth.getAuth() ? <DashboardContainer {...props} /> : <Redirect to="/login" />} />
+    <Route {...rest} render={(props) => {
+      //if user is authenticated, return this path
+      if(Auth.getAuth()){
+        return <Component {...props} />
+      }
+      else{
+        return <Redirect to = {
+          {
+            pathname:  "/"
+          }
+        }/>
+      }
+    
+    }} />
+      //Auth.getAuth() ? <DashboardContainer {...props} /> : <Redirect to="/login" />} />
   );
 }
 
