@@ -7,10 +7,11 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS containers (
   id SERIAL PRIMARY KEY,
-  dockerId integer NOT NULL,
+  dockerId varchar(100) NOT NULL,
   name varchar(100) NOT NULL,
   size integer,
   status varchar(50),
+  state varchar(50),
   owner integer REFERENCES users(id) NOT NULL
 )
 

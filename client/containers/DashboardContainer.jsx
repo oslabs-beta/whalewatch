@@ -14,7 +14,7 @@ import PIDChart from "../components/dashboard/PIDChart";
 
 const GET_CONTAINERS = gql`
     query containers {
-    container {
+    container(id:10) {
       id
       dockerid
       name
@@ -36,14 +36,8 @@ const GET_CONTAINERS = gql`
 
 
 const DashboardContainer = (props) => {
-
+  const { userId } = props;
   const [listOfContainers, setListOfContainers] = useState([]);
-  //this piece of state will hold the stats we'll use to make the chart
-  // const [stats, setStats] = useState({
-  //   cpuUsage: '',
-  //   memUsage: '',
-  //   netIO: ''
-  // })
 
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';
