@@ -6,6 +6,7 @@ import { useQuery, gql } from '@apollo/client';
 import deleteContainer from "../assets/delete.png";
 import stopContainer from "../assets/stop.png";
 import restartContainer from "../assets/restart.png";
+import Auth from '../Auth.js';
 
 const ContainersContainer = (props) => {
   const GET_CONTAINERS = gql`
@@ -27,6 +28,7 @@ const ContainersContainer = (props) => {
   //store containers
   const activeContainers = data.container;
   console.log('this is active containers', activeContainers)
+  console.log('is this page authenticated', Auth.isAuthenticated())
   const containers = [];
   activeContainers.map(container =>{
     console.log('this is container,', container)
@@ -40,30 +42,33 @@ const ContainersContainer = (props) => {
     </ul>
   ) 
     })
-  return (
-    <>
-    <div id = 'allContainers'>
-      <NavBar />
-      <div id = 'containersPage'>
-        <span className = 'containerTitle'>Active Containers</span>
-        <div className = 'containers'>
-          {containers}
+  if(Auth.isAuthenticated()){
+    return (
+      <>
+      <div id = 'allContainers'>
+        <NavBar />
+        <div id = 'containersPage'>
+          <span className = 'containerTitle'>Active Containers</span>
+          <div className = 'containers'>
+            {containers}
+          </div>
+          <div id = "inactiveContainer">
+            <span className = 'containerTitle'>Inactive Containers</span>
+          </div>
         </div>
-        <div id = "inactiveContainer">
-          <span className = 'containerTitle'>Inactive Containers</span>
+        <div id = "actions">
+          <div id = 'icons'>
+            <p>Actions</p>
+            <img src = {deleteContainer}/>
+            <img src = {stopContainer}/>
+            <img src = {restartContainer}/>
+          </div>
         </div>
       </div>
-      <div id = "actions">
-        <div id = 'icons'>
-          <p>Actions</p>
-          <img src = {deleteContainer}/>
-          <img src = {stopContainer}/>
-          <img src = {restartContainer}/>
-        </div>
-      </div>
-    </div>
-    </>
-  )
+      </>
+    )
+  }  
+ 
 }
 
 export default withAuth(ContainersContainer);

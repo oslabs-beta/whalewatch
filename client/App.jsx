@@ -16,9 +16,9 @@ import './styles.scss';
 
 const App = () => {
 
-  if(!Auth.isAuthenticated){
-    Auth.isAuthenticated = true;
-  }
+  // if(!Auth.isAuthenticated){
+  //   Auth.isAuthenticated = true;
+  // }
   return (
     <>
       <Router>

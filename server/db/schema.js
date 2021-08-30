@@ -17,6 +17,7 @@ const {
   Kind
   // needed to export our schema  
 } = graphql;
+const jwt = require('jsonwebtoken')
 
 //graphqlobjecttype is function from graphql
 const UserType = new GraphQLObjectType({
@@ -29,6 +30,7 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
+    //token: {type: GraphQLString},
     containerName: {
       type: new GraphQLList(ContainerType),
       resolve: async (parent) => {
@@ -48,7 +50,7 @@ const ContainerType = new GraphQLObjectType({
   description: 'Our containers',
   fields: () => ({
     id: { type: GraphQLInt },
-    dockerid: { type: GraphQLInt },
+    dockerid: { type: GraphQLString },
     name: { type: GraphQLString },
     size: { type: GraphQLInt },
     status: { type: GraphQLString },
@@ -113,8 +115,10 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(ContainerType),
       description: 'List of all our containers',
       resolve: async () => {
+        // console.log('this is req.cookies', req.cookies)
         const res = await pool.query(`SELECT * from "containers"`);
         return res.rows;
+
       }
     },
     oneContainer: {
@@ -161,16 +165,17 @@ const RootMutationType = new GraphQLObjectType({
         //     //return containerData.filter(container => container.user_id  === parent.id);
         //     const res = await pool.query(query,vals);
         //     return res.rows;
-        //   }
+        //   
         // },
       },
       resolve: async (parent, args) => {
-        // console.log(parent)
+        console.log('this is parent', parent)
         const password = await bcrypt.hash(args.password, 10);
         const user = [args.username, args.email, password]
         const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
         const res = await pool.query(query, user);
         console.log('this is response to adding a user', res);
+        console.log('this is createuser args', args)
         return res.rows[0];
         //return res.rows;
       }
@@ -180,25 +185,29 @@ const RootMutationType = new GraphQLObjectType({
       description: 'Make sure username + pw match',
       args: {
         username: { type: GraphQLString },
-        password: { type: GraphQLString }
+        password: { type: GraphQLString },
       },
-      resolve: async (parent, args) => {
-        // const username = [args.username]
-        // const query = `SELECT * from users WHERE username = $1`;
-        // const userpass = await pool.query(query, username);
-        // bcrypt.compare(args.password, userpass, (err,res) => {})
+      resolve: async (parent, args, {req,res}) => {
+
         const username = [args.username]
         const query = `SELECT password from users WHERE username = $1`;
         const result = await pool.query(query, username)
         // console.log('this is user password', result.rows[0].password)
-        //bcrypt.compare(args.password, 10) 
         const comparingPassword = await bcrypt.compare(args.password, result.rows[0].password);
-        // console.log('iam comparing', comparingPassword)
-        //return comparingPassword;
         if (comparingPassword === true) {
           const finalResult = await pool.query(`SELECT * from users where username = $1`, username);
-          console.log('TESTING TESTING 123')
+
+          const accessToken = jwt.sign({userId: finalResult.rows[0].id}, 'Dockerpalsarecuties', {expiresIn: '15min'});
+          const refreshToken = jwt.sign({userId: finalResult.rows[0].id}, 'Dockerpalsarecuties', {expiresIn: '7d'});
+
+          const refresh = res.cookie('refresh-token', refreshToken, {expire: 60*60*27*7})
+          const access = res.cookie('access-token', accessToken, {expire: 60*15})
+
+          console.log('this is access token', accessToken)
+
           return finalResult.rows[0];
+          return accessToken;
+          
         }
       }
     },
@@ -229,8 +238,6 @@ const RootMutationType = new GraphQLObjectType({
 
 
 });
-
-
 
 const schema = new GraphQLSchema({
   query: RootQueryType,
