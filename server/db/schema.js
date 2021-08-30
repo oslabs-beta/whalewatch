@@ -34,7 +34,6 @@ const UserType = new GraphQLObjectType({
     containerName: {
       type: new GraphQLList(ContainerType),
       resolve: async (parent) => {
-        await dbHelper.refreshContainerData;
         const vals = [parent.id];
         const query = `SELECT * from containers WHERE owner=$1`;
         //return containerData.filter(container => container.user_id  === parent.id);
