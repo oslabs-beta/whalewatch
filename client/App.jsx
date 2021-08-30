@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/authentication/Login';
 import DashboardContainer from './containers/DashboardContainer';
@@ -16,24 +17,24 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const App = () => {
-
-  if(!Auth.isAuthenticated){
+  const [userId, setUserId] = useState('');
+  if (!Auth.isAuthenticated) {
     Auth.isAuthenticated = true;
   }
   return (
     <DndProvider backend={HTML5Backend}>
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/"><Login setUserId={setUserId} /></Route>
           <Route exact path="/nav" component={NavBar} />
-          <Route exact path="/dashboard" component={DashboardContainer} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Form} />
-          <Route exact path="/containers" component={ContainersContainer} />
-          <Route exact path="/settings" component={SettingsContainer} />
-          <Route path="/notification" component={NotificationsContainer} />
+          <Route exact path="/dashboard"><DashboardContainer userId={userId} /> </Route>
+          <Route exact path="/login"><Login setUserId={setUserId} /></Route>
+          <Route exact path="/signup"><Form setUserId={setUserId} /></Route>
+          <Route exact path="/containers"><ContainersContainer userId={userId} /> </Route>
+          <Route exact path="/settings"><SettingsContainer userId={userId} /> </Route>
+          <Route path="/notification"><NotificationsContainer userId={userId} /> </Route>
           //if user tries to go to any other path that isn't defined
-          <Route path = "*" component = { () => "404 NOT FOUND"}/>
+          <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>
     </DndProvider>
