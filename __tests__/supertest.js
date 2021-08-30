@@ -6,7 +6,7 @@ const request = supertest(server);
 
 describe('Route integration', () => {
   describe('/graphql', () => {
-    it('gets a list of users', () => {
+    it('gets a list of users', (done) => {
       return request
         .post('/graphql')
         .send({
