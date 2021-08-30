@@ -37,7 +37,7 @@ const GET_CONTAINERS = gql`
 
 const DashboardContainer = (props) => {
 
-  const [listOfContainers, setListOfContainers] = useState([]);
+  // const [listOfContainers, setListOfContainers] = useState([]);
   //this piece of state will hold the stats we'll use to make the chart
   // const [stats, setStats] = useState({
   //   cpuUsage: '',
@@ -50,6 +50,7 @@ const DashboardContainer = (props) => {
   if (error) return `Error! ${error.message}`;
   console.log(data)
 
+  
   const populateChart = (datatype, data) => {
     const array = data.container;
     const dataArr = [];

@@ -8,11 +8,12 @@ import SettingsContainer from './containers/SettingsContainer';
 import NavBar from './components/NavBar/NavBar';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import Auth from './Auth.js';
-// import listOfContainers from './components/afterLogin/listOfContainers';
-// import dashBoard from './components/afterLogin/dashBoard';
-// import notification from './components/afterLogin/notification';
 import Form from './components/authentication/form'
 import './styles.scss';
+
+////for drag and drop 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const App = () => {
 
@@ -20,7 +21,7 @@ const App = () => {
     Auth.isAuthenticated = true;
   }
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
@@ -35,7 +36,7 @@ const App = () => {
           <Route path = "*" component = { () => "404 NOT FOUND"}/>
         </Switch>
       </Router>
-    </>
+    </DndProvider>
   );
 };
 
