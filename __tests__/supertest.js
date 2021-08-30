@@ -4,7 +4,7 @@ const server = 'http://localhost:3000';
 
 const request = supertest(server);
 
-xdescribe('Route integration', () => {
+describe('Route integration', () => {
   describe('/graphql', () => {
     it('gets a list of users', () => {
       return request
