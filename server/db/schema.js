@@ -5,6 +5,7 @@
 const pool = require('./connect.js');
 const bcrypt = require('bcrypt');
 const graphql = require('graphql')
+
 const {
   GraphQLInt,
   GraphQLObjectType,
@@ -55,6 +56,7 @@ const ContainerType = new GraphQLObjectType({
     stats: {
       type: new GraphQLList(StatsType),
       resolve: async (parent) => {
+
         const vals = [parent.id];
         const query = `SELECT * from stats WHERE container=$1`;
         //return containerData.filter(container => container.user_id  === parent.id);
