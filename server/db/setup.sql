@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS containers (
   name varchar(100) NOT NULL,
   size integer,
   status varchar(50),
+  state varchar(50),
   owner integer REFERENCES users(id) NOT NULL
 )
 

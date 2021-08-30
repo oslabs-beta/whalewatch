@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/oslabs-beta/whalewatch.git"
   },
-  "author": "Docker Pals",
+  "author": "Phil Kang, Annie Pan, Rachel Patterson, and Matilda Wang",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/whalewatch/issues"
@@ -41,6 +41,7 @@
     "node-polyfill-webpack-plugin": "^1.1.4",
     "path": "^0.12.7",
     "pg": "^8.7.1",
+    "pg-native": "^3.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",

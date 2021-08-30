@@ -8,7 +8,7 @@ const dockerPort = 'http://localhost:2375';
 //fetch a list of running containers from the docker engine API
 dockerApiHelper.getContainerList = () => {
 
-  fetch(`${dockerPort}/containers/json?all=true`)
+  fetch(`${dockerPort}/containers/json?all=true&size=true`)
     .then(result => result.json())
     .then(data => {
       return data;

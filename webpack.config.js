@@ -58,7 +58,7 @@ module.exports = {
       },
     ]
   },
-  // target: 'node',
+  target: 'node',
   // externals: {
   //   express: 'require(express)'
   // },

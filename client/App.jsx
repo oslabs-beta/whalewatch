@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/authentication/Login';
 import DashboardContainer from './containers/DashboardContainer';
@@ -15,8 +16,8 @@ import Form from './components/authentication/form'
 import './styles.scss';
 
 const App = () => {
-
-  if(!Auth.isAuthenticated){
+  const [userId, setUserId] = useState('');
+  if (!Auth.isAuthenticated) {
     Auth.isAuthenticated = true;
   }
   return (
@@ -25,14 +26,14 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/nav" component={NavBar} />
-          <Route exact path="/dashboard" component={DashboardContainer} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Form} />
-          <Route exact path="/containers" component={ContainersContainer} />
-          <Route exact path="/settings" component={SettingsContainer} />
-          <Route path="/notification" component={NotificationsContainer} />
+          <Route exact path="/dashboard" component={DashboardContainer} userId={userId} />
+          <Route exact path="/login" component={Login} setUserId={setUserId} />
+          <Route exact path="/signup" component={Form} setUserId={setUserId} />
+          <Route exact path="/containers" component={ContainersContainer} userId={userId} />
+          <Route exact path="/settings" component={SettingsContainer} userId={userId} />
+          <Route path="/notification" component={NotificationsContainer} userId={userId} />
           //if user tries to go to any other path that isn't defined
-          <Route path = "*" component = { () => "404 NOT FOUND"}/>
+          <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>
     </>
