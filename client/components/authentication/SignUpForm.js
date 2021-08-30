@@ -30,9 +30,8 @@ mutation addUser ($username: String!, $email: String!, $password: String!) {
 }
 `;
 
-const SignUpForm = (props) => {
-  const { submitForm } = props;
-  const { setUserId } = props.route;
+const SignUpForm = ({ props }) => {
+  const { submitForm, setUserId } = props;
   const [inputValues, setValues] = useState({
     username: '',
     email: '',

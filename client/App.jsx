@@ -24,14 +24,14 @@ const App = () => {
     <>
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/"><Login setUserId={setUserId} /></Route>
           <Route exact path="/nav" component={NavBar} />
-          <Route exact path="/dashboard" component={DashboardContainer} userId={userId} />
-          <Route exact path="/login" component={Login} setUserId={setUserId} />
-          <Route exact path="/signup" component={Form} setUserId={setUserId} />
-          <Route exact path="/containers" component={ContainersContainer} userId={userId} />
-          <Route exact path="/settings" component={SettingsContainer} userId={userId} />
-          <Route path="/notification" component={NotificationsContainer} userId={userId} />
+          <Route exact path="/dashboard"><DashboardContainer userId={userId} /> </Route>
+          <Route exact path="/login"><Login setUserId={setUserId} /></Route>
+          <Route exact path="/signup"><Form setUserId={setUserId} /></Route>
+          <Route exact path="/containers"><ContainersContainer userId={userId} /> </Route>
+          <Route exact path="/settings"><SettingsContainer userId={userId} /> </Route>
+          <Route path="/notification"><NotificationsContainer userId={userId} /> </Route>
           //if user tries to go to any other path that isn't defined
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>

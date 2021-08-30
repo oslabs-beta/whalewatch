@@ -10,12 +10,11 @@ import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
-import dbHelper from "../../server/helpers/dbHelper";
 
 
 const GET_CONTAINERS = gql`
     query containers {
-    container {
+    container(id:10) {
       id
       dockerid
       name
@@ -37,11 +36,8 @@ const GET_CONTAINERS = gql`
 
 
 const DashboardContainer = (props) => {
-  const { userId } = props.route;
+  const { userId } = props;
   const [listOfContainers, setListOfContainers] = useState([]);
-  useEffect(() => {
-    dbHelper.refreshContainerData(userId);
-  }, [])
 
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';

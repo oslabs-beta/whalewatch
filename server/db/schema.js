@@ -4,7 +4,8 @@
 // }from 'graphql';
 const pool = require('./connect.js');
 const bcrypt = require('bcrypt');
-const graphql = require('graphql')
+const graphql = require('graphql');
+const dbHelper = require('../helpers/dbHelper');
 
 const {
   GraphQLInt,
@@ -33,6 +34,7 @@ const UserType = new GraphQLObjectType({
     containerName: {
       type: new GraphQLList(ContainerType),
       resolve: async (parent) => {
+        await dbHelper.refreshContainerData;
         const vals = [parent.id];
         const query = `SELECT * from containers WHERE owner=$1`;
         //return containerData.filter(container => container.user_id  === parent.id);
@@ -49,14 +51,13 @@ const ContainerType = new GraphQLObjectType({
   description: 'Our containers',
   fields: () => ({
     id: { type: GraphQLInt },
-    dockerid: { type: GraphQLInt },
+    dockerid: { type: GraphQLString },
     name: { type: GraphQLString },
     size: { type: GraphQLInt },
     status: { type: GraphQLString },
     stats: {
       type: new GraphQLList(StatsType),
       resolve: async (parent) => {
-
         const vals = [parent.id];
         const query = `SELECT * from stats WHERE container=$1`;
         //return containerData.filter(container => container.user_id  === parent.id);
@@ -114,8 +115,12 @@ const RootQueryType = new GraphQLObjectType({
     container: {
       type: new GraphQLList(ContainerType),
       description: 'List of all our containers',
-      resolve: async () => {
-        const res = await pool.query(`SELECT * from "containers"`);
+      args: {
+        id: { type: GraphQLInt }
+      },
+      resolve: async (parent, args) => {
+        await dbHelper.refreshContainerData(args.id);
+        const res = await pool.query(`SELECT * from "containers" WHERE owner = $1`, [args.id]);
         return res.rows;
       }
     },

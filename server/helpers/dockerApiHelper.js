@@ -6,14 +6,15 @@ const dockerPort = 'http://localhost:2375';
 
 
 //fetch a list of running containers from the docker engine API
-dockerApiHelper.getContainerList = () => {
-
-  fetch(`${dockerPort}/containers/json?all=true&size=true`)
-    .then(result => result.json())
-    .then(data => {
-      return data;
-    })
-    .catch(err => console.log('Error in docker helper get container list: ', err))
+dockerApiHelper.getContainerList = async () => {
+  try {
+    const response = await fetch(`${dockerPort}/containers/json?all=true&size=true`)
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (err) {
+    console.log('error in get container list: ', err)
+  }
 }
 
 dockerApiHelper.inspectContainer = (id) => {

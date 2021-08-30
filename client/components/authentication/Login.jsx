@@ -31,9 +31,8 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-const Login = (props) => {
+const Login = ({ setUserId }) => {
   //add state
-  const { setUserId } = props.route;
   const [userData, setUserData] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState({ value: '' });
   const history = useHistory();
@@ -64,7 +63,7 @@ const Login = (props) => {
       onError: () => console.log('there is an error'),
       onCompleted: (data) => {
         console.log('this is data inside oncompleted', data)
-        setUserId(data.id);
+        // setUserId(data.id);
         Auth.login(() => {
           history.push('/dashboard')
         })
