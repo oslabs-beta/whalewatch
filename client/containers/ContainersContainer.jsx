@@ -11,7 +11,7 @@ import Auth from '../Auth.js';
 const ContainersContainer = (props) => {
   const GET_CONTAINERS = gql`
     query containers {
-    container {
+    container(id:10) {
       id
       dockerid
       name
