@@ -57,8 +57,13 @@ const ContainersContainer = (props) => {
         <div className = 'containers'>
           {containers}
         </div>
-        <div id = "inactiveContainer">
-          <span className = 'containerTitle'>Inactive Containers</span>
+        <div id = "actions">
+          <div id = 'icons'>
+            <p>Actions</p>
+            <img src = {deleteContainer}/>
+            <img src = {stopContainer}/>
+            <img src = {restartContainer}/>
+          </div>
         </div>
       </div>
       <div id = "actions">

@@ -3,20 +3,37 @@ const path = require('path');
 const app = express();
 const {graphqlHTTP} = require('express-graphql');
 const PORT = 3000;
-//make sure to import schema 
 const schema = require('./db/schema.js');
+const expressJwt = require('express-jwt');
+const {ApolloServer,gql} = require('apollo-server-express');
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+
 
 //need cors to connect our front end + back
 app.use(express.json());
 app.use(express.static('build'));
+app.use(cookieParser());
+// const authMiddleware = expressJwt({
+//   secret: "Dockerpalsarecuties",
+//   algorithms: ['HS256'],
+//   credentialsRequired: false
+// })
 
+//app.use(authMiddleware);
 
+// const context = async(req) =>{
+//   const{authorization: token} = req.headers;
+//   return {token}
+// }
 //use our graphql middleware. only to one endpoint
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', (req,res) => {
+  return graphqlHTTP({
   schema,
+  context: {req,res},
   graphiql:true
-}))
-
+})(req,res)}
+)
 
 //allow access to our index.html folder
 app.use('/', express.static(path.join(__dirname, '../client')));

@@ -10,6 +10,7 @@ import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
+import Auth from '../Auth.js';
 
 
 const GET_CONTAINERS = gql`
@@ -38,7 +39,6 @@ const GET_CONTAINERS = gql`
 const DashboardContainer = (props) => {
   const { userId } = props;
   const [listOfContainers, setListOfContainers] = useState([]);
-
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
