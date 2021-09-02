@@ -16,8 +16,8 @@ const style = {
   signupOrLogin: {
     top: '-120px',
     right: '40px',
-    color:'#0275d8',
-    size:'15px',
+    color: '#0275d8',
+    size: '15px',
   }
 };
 
@@ -33,7 +33,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-const Login = (props) => {
+const Login = ({ setUserId }) => {
   //add state
   const [userData, setUserData] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState({ value: '' });
@@ -75,53 +75,53 @@ const Login = (props) => {
   
   return (
     <div>
-       <Link className="signupOrLogin" to='/signup' style={style.signupOrLogin}> Don't have an account?</Link>
-    <div className='authen-box'>
-     
-      <div className='authen-box-color'>
-        <img src={logo} className='logo' />
-        
-        <h1 className='welcome'>Welcome back! Please login.</h1>
+      <Link className="signupOrLogin" to='/signup' style={style.signupOrLogin}> Don't have an account?</Link>
+      <div className='authen-box'>
 
-        <div className='login-page container text-center'>
+        <div className='authen-box-color'>
+          <img src={logo} className='logo' />
 
-          <form onSubmit={e => { e.preventDefault(); login() }} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+          <h1 className='welcome'>Welcome back! Please login.</h1>
 
-            <div className='form-control-sm'>
-              <label htmlFor="username">Username</label>
-              <input
-                id="username"
-                className="form-field form-control"
-                type="text"
-                name="username"
-                placeholder="username"
-                value={userData.username}
-                onChange={handleUsernameInputChange}
-              />
-            </div>
-            <div className='form-control-sm'>
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                className="form-field form-control"
-                type="password"
-                name="username"
-                placeholder="password"
-                value={userData.password}
-                onChange={handlePasswordInputChange}
-              />
-            </div>
-            <br />
+          <div className='login-page container text-center'>
 
-            <div>
-              <input className="form-button btn btn-primary" type="submit" value="Log in" />
-            </div>
-          </form>
+            <form onSubmit={e => { e.preventDefault(); login() }} className='form-group col-md-8 col-lg-8 mx-auto text-center'>
+
+              <div className='form-control-sm'>
+                <label htmlFor="username">Username</label>
+                <input
+                  id="username"
+                  className="form-field form-control"
+                  type="text"
+                  name="username"
+                  placeholder="username"
+                  value={userData.username}
+                  onChange={handleUsernameInputChange}
+                />
+              </div>
+              <div className='form-control-sm'>
+                <label htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  className="form-field form-control"
+                  type="password"
+                  name="username"
+                  placeholder="password"
+                  value={userData.password}
+                  onChange={handlePasswordInputChange}
+                />
+              </div>
+              <br />
+
+              <div>
+                <input className="form-button btn btn-primary" type="submit" value="Log in" />
+              </div>
+            </form>
+          </div>
+
         </div>
-        
+
       </div>
-      
-    </div>
     </div>
   )
 }
