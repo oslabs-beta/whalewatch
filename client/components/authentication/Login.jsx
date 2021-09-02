@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../../Auth";
 import logo from '../../assets/logo.gif';
+import Cookies from 'js-cookie';
 
 //unsure if we need the below - more research required
 import {
@@ -20,13 +21,14 @@ const style = {
   }
 };
 
-
+  // token
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
     validateUser(username: $username, password: $password){
       id
       username
       password
+     
     }
   }
 `;
@@ -39,11 +41,9 @@ const Login = ({ setUserId }) => {
   //function to handle changing username
   const handleUsernameInputChange = (e) => {
     e.persist();
-    console.log('hi from handle username')
     setUserData((userData) => ({
       ...userData, username: e.target.value,
     }));
-    console.log('this is username', userData.username)
   };
 
   const handlePasswordInputChange = (e) => {
@@ -60,21 +60,19 @@ const Login = ({ setUserId }) => {
         username: userData.username,
         password: userData.password
       },
-      onError: () => console.log('there is an error'),
+      onError: (err) => console.log('there is an error', err),
       onCompleted: (data) => {
         console.log('this is data inside oncompleted', data)
-        // setUserId(data.id);
-        Auth.login(() => {
-          history.push('/dashboard')
-        })
+        if(data.validateUser){
+          Cookies.set('id', data.validateUser.id)
+          console.log('this is my cookie', Cookies.get('access-token'))
+          Auth.login(() => {
+            history.push('/dashboard')
+          })
+        }
       }
     })
-  //something with cookies here
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   login({username: userData.username, password: userData.password})
-  // };
-
+  
   return (
     <div>
       <Link className="signupOrLogin" to='/signup' style={style.signupOrLogin}> Don't have an account?</Link>

@@ -3,6 +3,7 @@ const uri = 'postgres://xhvnddmn:JF9lN_N9dhSib-oqRKUPFuSEyVMMopcg@chunee.db.elep
 
 const pool = new Pool({
   connectionString: uri,
+  max: 3
 });
 
 module.exports = pool;

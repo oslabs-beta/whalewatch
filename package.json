@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "whalewatch",
   "version": "1.0.0",
   "description": "WhaleWatch is a health monitoring app for Docker containers.",
@@ -30,6 +29,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.8",
     "apollo": "^2.33.6",
+    "apollo-server": "^3.3.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.6.0",
@@ -37,8 +37,11 @@
     "electron": "^13.2.2",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
+    "express-jwt": "^6.1.0",
     "graphql": "^15.5.1",
     "html-webpack-plugin": "^5.3.2",
+    "js-cookie": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.6.1",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "path": "^0.12.7",
