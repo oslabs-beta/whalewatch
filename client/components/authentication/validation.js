@@ -1,5 +1,5 @@
 import React from 'react'
-import SignUpForm from './SignUpForm';
+import SignUpForm from './SignUpForm.js';
 
 const Validation = (inputValues) => {
     let errors = {};
