@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "whalewatch",
   "version": "1.0.0",
   "description": "WhaleWatch is a health monitoring app for Docker containers.",

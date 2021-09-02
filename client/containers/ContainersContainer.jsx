@@ -7,7 +7,7 @@ import deleteContainer from "../assets/delete.png";
 import stopContainer from "../assets/stop.png";
 import restartContainer from "../assets/restart.png";
 import DndContainers from "../components/dockerContainer/DndContainers"
-
+import TrashCan from "../components/dockerContainer/TrashCan"
 
 // Do I need this?
 // import { DragDropContext } from 'react-dnd';
@@ -15,8 +15,8 @@ import DndContainers from "../components/dockerContainer/DndContainers"
 
 const ContainersContainer = (props) => {
   const GET_CONTAINERS = gql`
-    query containers {
-    container {
+  query containers {
+    container(id:10) {
       id
       dockerid
       name
@@ -86,6 +86,7 @@ const ContainersContainer = (props) => {
           {/* <!-- Card body --> */}
           <div className="card-body">
             {/* <!-- Chart wrapper --> */}
+            <TrashCan/>
           </div>
         </div>
     </div>

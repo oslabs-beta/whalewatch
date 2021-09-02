@@ -6,6 +6,7 @@ import { useDrag } from 'react-dnd'
 
 const EachContainer = ({info}) => {
 
+    //for dragging
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "image",
         item: { info },
@@ -23,9 +24,9 @@ const EachContainer = ({info}) => {
     const opacity = isDragging ? 0 : 1;
     return (
         <div className="whale-display">
-        {info.status !== 'Bad' ? <img ref={drag} src={whaleBlue} className="whale" style={{border: isDragging? "5px solid pink" : "0px"}}/> : <img src={whaleRed} ref={drag} className="whale" style={{border: isDragging? "5px solid pink" : "0px"}} />}
-  
-        <br />Container {info.name}  <br />{info.size} MB
+        {info.status !== 'Bad' ? <img ref={drag} src={whaleBlue} className="whale" style={{opacity}}/> : <img src={whaleRed} ref={drag} className="whale" style={{opacity}} />}
+
+        {/* <br />Container {info.name}  <br />{info.size} MB */}
    
   
   
