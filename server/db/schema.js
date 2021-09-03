@@ -36,6 +36,7 @@ const UserType = new GraphQLObjectType({
     containerName: {
       type: new GraphQLList(ContainerType),
       resolve: async (parent) => {
+        await dbHelper.refreshContainerData(parent.id);
         const vals = [parent.id];
         const query = `SELECT * from containers WHERE owner=$1`;
         //return containerData.filter(container => container.user_id  === parent.id);
@@ -76,10 +77,10 @@ const StatsType = new GraphQLObjectType({
     id: { type: GraphQLID },
     container: { type: GraphQLID },
     timestamp: { type: GraphQLFloat }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
-    cpuusage: { type: GraphQLInt },
-    memusage: { type: GraphQLInt },
-    netio: { type: GraphQLInt },
-    blockio: { type: GraphQLInt },
+    cpuusage: { type: GraphQLFloat },
+    memusage: { type: GraphQLFloat },
+    netio: { type: GraphQLString },
+    blockio: { type: GraphQLString },
     pids: { type: GraphQLInt },
     reqpermin: { type: GraphQLInt },
   })
@@ -192,7 +193,7 @@ const RootMutationType = new GraphQLObjectType({
         username: { type: GraphQLString },
         password: { type: GraphQLString },
       },
-      resolve: async (parent, args, {req,res}) => {
+      resolve: async (parent, args, { req, res }) => {
 
         const username = [args.username]
         const query = `SELECT password from users WHERE username = $1`;
@@ -202,17 +203,17 @@ const RootMutationType = new GraphQLObjectType({
         if (comparingPassword === true) {
           const finalResult = await pool.query(`SELECT * from users where username = $1`, username);
 
-          const accessToken = jwt.sign({userId: finalResult.rows[0].id}, 'Dockerpalsarecuties', {expiresIn: '15min'});
-          const refreshToken = jwt.sign({userId: finalResult.rows[0].id}, 'Dockerpalsarecuties', {expiresIn: '7d'});
+          const accessToken = jwt.sign({ userId: finalResult.rows[0].id }, 'Dockerpalsarecuties', { expiresIn: '15min' });
+          const refreshToken = jwt.sign({ userId: finalResult.rows[0].id }, 'Dockerpalsarecuties', { expiresIn: '7d' });
 
-          const refresh = res.cookie('refresh-token', refreshToken, {expire: 60*60*27*7})
-          const access = res.cookie('access-token', accessToken, {expire: 60*15})
+          const refresh = res.cookie('refresh-token', refreshToken, { expire: 60 * 60 * 27 * 7 })
+          const access = res.cookie('access-token', accessToken, { expire: 60 * 15 })
 
           console.log('this is access token', accessToken)
 
           return finalResult.rows[0];
           return accessToken;
-          
+
         }
       }
     },

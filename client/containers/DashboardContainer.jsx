@@ -42,8 +42,8 @@ const DashboardContainer = (props) => {
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-  console.log(data)
 
+  //function to parse the data for the line charts
   const populateChart = (datatype, data) => {
     const array = data.container;
     const dataArr = [];
@@ -69,6 +69,9 @@ const DashboardContainer = (props) => {
     dataArr.sort((a, b) => a.timestamp - b.timestamp)
     return dataArr;
   }
+
+
+
 
 
   return (
@@ -117,7 +120,7 @@ const DashboardContainer = (props) => {
             <div className="metric-type">Average Net I/O</div>
           </div>
           <div className="card-body">
-            <NetIOChart data={data} populateChart={populateChart} />
+            <NetIOChart data={data} />
           </div>
         </div>
 
@@ -127,7 +130,7 @@ const DashboardContainer = (props) => {
             <div className="metric-type">Average Block I/O</div>
           </div>
           <div className="card-body">
-            <BlockIOChart data={data} populateChart={populateChart} />
+            <BlockIOChart data={data} />
           </div>
         </div>
 
