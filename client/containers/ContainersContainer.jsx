@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { withAuth } from "../withAuth";
 import NavBar from '../components/NavBar/NavBar';
 import { useQuery, gql } from '@apollo/client';
 import deleteContainer from "../assets/delete.png";
@@ -157,7 +156,7 @@ const ContainersContainer = (props) => {
   )
 }
 
-export default withAuth(ContainersContainer);
+export default ContainersContainer;
 
 // Do I need this??? this is probably addressed in the app.js
 // export default DragDropContext(withAuth)(ContainersContainer);
