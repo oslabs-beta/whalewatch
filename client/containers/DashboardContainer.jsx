@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect, useContext } from 'react';
 //reimplement withauth
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
@@ -9,8 +9,8 @@ import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
-import Auth from '../Auth.js';
-
+import AuthApi from '../Context.js'
+import Cookies from 'js-cookie';
 
 const GET_CONTAINERS = gql`
     query containers {
@@ -34,9 +34,21 @@ const GET_CONTAINERS = gql`
   
 `;
 
-
 const DashboardContainer = (props) => {
-  const { userId } = props;
+
+  const Auth = React.useContext(AuthApi);
+  console.log('this is refresh token', Cookies.get('refresh-token'))
+
+  useEffect(() =>{
+    const user = Cookies.get('refresh-token')
+    if(user){
+      Auth.value[1](true)
+    }
+  })
+
+  console.log('this is authorization inside dashboard container', Auth.value[0])
+  console.log('this is userid inside dashboard container', Auth.value2[0])
+
   const [listOfContainers, setListOfContainers] = useState([]);
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';

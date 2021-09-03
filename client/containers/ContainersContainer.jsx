@@ -27,6 +27,7 @@ const ContainersContainer = (props) => {
   //store containers
   const activeContainers = data.container;
   console.log('this is active containers', activeContainers)
+
   const containers = [];
   activeContainers.map(container => {
     console.log('this is container,', container)
@@ -69,4 +70,4 @@ const ContainersContainer = (props) => {
 
 }
 
-export default ContainersContainer;
+export default ContainersContainer
