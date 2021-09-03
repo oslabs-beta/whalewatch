@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withAuth } from "../withAuth";
+// import { withAuth } from "../withAuth";
 import NavBar from '../components/NavBar/NavBar';
 import { useQuery, gql } from '@apollo/client';
 import deleteContainer from "../assets/delete.png";

@@ -1,5 +1,5 @@
 import React from "react";
-import { withAuth } from "../../withAuth";
+// import { withAuth } from "../../withAuth";
 import whaleBlue from "../../assets/whaleBlue.png"
 import whaleRed from "../../assets/whaleRed.png"
 import { useDrag } from 'react-dnd'
