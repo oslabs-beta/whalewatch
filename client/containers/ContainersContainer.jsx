@@ -87,12 +87,12 @@ const ContainersContainer = (props) => {
         <div className = 'containers'>
           {containers}
         </div>
-        <div id = "actions">
-          <div id = 'icons'>
+        <div id="actions">
+          <div id='icons'>
             <p>Actions</p>
-            <img src = {deleteContainer}/>
-            <img src = {stopContainer}/>
-            <img src = {restartContainer}/>
+            <img src={deleteContainer} />
+            <img src={stopContainer} />
+            <img src={restartContainer} />
           </div>
         </div>
       </div>

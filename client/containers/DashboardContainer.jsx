@@ -1,7 +1,6 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect, useContext } from 'react';
 //reimplement withauth
-import { withAuth } from "../withAuth";
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -10,8 +9,8 @@ import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
-import Auth from '../Auth.js';
-
+import AuthApi from '../Context.js'
+import Cookies from 'js-cookie';
 
 const GET_CONTAINERS = gql`
     query containers {
@@ -35,16 +34,27 @@ const GET_CONTAINERS = gql`
   
 `;
 
-
 const DashboardContainer = (props) => {
-  const { userId } = props;
+
+  const Auth = React.useContext(AuthApi);
+  console.log('this is refresh token', Cookies.get('refresh-token'))
+
+  useEffect(() =>{
+    const user = Cookies.get('refresh-token')
+    if(user){
+      Auth.value[1](true)
+    }
+  })
+
+  console.log('this is authorization inside dashboard container', Auth.value[0])
+  console.log('this is userid inside dashboard container', Auth.value2[0])
+
   const [listOfContainers, setListOfContainers] = useState([]);
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-
-  
+  //function to parse the data for the line charts
   const populateChart = (datatype, data) => {
     const array = data.container;
     const dataArr = [];
@@ -70,6 +80,9 @@ const DashboardContainer = (props) => {
     dataArr.sort((a, b) => a.timestamp - b.timestamp)
     return dataArr;
   }
+
+
+
 
 
   return (
@@ -118,7 +131,7 @@ const DashboardContainer = (props) => {
             <div className="metric-type">Average Net I/O</div>
           </div>
           <div className="card-body">
-            <NetIOChart data={data} populateChart={populateChart} />
+            <NetIOChart data={data} />
           </div>
         </div>
 
@@ -128,7 +141,7 @@ const DashboardContainer = (props) => {
             <div className="metric-type">Average Block I/O</div>
           </div>
           <div className="card-body">
-            <BlockIOChart data={data} populateChart={populateChart} />
+            <BlockIOChart data={data} />
           </div>
         </div>
 
@@ -158,5 +171,5 @@ const DashboardContainer = (props) => {
   )
 }
 
-export default withAuth(DashboardContainer)
+export default DashboardContainer
 
