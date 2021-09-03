@@ -8,6 +8,8 @@ import {
 } from "@apollo/client";
 import styles from './scss/Application.scss';
 
+
+
 const enhancedFetch = (url, init) => {
 
   return fetch(url, {

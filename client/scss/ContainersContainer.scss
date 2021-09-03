@@ -75,3 +75,26 @@ $containerBlue:rgb(98, 189, 222);
 #inactiveContainer{
   height: 50%;
 }
+
+
+// Re-edited
+
+.dnd-board {
+height:500px;
+}
+
+.card2{
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid rgba(180, 74, 74, 0.05);
+  background-color: rgb(255, 255, 255);
+  background-clip: border-box;
+  width:500px;
+  // margin-left: 15px;
+  // box-shadow: 0px 5px 5px 5px rgb(209, 209, 209);
+  border-radius: 0px 0px 15px 15px ;
+  margin-bottom: 30px;
+}
+
+
+

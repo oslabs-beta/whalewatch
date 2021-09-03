@@ -16,6 +16,10 @@ import Form from './components/authentication/form'
 import './styles.scss';
 import AuthApi from './Context.js'
 
+////for drag and drop 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 const App = () => {
   const [userId, setUserId] = useState('racheljs');
   const [auth, setAuth] = useState(false); 
@@ -23,7 +27,8 @@ const App = () => {
   const Auth = React.useContext(AuthApi);
  
   return ( 
-    <div>
+    
+      <DndProvider backend={HTML5Backend}>
       <AuthApi.Provider value = {{value: [auth, setAuth], value2: [userId, setUserId]}}>   
         <Router>
           <Switch>
@@ -40,8 +45,8 @@ const App = () => {
           </Switch>
         </Router>
       </AuthApi.Provider>
-     
-    </div>
+      </DndProvider>
+    
   );
 };
 
