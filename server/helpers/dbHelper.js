@@ -24,7 +24,7 @@ const refreshStats = async (dockerId, id) => {
   }
 }
 
-dbHelper.refreshContainerData = async (owner) => {
+dbHelpear.refreshContainerData = async (owner) => {
   try {
     const containers = await dockerApiHelper.getContainerList();
     const insertQuery = 'INSERT INTO containers (dockerId, name, size, state, owner) VALUES ($1, $2, $3, $4, $5) RETURNING id';

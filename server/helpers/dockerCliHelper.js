@@ -1,9 +1,24 @@
 const dockerCliHelper = {};
 import { exec } from 'child_process';
 
-dockerApiHelper.getContainerList = () => {
+const parseCliJSON = (stdout) => {
+  const output = [];
+  let dockerOutput = stdout.trim();
+
+  const objs = dockerOutput.split('\n');
+  if (objs.length === 1) {
+    return JSON.parse(objs[0].slice(0, -1))
+  }
+  for (let i = 0; i < objs.length; i++) {
+    output.push(JSON.parse(objs[i]))
+  }
+  return output;
+}
+
+dockerCliHelper.getContainerList = () => {
   exec(
-    'docker ps --all --format "{{json .}}," --size',
+    'docker ps --all  --size --format "{{json .}}"',
+    //stdout output/stderr standard error
     (error, stdout, stderr) => {
       if (error) {
         console.log(error);
@@ -13,13 +28,15 @@ dockerApiHelper.getContainerList = () => {
         console.log(stderr);
         return;
       }
-      return [...stdout];
+
+      return parseCliJSON(stdout);
+
     }
   )
 
 }
 
-dockerApiHelper.inspectContainer = (id) => {
+dockerCliHelper.inspectContainer = (id) => {
   exec(
     `docker inspect --format "{{json .}}," ${id}`,
     (error, stdout, stderr) => {
@@ -31,12 +48,14 @@ dockerApiHelper.inspectContainer = (id) => {
         console.log(stderr);
         return;
       }
-      return [...stdout];
+      //console.log(parseCliJSON(stdout))
+      return parseCliJSON(stdout)
     }
   )
 }
 
-dockerApiHelper.getStats = () => {
+
+dockerCliHelper.getStats = () => {
   exec(
     'docker stats --no-stream --format "{{json .}},"',
     (error, stdout, stderr) => {
@@ -48,12 +67,13 @@ dockerApiHelper.getStats = () => {
         console.log(stderr);
         return;
       }
-      return [...stdout];
+      return parseCliJSON(stdout);
     }
   )
 }
 
-dockerApiHelper.startContainer = (id) => {
+
+dockerCliHelper.startContainer = (id) => {
   exec(
     `docker start ${id}`,
     (error, stdout, stderr) => {
@@ -70,7 +90,7 @@ dockerApiHelper.startContainer = (id) => {
   )
 }
 
-dockerApiHelper.stopContainer = (id) => {
+dockerCliHelper.stopContainer = (id) => {
   exec(
     `docker stop ${id}`,
     (error, stdout, stderr) => {
@@ -87,7 +107,7 @@ dockerApiHelper.stopContainer = (id) => {
   )
 }
 
-dockerApiHelper.restartContainer = (id) => {
+dockerCliHelper.restartContainer = (id) => {
   exec(
     `docker rm ${id}`,
     (error, stdout, stderr) => {
@@ -104,7 +124,7 @@ dockerApiHelper.restartContainer = (id) => {
   )
 }
 
-dockerApiHelper.removeContainer = (id) => {
+dockerCliHelper.removeContainer = (id) => {
   exec(
     `docker start ${id}`,
     (error, stdout, stderr) => {
