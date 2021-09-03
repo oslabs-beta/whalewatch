@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import Auth from "../../Auth";
 import logo from '../../assets/logo.gif';
 import Cookies from 'js-cookie';
-
+import AuthApi from '../../Context.js'
 //unsure if we need the below - more research required
 import {
   useMutation,
@@ -34,6 +34,8 @@ const LOGIN_MUTATION = gql`
 `;
 
 const Login = ({ setUserId }) => {
+
+  const Auth = React.useContext(AuthApi);
   //add state
   const [userData, setUserData] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState({ value: '' });
@@ -66,9 +68,10 @@ const Login = ({ setUserId }) => {
         if(data.validateUser){
           Cookies.set('id', data.validateUser.id)
           console.log('this is my cookie', Cookies.get('access-token'))
-          Auth.login(() => {
+          console.log('this is my cookie refresh token', Cookies.get('refresh-token'))
+          Auth.value[1](true)
+          console.log('inside login component this is currentAuth',Auth)
             history.push('/dashboard')
-          })
         }
       }
     })

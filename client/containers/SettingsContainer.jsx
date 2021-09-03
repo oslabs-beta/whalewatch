@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from 'react';
-import { withAuth } from "../withAuth";
 import NavBar from "../components/NavBar/NavBar";
 
 const SettingsContainer = (props) => {
@@ -16,4 +15,4 @@ const SettingsContainer = (props) => {
   )
 }
 
-export default withAuth(SettingsContainer)
+export default SettingsContainer
