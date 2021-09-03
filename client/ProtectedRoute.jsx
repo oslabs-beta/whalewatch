@@ -4,20 +4,17 @@ import { Route, Redirect } from "react-router-dom";
 import Auth from "./Auth";
 
 //returning a route with a comoponent that is passed in
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-
+const ProtectedRoute = ({auth, userId, component: Component, ...rest }) => {
+  
   return (
-    <Route {...rest} render={(props) => {
+    <Route
+      {...rest}
+      render={(props) => {
       //if user is authenticated, return this path
-      if(Auth.getAuth()){
-        return <Component {...props} />
-      }
+      if(auth)
+        return <Component auth={auth} userId = {userId} {...rest}/>
       else{
-        return <Redirect to = {
-          {
-            pathname:  "/"
-          }
-        }/>
+        <Redirect to = {{ pathname: "/login", state: {from: props.location}}}/>
       }
     
     }} />

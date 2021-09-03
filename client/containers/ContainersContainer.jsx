@@ -28,7 +28,7 @@ const ContainersContainer = (props) => {
   //store containers
   const activeContainers = data.container;
   console.log('this is active containers', activeContainers)
-  console.log('is this page authenticated', Auth.isAuthenticated())
+ 
   const containers = [];
   activeContainers.map(container =>{
     console.log('this is container,', container)
@@ -71,4 +71,4 @@ const ContainersContainer = (props) => {
  
 }
 
-export default withAuth(ContainersContainer);
+export default ContainersContainer
