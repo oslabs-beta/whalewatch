@@ -4,8 +4,8 @@ import whaleBlue from "../../assets/whaleBlue.png"
 import whaleRed from "../../assets/whaleRed.png"
 import { useDrag } from 'react-dnd'
 
-const EachContainer = ({info}) => {
-
+const EachContainer = ({info, handleDrop}) => {
+ console.log(info)
     //for dragging
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "image",
@@ -13,7 +13,7 @@ const EachContainer = ({info}) => {
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult();
             if (item && dropResult) {
-                console.log('yes')
+                handleDrop(info.id)
             }
         },
         collect: (monitor) => ({

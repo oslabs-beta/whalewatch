@@ -42,7 +42,7 @@ const DashboardContainer = (props) => {
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-  console.log(data)
+
 
   
   const populateChart = (datatype, data) => {
