@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
-//reimplement withauth
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -50,12 +49,6 @@ const DashboardContainer = (props) => {
   //  })
  
   const Auth = React.useContext(AuthApi);
-  console.log('this is Auth', Auth.value[1])
-  console.log('this is refresh token', Cookies.get('refresh-token'))
-
-  console.log('this is authorization inside dashboard container', Auth.value[0])
-  console.log('this is userid inside dashboard container', Auth.value2[0])
-
   const [listOfContainers, setListOfContainers] = useState([]);
   const { loading, error, data } = useQuery(GET_CONTAINERS);
   if (loading) return 'Loading...';
@@ -87,10 +80,6 @@ const DashboardContainer = (props) => {
     dataArr.sort((a, b) => a.timestamp - b.timestamp)
     return dataArr;
   }
-
-
-
-
 
   return (
     <div className='dashbaordContainer'>
