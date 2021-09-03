@@ -27,7 +27,8 @@ const App = () => {
   const Auth = React.useContext(AuthApi);
  
   return ( 
-    <div>
+    
+      <DndProvider backend={HTML5Backend}>
       <AuthApi.Provider value = {{value: [auth, setAuth], value2: [userId, setUserId]}}>   
         <Router>
           <Switch>
@@ -44,8 +45,8 @@ const App = () => {
           </Switch>
         </Router>
       </AuthApi.Provider>
-     
-    </div>
+      </DndProvider>
+    
   );
 };
 
