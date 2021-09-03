@@ -10,7 +10,6 @@ dockerApiHelper.getContainerList = async () => {
   try {
     const response = await fetch(`${dockerPort}/containers/json?all=true&size=true`)
     const data = await response.json();
-    console.log(data)
     return data;
   } catch (err) {
     console.log('error in get container list: ', err)
@@ -25,14 +24,17 @@ dockerApiHelper.inspectContainer = (id) => {
     })
     .catch(err => console.log('Error in docker helper inspect container: ', err))
 }
+const getDelta = (current, pre) => current - pre;
 
-dockerApiHelper.getStats = (id) => {
-  fetch(`${dockerPort}/containers/${id}/stats?stream=false`)
-    .then(result => result.json())
-    .then(data => {
-      return data;
-    })
-    .catch(err => console.log('Error in docker helper inspect container: ', err))
+dockerApiHelper.getStats = async (id) => {
+  try {
+    const response = await fetch(`${dockerPort}/containers/${id}/stats?stream=false`)
+    const stats = await response.json();
+    return stats;
+
+  } catch (err) {
+    console.log('Error in docker helper inspect container: ', err)
+  }
 }
 
 dockerApiHelper.startContainer = (id) => {
@@ -81,3 +83,4 @@ dockerApiHelper.removeContainer = (id) => {
 
 
 module.exports = dockerApiHelper;
+

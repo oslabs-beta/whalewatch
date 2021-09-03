@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from 'react';
-import { withAuth } from "../withAuth";
 import NavBar from "../components/NavBar/NavBar";
 import Notification from "../components/notification/Notification";
 
