@@ -76,10 +76,10 @@ const StatsType = new GraphQLObjectType({
     id: { type: GraphQLID },
     container: { type: GraphQLID },
     timestamp: { type: GraphQLFloat }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
-    cpuusage: { type: GraphQLInt },
-    memusage: { type: GraphQLInt },
-    netio: { type: GraphQLInt },
-    blockio: { type: GraphQLInt },
+    cpuusage: { type: GraphQLFloat },
+    memusage: { type: GraphQLFloat },
+    netio: { type: GraphQLString },
+    blockio: { type: GraphQLString },
     pids: { type: GraphQLInt },
     reqpermin: { type: GraphQLInt },
   })
@@ -222,11 +222,11 @@ const RootMutationType = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID },
         container: { type: GraphQLInt },
-        timestamp: { type: GraphQLInt }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
-        cpuusage: { type: GraphQLInt },
-        memusage: { type: GraphQLInt },
-        netio: { type: GraphQLInt },
-        blockio: { type: GraphQLInt },
+        timestamp: { type: GraphQLFloat }, // dates and times have to be defined as custom scalars like Date or timestamp - might need to npm install --save graphql-scalars
+        cpuusage: { type: GraphQLFloat },
+        memusage: { type: GraphQLFloat },
+        netio: { type: GraphQLString },
+        blockio: { type: GraphQLString },
         pids: { type: GraphQLInt },
         reqpermin: { type: GraphQLInt },
       },

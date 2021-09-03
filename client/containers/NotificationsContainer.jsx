@@ -16,4 +16,4 @@ const NotificationsContainer = (props) => {
   )
 }
 
-export default withAuth(NotificationsContainer)
+export default NotificationsContainer

@@ -16,4 +16,4 @@ const SettingsContainer = (props) => {
   )
 }
 
-export default withAuth(SettingsContainer)
+export default SettingsContainer
