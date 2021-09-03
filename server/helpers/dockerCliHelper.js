@@ -28,7 +28,7 @@ dockerCliHelper.getContainerList = () => {
         console.log(stderr);
         return;
       }
-
+      // console.log(parseCliJSON(stdout))
       return parseCliJSON(stdout);
 
     }
@@ -67,6 +67,7 @@ dockerCliHelper.getStats = () => {
         console.log(stderr);
         return;
       }
+      console.log(parseCliJSON9)
       return parseCliJSON(stdout);
     }
   )
