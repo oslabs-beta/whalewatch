@@ -37,15 +37,22 @@ const GET_CONTAINERS = gql`
 
 const DashboardContainer = (props) => {
 
+  // const readCookie = () => {
+  //   const user = Cookies.get('refresh-token')
+  //    console.log('this is dashboard cookie', user)
+  //    if(user){
+  //      Auth.value[1](true)
+  //    }
+  //  }
+ 
+ 
+  //  useEffect(() =>{
+  //    readCookie();
+  //  })
+ 
   const Auth = React.useContext(AuthApi);
+  console.log('this is Auth', Auth.value[1])
   console.log('this is refresh token', Cookies.get('refresh-token'))
-
-  useEffect(() =>{
-    const user = Cookies.get('refresh-token')
-    if(user){
-      Auth.value[1](true)
-    }
-  })
 
   console.log('this is authorization inside dashboard container', Auth.value[0])
   console.log('this is userid inside dashboard container', Auth.value2[0])
