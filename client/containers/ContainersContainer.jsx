@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import NavBar from '../components/NavBar/NavBar';
 import { useQuery, gql } from '@apollo/client';
+
+import AuthApi from '../Context.js'
+import Cookies from 'js-cookie';
+import Auth from "../Auth.js";
+
 import deleteContainer from "../assets/delete.png";
 import stopContainer from "../assets/stop.png";
 import restartContainer from "../assets/restart.png";
 import DndContainers from "../components/dockerContainer/DndContainers"
 import TrashCan from "../components/dockerContainer/TrashCan"
 
-
 const GET_CONTAINERS = gql`
-query containers {
-  container(id:10) {
+query Containers ($id: Int) {
+  container(id: $id) {
     id
     dockerid
     name
@@ -42,7 +46,7 @@ const ContainersContainer = (props) => {
 //     }
 //   }
 // `;
-  const { loading, error, data } = useQuery(GET_CONTAINERS);
+  const { loading, error, data } = useQuery(GET_CONTAINERS, {variables});
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
   // console.log("data:", data)

@@ -20,7 +20,6 @@ const {
   // needed to export our schema  
 } = graphql;
 const jwt = require('jsonwebtoken')
-
 //graphqlobjecttype is function from graphql
 const UserType = new GraphQLObjectType({
   name: 'User',
@@ -121,6 +120,7 @@ const RootQueryType = new GraphQLObjectType({
         id: { type: GraphQLInt }
       },
       resolve: async (parent, args) => {
+        console.log('args.id: ', args.id)
         await dbHelper.refreshContainerData(args.id);
         const res = await pool.query(`SELECT * from "containers" WHERE owner = $1`, [args.id]);
         return res.rows;

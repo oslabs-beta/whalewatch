@@ -1,5 +1,9 @@
 import React from 'react';
+import { Route, Redirect } from "react-router-dom";
+
 import { useState, useEffect, useContext } from 'react';
+import Auth from "../Auth.js";
+
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -14,29 +18,29 @@ import formatBytes from "./containerHelpers";
 
 
 const GET_CONTAINERS = gql`
-    query containers {
-    container(id:10) {
-      id
-      dockerid
-      name
-      size
-      status
-      stats {
-        timestamp
-        cpuusage
-        memusage
-        netio
-        blockio
-        pids
-        reqpermin
+    query Containers ($id: Int) {
+      container(id: $id) {
+        id
+        dockerid
+        name
+        size
+        status
+        stats {
+          timestamp
+          cpuusage
+          memusage
+          netio
+          blockio
+          pids
+          reqpermin
+        }
       }
     }
-  }
-  
 `;
 
-const DashboardContainer = (props) => {
 
+
+const DashboardContainer = (props) => {
   // const readCookie = () => {
   //   const user = Cookies.get('refresh-token')
   //    console.log('this is dashboard cookie', user)
@@ -53,16 +57,18 @@ const DashboardContainer = (props) => {
 
   const Auth = React.useContext(AuthApi);
   const [listOfContainers, setListOfContainers] = useState([]);
-  const { loading, error, data } = useQuery(GET_CONTAINERS);
+  const variables = { id: Auth.value2[0] };
+  const id = Auth.value2[0];
+  const { loading, error, data } = useQuery(GET_CONTAINERS, {variables});
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
   //function to parse the data for the line charts
   const populateChart = (datatype, data) => {
+
     const array = data.container;
     const dataArr = [];
     const dataCache = {};
-
     array.forEach(container => {
       const stats = container.stats;
       stats.forEach(stat => {
