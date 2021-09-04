@@ -1,14 +1,12 @@
 const dockerCliHelper = {};
-import { exec } from 'child_process';
+const { exec } = require('child_process');
 
 const parseCliJSON = (stdout) => {
   const output = [];
   let dockerOutput = stdout.trim();
 
   const objs = dockerOutput.split('\n');
-  if (objs.length === 1) {
-    return JSON.parse(objs[0].slice(0, -1))
-  }
+
   for (let i = 0; i < objs.length; i++) {
     output.push(JSON.parse(objs[i]))
   }
@@ -38,7 +36,7 @@ dockerCliHelper.getContainerList = () => {
 
 dockerCliHelper.inspectContainer = (id) => {
   exec(
-    `docker inspect --format "{{json .}}," ${id}`,
+    `docker inspect --format "{{json .}}" ${id}`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(error);
@@ -48,16 +46,16 @@ dockerCliHelper.inspectContainer = (id) => {
         console.log(stderr);
         return;
       }
-      //console.log(parseCliJSON(stdout))
+      console.log(parseCliJSON(stdout))
       return parseCliJSON(stdout)
     }
   )
 }
+// dockerCliHelper.inspectContainer('5e92d0ef966e')
 
-
-dockerCliHelper.getStats = () => {
+dockerCliHelper.getStats = (id) => {
   exec(
-    'docker stats --no-stream --format "{{json .}},"',
+    `docker stats --no-stream --format "{{json .}}" ${id}`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(error);
@@ -67,12 +65,12 @@ dockerCliHelper.getStats = () => {
         console.log(stderr);
         return;
       }
-      console.log(parseCliJSON9)
+      console.log(parseCliJSON(stdout));
       return parseCliJSON(stdout);
     }
   )
 }
-
+dockerCliHelper.getStats('31fd33e15314')
 
 dockerCliHelper.startContainer = (id) => {
   exec(
@@ -144,4 +142,4 @@ dockerCliHelper.removeContainer = (id) => {
 
 
 
-export default dockerCliHelper;
+module.exports = dockerCliHelper;
