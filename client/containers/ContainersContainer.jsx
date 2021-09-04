@@ -53,10 +53,12 @@ const ContainersContainer = (props) => {
 
   
   
-  const handleDrop = (id) => {
-    setContainerData(containerData.container.filter(container=> container.id !== id))
-    }
-  
+  // const handleDrop = (id) => {
+  //   setContainerData(containerData.container.filter(container=> container.id !== id))
+  //   }
+    const handleDrop = () => {
+      setContainerData(console.log('yay'))
+      }
 
 
   //store containers
