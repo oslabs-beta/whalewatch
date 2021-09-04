@@ -11,7 +11,7 @@ const Whale = ({ info }) => {
 
     <div className="whale-display">
       {info.status !== 'Bad' ? <img src={whaleBlue} className="whale" /> : <img src={whaleRed} className="whale" />}
-      <br />Container {info.name} <br />{info.size} MB
+      <br />Container {info.name} <br />{info.size}
       {/* <img src={whaleRed} /><br/>My name is {info.name} */}
 
 

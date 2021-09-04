@@ -11,13 +11,13 @@ const getDelta = (current, pre) => current - pre;
 const refreshStats = async (dockerId, id) => {
   try {
     const stats = await dockerCliHelper.getStats(dockerId);
-    const timestamp = Date.now();
-
-    const cpuUsage = stats.CPUPerc.slice(0, -1);
-    const memUsage = stats.MemPerc.slice(0, -1);
-    const netIo = stats.NetIO
-    const blockIo = stats.BlockIO;
-    const pids = stats.PIDs;
+    let timestamp = new Date(Date.now());
+    // timestamp = timestamp.
+    const cpuUsage = stats[0].CPUPerc.slice(0, -1);
+    const memUsage = stats[0].MemPerc.slice(0, -1);
+    const netIo = stats[0].NetIO
+    const blockIo = stats[0].BlockIO;
+    const pids = stats[0].PIDs;
     const vals = [id, timestamp, cpuUsage, memUsage, netIo, blockIo, pids]
     await pool.query('INSERT INTO STATS (container, timestamp, cpuUsage, memUsage, netIo, blockIo, pids) VALUES ($1, $2, $3, $4, $5, $6, $7)', vals)
   } catch (err) {
@@ -32,7 +32,7 @@ dbHelper.refreshContainerData = async (owner) => {
     for (let container of containers) {
       const dockerId = container.ID;
       const name = container.Names;
-      const size = container.Size.slice(0, container.Size.indexOf('B'));
+      let size = container.Size;
       const state = container.State;
       //check if already there, if so, update size and state
       const checkContainer = await pool.query('SELECT * from containers WHERE dockerId=$1', [dockerId]);
