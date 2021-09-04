@@ -11,6 +11,8 @@ import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
 import AuthApi from '../Context.js'
 import Cookies from 'js-cookie';
+import formatBytes from "./containerHelpers";
+
 
 const GET_CONTAINERS = gql`
     query containers {
@@ -39,9 +41,9 @@ const DashboardContainer = (props) => {
   const Auth = React.useContext(AuthApi);
   console.log('this is refresh token', Cookies.get('refresh-token'))
 
-  useEffect(() =>{
+  useEffect(() => {
     const user = Cookies.get('refresh-token')
-    if(user){
+    if (user) {
       Auth.value[1](true)
     }
   })
@@ -81,8 +83,46 @@ const DashboardContainer = (props) => {
     return dataArr;
   }
 
+  //function to parse data for the bar charts
+  const populateBarChart = (datatype, data) => {
+    const arr = data.container;
+    const dataArr = [];
+    const dataCache = {};
+    arr.forEach(container => {
+      const stats = container.stats;
+      stats.forEach(stat => {
+        if (!dataCache[stat.timestamp]) {
+          dataCache[stat.timestamp] = [];
+        }
+        dataCache[stat.timestamp].push(stat[datatype]);
+      })
+    })
+    Object.keys(dataCache).forEach(time => {
+      const timeArr = dataCache[time];
+      const inputArr = [];
+      const outputArr = [];
+      timeArr.forEach(el => {
+        const idx = el.indexOf('B');
+        inputArr.push(el.slice(0, idx));
+        const out = el.slice(idx + 4, -1)
+        outputArr.push(out === '' ? '0' : out)
+      })
+      const totalIn = inputArr.reduce((a, c) => Number(a) + Number(c))
 
 
+      const totalOut = outputArr.reduce((a, c) => Number(a) + Number(c))
+
+      let avgIn = totalIn / inputArr.length;
+      avgIn = isNaN(avgIn) ? 0 : formatBytes(avgIn);
+      let avgOut = totalOut / outputArr.length;
+      avgOut = isNaN(avgOut) ? 0 : formatBytes(avgOut);
+      let timestamp = Number(time);
+      timestamp = new Date(timestamp)
+      dataArr.push({ name: timestamp.getDate(), in: avgIn, out: avgOut })
+    })
+    dataArr.sort((a, b) => a.timestamp - b.timestamp)
+    return dataArr;
+  }
 
 
   return (
@@ -131,7 +171,7 @@ const DashboardContainer = (props) => {
             <div className="metric-type">Average Net I/O</div>
           </div>
           <div className="card-body">
-            <NetIOChart data={data} />
+            <NetIOChart data={data} populateBarChart={populateBarChart} />
           </div>
         </div>
 
@@ -141,7 +181,7 @@ const DashboardContainer = (props) => {
             <div className="metric-type">Average Block I/O</div>
           </div>
           <div className="card-body">
-            <BlockIOChart data={data} />
+            <BlockIOChart data={data} populateBarChart={populateBarChart} />
           </div>
         </div>
 
