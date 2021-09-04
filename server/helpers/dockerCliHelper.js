@@ -1,126 +1,100 @@
 const dockerCliHelper = {};
-import { exec } from 'child_process';
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
-dockerApiHelper.getContainerList = () => {
-  exec(
-    'docker ps --all --format "{{json .}}," --size',
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return [...stdout];
-    }
-  )
+
+const parseCliJSON = (stdout) => {
+  const output = [];
+  let dockerOutput = stdout.trim();
+
+  const objs = dockerOutput.split('\n');
+
+  for (let i = 0; i < objs.length; i++) {
+    output.push(JSON.parse(objs[i]))
+  }
+  return output;
+}
+
+dockerCliHelper.getContainerList = async () => {
+  const { stdout, stderr } = await exec('docker ps --all  --size --format "{{json .}}"')
+  if (stderr) {
+    console.log(stderr);
+    return stderr;
+  }
+  const output = parseCliJSON(stdout)
+  return output;
 
 }
 
-dockerApiHelper.inspectContainer = (id) => {
-  exec(
-    `docker inspect --format "{{json .}}," ${id}`,
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return [...stdout];
-    }
-  )
+dockerCliHelper.inspectContainer = async (id) => {
+  const { stdout, stderr } = await exec(`docker inspect --format "{{json .}}" ${id}`)
+
+  if (stderr) {
+    console.log(stderr);
+    return;
+  }
+  // console.log(parseCliJSON(stdout))
+  return parseCliJSON(stdout)
+
+}
+// dockerCliHelper.inspectContainer('5e92d0ef966e')
+
+dockerCliHelper.getStats = async (id) => {
+  const { stdout, stderr } = await exec(`docker stats --no-stream --format "{{json .}}" ${id}`)
+  if (stderr) {
+    console.log(stderr);
+    return;
+  }
+  // console.log(parseCliJSON(stdout));
+  return parseCliJSON(stdout);
+
+}
+// dockerCliHelper.getStats('31fd33e15314')
+
+dockerCliHelper.startContainer = async (id) => {
+  const { stdout, stderr } = await exec(`docker start ${id}`)
+
+  if (stderr) {
+    console.log(stderr);
+    return;
+  }
+  return;
+
 }
 
-dockerApiHelper.getStats = () => {
-  exec(
-    'docker stats --no-stream --format "{{json .}},"',
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return [...stdout];
-    }
-  )
+dockerCliHelper.stopContainer = async (id) => {
+  const { stdout, stderr } = await exec(`docker stop ${id}`)
+
+  if (stderr) {
+    console.log(stderr);
+    return;
+  }
+  return;
+
 }
 
-dockerApiHelper.startContainer = (id) => {
-  exec(
-    `docker start ${id}`,
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return;
-    }
-  )
+dockerCliHelper.restartContainer = async (id) => {
+  const { stdout, stderr } = await exec(`docker rm ${id}`)
+
+  if (stderr) {
+    console.log(stderr);
+    return;
+  }
+  return;
+
 }
 
-dockerApiHelper.stopContainer = (id) => {
-  exec(
-    `docker stop ${id}`,
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return;
-    }
-  )
-}
+dockerCliHelper.removeContainer = async (id) => {
+  const { stdout, stderr } = await exec(`docker start ${id}`)
 
-dockerApiHelper.restartContainer = (id) => {
-  exec(
-    `docker rm ${id}`,
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return;
-    }
-  )
-}
+  if (stderr) {
+    console.log(stderr);
+    return;
+  }
+  return;
 
-dockerApiHelper.removeContainer = (id) => {
-  exec(
-    `docker start ${id}`,
-    (error, stdout, stderr) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      if (stderr) {
-        console.log(stderr);
-        return;
-      }
-      return;
-    }
-  )
 }
 
 
 
-export default dockerCliHelper;
+module.exports = dockerCliHelper;
