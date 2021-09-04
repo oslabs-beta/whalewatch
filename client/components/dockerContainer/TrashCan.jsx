@@ -14,15 +14,19 @@ const style = {
     float: 'left',
 };
 
-function TrashCan() {
-    const [{ canDrop, isOver }, drop] = useDrop(() => ({
+
+function TrashCan({containerData, handleDrop}) {
+    const [{ isOver, canDrop }, drop] = useDrop({
         accept: 'image',
-        drop: () => ({ name: 'Dustbin' }),
+        drop: (item) => {
+            console.log('This is the item', item)
+            handleDrop(containerData.filter(container=> container.id !== item.info))
+          },
         collect: (monitor) => ({
-            isOver: monitor.isOver(),
+            isOver: !!monitor.isOver(),
             canDrop: monitor.canDrop(),
         }),
-    }));
+    });
     const isActive = canDrop && isOver;
     let backgroundColor = '#222';
     if (isActive) {
