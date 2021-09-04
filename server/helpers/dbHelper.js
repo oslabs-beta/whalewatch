@@ -2,11 +2,10 @@ const dockerApiHelper = require('./dockerApiHelper');
 const pool = require('../db/connect.js');
 const { container } = require('webpack');
 const dbHelper = {};
-const dockerCliHelper = require('./dockerCliHelper');
+const { dockerCliHelper } = require('./dockerCliHelper');
 
 //these functions will parse the docker data and add it to the database if not already there
 
-const getDelta = (current, pre) => current - pre;
 
 const refreshStats = async (dockerId, id) => {
   try {
