@@ -1,9 +1,22 @@
 const dockerCliHelper = {};
-import { exec } from 'child_process';
+const { exec } = require('child_process');
 
-dockerApiHelper.getContainerList = () => {
+const parseCliJSON = (stdout) => {
+  const output = [];
+  let dockerOutput = stdout.trim();
+
+  const objs = dockerOutput.split('\n');
+
+  for (let i = 0; i < objs.length; i++) {
+    output.push(JSON.parse(objs[i]))
+  }
+  return output;
+}
+
+dockerCliHelper.getContainerList = () => {
   exec(
-    'docker ps --all --format "{{json .}}," --size',
+    'docker ps --all  --size --format "{{json .}}"',
+    //stdout output/stderr standard error
     (error, stdout, stderr) => {
       if (error) {
         console.log(error);
@@ -13,15 +26,17 @@ dockerApiHelper.getContainerList = () => {
         console.log(stderr);
         return;
       }
-      return [...stdout];
+      // console.log(parseCliJSON(stdout))
+      return parseCliJSON(stdout);
+
     }
   )
 
 }
 
-dockerApiHelper.inspectContainer = (id) => {
+dockerCliHelper.inspectContainer = (id) => {
   exec(
-    `docker inspect --format "{{json .}}," ${id}`,
+    `docker inspect --format "{{json .}}" ${id}`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(error);
@@ -31,14 +46,16 @@ dockerApiHelper.inspectContainer = (id) => {
         console.log(stderr);
         return;
       }
-      return [...stdout];
+      console.log(parseCliJSON(stdout))
+      return parseCliJSON(stdout)
     }
   )
 }
+// dockerCliHelper.inspectContainer('5e92d0ef966e')
 
-dockerApiHelper.getStats = () => {
+dockerCliHelper.getStats = (id) => {
   exec(
-    'docker stats --no-stream --format "{{json .}},"',
+    `docker stats --no-stream --format "{{json .}}" ${id}`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(error);
@@ -48,12 +65,14 @@ dockerApiHelper.getStats = () => {
         console.log(stderr);
         return;
       }
-      return [...stdout];
+      console.log(parseCliJSON(stdout));
+      return parseCliJSON(stdout);
     }
   )
 }
+dockerCliHelper.getStats('31fd33e15314')
 
-dockerApiHelper.startContainer = (id) => {
+dockerCliHelper.startContainer = (id) => {
   exec(
     `docker start ${id}`,
     (error, stdout, stderr) => {
@@ -70,7 +89,7 @@ dockerApiHelper.startContainer = (id) => {
   )
 }
 
-dockerApiHelper.stopContainer = (id) => {
+dockerCliHelper.stopContainer = (id) => {
   exec(
     `docker stop ${id}`,
     (error, stdout, stderr) => {
@@ -87,7 +106,7 @@ dockerApiHelper.stopContainer = (id) => {
   )
 }
 
-dockerApiHelper.restartContainer = (id) => {
+dockerCliHelper.restartContainer = (id) => {
   exec(
     `docker rm ${id}`,
     (error, stdout, stderr) => {
@@ -104,7 +123,7 @@ dockerApiHelper.restartContainer = (id) => {
   )
 }
 
-dockerApiHelper.removeContainer = (id) => {
+dockerCliHelper.removeContainer = (id) => {
   exec(
     `docker start ${id}`,
     (error, stdout, stderr) => {
@@ -123,4 +142,4 @@ dockerApiHelper.removeContainer = (id) => {
 
 
 
-export default dockerCliHelper;
+module.exports = dockerCliHelper;
