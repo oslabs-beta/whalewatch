@@ -28,7 +28,6 @@
   "homepage": "https://github.com/oslabs-beta/whalewatch#readme",
   "dependencies": {
     "@apollo/client": "^3.4.8",
-    "apollo": "^2.33.6",
     "apollo-server": "^3.3.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",

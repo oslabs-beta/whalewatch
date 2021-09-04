@@ -21,6 +21,8 @@ const style = {
   }
 };
 
+
+
   // token
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
@@ -64,13 +66,16 @@ const Login = ({ setUserId }) => {
       },
       onError: (err) => console.log('there is an error', err),
       onCompleted: (data) => {
+        console.log(userData)
         console.log('this is data inside oncompleted', data)
         if(data.validateUser){
           Cookies.set('id', data.validateUser.id)
           console.log('this is my cookie', Cookies.get('access-token'))
           console.log('this is my cookie refresh token', Cookies.get('refresh-token'))
+          console.log(data.validateUser  )
           Auth.value[1](true)
-            history.push('/dashboard')
+          Auth.value2[1] (data.validateUser.id);
+          history.push('/dashboard')
         }
       }
     })

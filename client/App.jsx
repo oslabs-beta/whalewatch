@@ -21,9 +21,9 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const App = () => {
-  const [userId, setUserId] = useState('racheljs');
+  const [userId, setUserId] = useState('');
   const [auth, setAuth] = useState(false); 
-
+  console.log('user id within app.jsx', userId)
   const Auth = React.useContext(AuthApi);
  
   return ( 

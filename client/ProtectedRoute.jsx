@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useState, useEffect, useContext } from 'react';
 import AuthApi from './Context.js'
 //returning a route with a comoponent that is passed in
+
 const ProtectedRoute = ({auth, userId, component: Component, ...rest }) => {
   console.log('protected route', auth)
   console.log('this is protected route cookie', Cookies.get('refresh-token'))

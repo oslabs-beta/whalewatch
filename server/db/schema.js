@@ -20,7 +20,6 @@ const {
   // needed to export our schema  
 } = graphql;
 const jwt = require('jsonwebtoken')
-
 //graphqlobjecttype is function from graphql
 const UserType = new GraphQLObjectType({
   name: 'User',
