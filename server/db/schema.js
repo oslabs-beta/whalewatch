@@ -54,7 +54,7 @@ const ContainerType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     dockerid: { type: GraphQLString },
     name: { type: GraphQLString },
-    size: { type: GraphQLInt },
+    size: { type: GraphQLString },
     status: { type: GraphQLString },
     stats: {
       type: new GraphQLList(StatsType),
