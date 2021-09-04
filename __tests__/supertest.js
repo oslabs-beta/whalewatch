@@ -1,22 +1,22 @@
 
 const supertest = require('supertest');
-const server = 'http://localhost:3000';
+const server = 'http://localhost:8080';
 
 const request = supertest(server);
 
 describe('Route integration', () => {
   describe('/graphql', () => {
     it('gets a list of users', (done) => {
-      return request
+      request
         .post('/graphql')
         .send({
           query: "{ users{ id, name} }",
         })
         .set("Accept", "application/json")
-        .expect("Content-Type", "/json/")
+        .expect("Content-Type", "application/json; charset=utf-8")
         .expect(200)
         .end((err, res) => {
-          if (err) return done(err);
+          if (err) done(err);
           expect(res.body).toBeInstanceOf(Object);
         })
     })

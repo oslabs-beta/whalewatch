@@ -95,4 +95,4 @@ dockerCliHelper.removeContainer = async (id) => {
 
 
 
-module.exports = dockerCliHelper;
+module.exports = { dockerCliHelper, parseCliJSON };
