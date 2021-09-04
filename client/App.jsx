@@ -37,7 +37,7 @@ const App = () => {
             <ProtectedRoute exact path="/dashboard" auth={auth} userId = {userId} component={DashboardContainer}/>
             <Route exact path="/login"><Login /></Route>
             <Route exact path="/signup"><Form /></Route>
-            <ProtectedRoute exact path="/containers"><ContainersContainer userId={userId} /> </ProtectedRoute>
+            <ProtectedRoute exact path="/containers"><ContainersContainer auth={auth} userId={userId} /> </ProtectedRoute>
             <ProtectedRoute exact path="/settings"><SettingsContainer userId={userId} /> </ProtectedRoute>
             <ProtectedRoute path="/notification"><NotificationsContainer userId={userId} /> </ProtectedRoute>
             //if user tries to go to any other path that isn't defined

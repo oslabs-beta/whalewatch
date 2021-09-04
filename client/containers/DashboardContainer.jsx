@@ -2,9 +2,7 @@ import React from 'react';
 import { Route, Redirect } from "react-router-dom";
 
 import { useState, useEffect, useContext } from 'react';
-import AuthApi from '../Context.js'
 import Auth from "../Auth.js";
-import Cookies from 'js-cookie';
 
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
@@ -38,7 +36,6 @@ const GET_CONTAINERS = gql`
         }
       }
     }
-  
 `;
 
 
@@ -60,15 +57,15 @@ const DashboardContainer = (props) => {
 
   const Auth = React.useContext(AuthApi);
   const [listOfContainers, setListOfContainers] = useState([]);
-  console.log(typeof Auth.value2[0])
-  console.log(Auth.value2[0])
-  const variables = {id: Auth.value2[0]}
-  const { loading, error, data } = useQuery(GET_CONTAINERS, variables);
+  const variables = { id: Auth.value2[0] };
+  const id = Auth.value2[0];
+  const { loading, error, data } = useQuery(GET_CONTAINERS, {variables});
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
   //function to parse the data for the line charts
   const populateChart = (datatype, data) => {
+
     const array = data.container;
     const dataArr = [];
     const dataCache = {};

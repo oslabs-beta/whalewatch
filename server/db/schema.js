@@ -120,6 +120,7 @@ const RootQueryType = new GraphQLObjectType({
         id: { type: GraphQLInt }
       },
       resolve: async (parent, args) => {
+        console.log('args.id: ', args.id)
         await dbHelper.refreshContainerData(args.id);
         const res = await pool.query(`SELECT * from "containers" WHERE owner = $1`, [args.id]);
         return res.rows;
