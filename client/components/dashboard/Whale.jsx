@@ -1,18 +1,26 @@
 import React from "react";
 import whaleBlue from "../../assets/whaleBlue.png"
 import whaleRed from "../../assets/whaleRed.png"
+import { useDrag } from "react-dnd";
 
 const Whale = ({ info }) => {
-  //each whale will represent a container
-  //health status will indicate a css class to have different colors
-  //should they include names?
+
+
+  //use-drag hook from DnD
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "image", //type can be a div if you want
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    })
+  }));
+
   return (
     // put appropriate stuff here
-
     <div className="whale-display">
-      {info.status !== 'Bad' ? <img src={whaleBlue} className="whale" /> : <img src={whaleRed} className="whale" />}
-      <br />Container {info.name} <br />{info.size}
-      {/* <img src={whaleRed} /><br/>My name is {info.name} */}
+      {info.status !== 'Bad' ? <img ref={drag} src={whaleBlue} className="whale" style={{ border: isDragging ? "5px solid pink" : "0px" }} /> : <img src={whaleRed} ref={drag} className="whale" style={{ border: isDragging ? "5px solid pink" : "0px" }} />}
+      {/* <img ref={drag} src={whaleBlue} className="whale" style={{border: isDragging? "5px solid pink" : "0px"}}/>  */}
+      <br />Container {info.name}  <br />{info.size}
+
 
 
     </div>

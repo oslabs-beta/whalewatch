@@ -16,6 +16,10 @@ import Form from './components/authentication/form'
 import './styles.scss';
 import AuthApi from './Context.js'
 
+////for drag and drop 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 const App = () => {
   const [userId, setUserId] = useState('racheljs');
   const [auth, setAuth] = useState(false); 
@@ -23,7 +27,8 @@ const App = () => {
   const Auth = React.useContext(AuthApi);
  
   return ( 
-    <div>
+    
+      <DndProvider backend={HTML5Backend}>
       <AuthApi.Provider value = {{value: [auth, setAuth], value2: [userId, setUserId]}}>   
         <Router>
           <Switch>
@@ -33,15 +38,15 @@ const App = () => {
             <Route exact path="/login"><Login /></Route>
             <Route exact path="/signup"><Form /></Route>
             <ProtectedRoute exact path="/containers"><ContainersContainer userId={userId} /> </ProtectedRoute>
-            <Route exact path="/settings"><SettingsContainer userId={userId} /> </Route>
-            <Route path="/notification"><NotificationsContainer userId={userId} /> </Route>
+            <ProtectedRoute exact path="/settings"><SettingsContainer userId={userId} /> </ProtectedRoute>
+            <ProtectedRoute path="/notification"><NotificationsContainer userId={userId} /> </ProtectedRoute>
             //if user tries to go to any other path that isn't defined
             <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </Router>
       </AuthApi.Provider>
-     
-    </div>
+      </DndProvider>
+    
   );
 };
 

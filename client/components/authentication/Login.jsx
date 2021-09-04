@@ -70,7 +70,6 @@ const Login = ({ setUserId }) => {
           console.log('this is my cookie', Cookies.get('access-token'))
           console.log('this is my cookie refresh token', Cookies.get('refresh-token'))
           Auth.value[1](true)
-          console.log('inside login component this is currentAuth',Auth)
             history.push('/dashboard')
         }
       }
