@@ -10,7 +10,8 @@ import deleteContainer from "../assets/delete.png";
 import stopContainer from "../assets/stop.png";
 import restartContainer from "../assets/restart.png";
 import DndContainers from "../components/dockerContainer/DndContainers"
-import TrashCan from "../components/dockerContainer/TrashCan"
+import Stop from "../components/dockerContainer/Stop"
+import Restart from '../components/dockerContainer/Restart'
 
 const GET_CONTAINERS = gql`
 query Containers ($id: Int) {
@@ -19,6 +20,7 @@ query Containers ($id: Int) {
     dockerid
     name
     size
+    state
     status
   }
 }
@@ -26,45 +28,15 @@ query Containers ($id: Int) {
 
 
 const ContainersContainer = ({validId}) => {
-  const fakeData =
-    [
-      { id: 1, name: 'Item 1' },
-      { id: 2, name: 'Item 2' },
-      { id: 3, name: 'Item 3' },
-      { id: 4, name: 'Item 4' },
-    ]
-
-  // const [containerData, setContainerData] = useState(fakeData)
-
-  //   const GET_CONTAINERS = gql`
-  //   query containers {
-  //     container(id:10) {
-  //       id
-  //       dockerid
-  //       name
-  //       size
-  //       status
-  //     }
-  //   }
-  // `;
+  
   const Auth = React.useContext(AuthApi);
   const variables = { id: parseInt(localStorage.getItem('validId')) };
-
-  // const [containerData, setContainerData] = useState([])
-  // useEffect(() => {
-  //   const { loading, error, data } = useLazyQuery(GET_CONTAINERS, { variables });
-  //   if (loading) return 'Loading...';
-  //   if (error) return `Error! ${error.message}`;
-  //   console.log(data)
-  // },)
-
   const { loading, data, error } = useQuery(GET_CONTAINERS, {variables})
   const [containerData, setContainerData] = useState([])
 
   useEffect(() => {
   // do some checking here to ensure data exist
   if (data) {
-    // mutate data if you need to
     setContainerData(data.container)
   }
   }, [data])
@@ -75,31 +47,10 @@ const ContainersContainer = ({validId}) => {
 
   return (
     <div className='dashbaordContainer'>
-
-
       <NavBar />
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Containers</div>
 
-        {/* test */}
-        <DndContainers listOfContainers={containerData} handleDrop={handleDrop} />
-
-
-        {/* Active Containers */}
-        <div className="card2">
-          <div className='dnd-board'>
-            {/* <!-- Card header --> */}
-            <div className="card-header">
-              {/* <!-- Title --> */}
-              <div className="each-container">Please drag your container here</div>
-            </div>
-            {/* <!-- Card body --> */}
-            <div className="card-body">
-              {/* <!-- Chart wrapper --> */}
-              <TrashCan containerData={containerData} handleDrop={handleDrop} />
-            </div>
-          </div>
-        </div>
 
         {/* Active Containers */}
         <div className="card2">
@@ -111,11 +62,35 @@ const ContainersContainer = ({validId}) => {
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">
-              {/* <!-- Chart wrapper --> */}
-              {/* <DndContainers listOfContainers={data}/> */}
+              <DndContainers listOfContainers={containerData} handleDrop={handleDrop} state={'running'} />
             </div>
+            
           </div>
         </div>
+
+
+            <div className="restart-stop">
+              <Stop containerData={containerData} handleDrop={handleDrop} />
+              <Restart containerData={containerData} handleDrop={handleDrop} />
+            </div>
+
+        {/* InActive Containers */}
+         <div className="card2">
+          <div className='dnd-board'>
+            {/* <!-- Card header --> */}
+            <div className="card-header">
+              {/* <!-- Title --> */}
+              <div className="each-container">Inactive Containers</div>
+            </div>
+            {/* <!-- Card body --> */}
+            <div className="card-body">
+              <DndContainers listOfContainers={containerData} handleDrop={handleDrop} state={'exited'} />
+            </div>
+            
+          </div>
+        </div>
+
+
       </div>
     </div>
   )

@@ -19,6 +19,7 @@ const EachContainer = ({info, handleDrop}) => {
     const opacity = isDragging ? 0 : 1;
 
     return (
+    
         <div className="whale-display">
         
         <div id="containersList" ref={drag} style={{opacity}}> 

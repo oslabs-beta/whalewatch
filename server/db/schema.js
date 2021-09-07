@@ -56,6 +56,7 @@ const ContainerType = new GraphQLObjectType({
     name: { type: GraphQLString },
     size: { type: GraphQLString },
     status: { type: GraphQLString },
+    state: {type: GraphQLString},
     stats: {
       type: new GraphQLList(StatsType),
       resolve: async (parent) => {
