@@ -35,13 +35,14 @@ dbHelper.refreshContainerData = async (owner) => {
       const size = container.Size;
       const state = container.State;
       let status;
+
       if (container.Status.includes('unhealthy')) {
         status = 'unhealthy';
       } else status = 'healthy';
       //check if already there, if so, update size and state
       const checkContainer = await pool.query('SELECT * from containers WHERE dockerId=$1 AND owner=$2', [dockerId, owner]);
       if (checkContainer.rows.length) {
-        await pool.query('UPDATE containers SET size=$1, state=$2, status=$3', [size, state, status]);
+        await pool.query('UPDATE containers SET size=$1, state=$2, status=$3 WHERE dockerId=$4', [size, state, status, dockerId]);
         if (state === 'running') {
           await refreshStats(dockerId, checkContainer.rows[0].id);
         }
