@@ -240,6 +240,26 @@ const RootMutationType = new GraphQLObjectType({
         console.log('this is response to adding a stat', res[0]);
         return res.rows[0];
       }
+    },
+    stopContainer:{
+      type: ContainerType,
+      description: 'Stop a container',
+      args: {
+        id: {type: GraphQLInt}
+      },
+      resolve: async (parent, args) => {
+        return await dbHelper.stopContainer(args.id);
+      }
+    },
+    restartContainer:{
+      type: ContainerType,
+      description: 'Restart a container',
+      args: {
+        id: {type: GraphQLInt}
+      },
+      resolve: async (parent, args) => {
+        return await dbHelper.restartContainer(args.id);
+      }
     }
   })
 

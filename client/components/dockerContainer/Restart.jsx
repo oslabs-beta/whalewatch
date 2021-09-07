@@ -4,8 +4,8 @@ import stop from '../../assets/stop.png'
 import restart from '../../assets/restart.png'
 
 const style = {
-    height: '5rem',
-    width: '5rem',
+    height: '12rem',
+    width: '12rem',
 
     color: 'white',
     padding: '1rem',
