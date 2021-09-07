@@ -178,7 +178,7 @@ const RootMutationType = new GraphQLObjectType({
         console.log('this is parent', parent)
         const password = await bcrypt.hash(args.password, 10);
         const user = [args.username, args.email, password]
-        const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
+        const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *'
         const res = await pool.query(query, user);
         console.log('this is response to adding a user', res);
         console.log('this is createuser args', args)
