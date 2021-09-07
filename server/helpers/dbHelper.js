@@ -28,26 +28,22 @@ dbHelper.refreshContainerData = async (owner) => {
   console.log('owner id is: ', owner)
   try {
     const containers = await dockerCliHelper.getContainerList();
-    const insertQuery = 'INSERT INTO containers (dockerId, name, size, state, owner, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+    const insertQuery = 'INSERT INTO containers (dockerId, name, size, state, owner) VALUES ($1, $2, $3, $4, $5) RETURNING id';
     for (let container of containers) {
       const dockerId = container.ID;
       const name = container.Names;
       const size = container.Size;
       const state = container.State;
-      let status;
-      if (state === "running") {
-        const inspect = await dockerCliHelper.inspectContainer(dockerId);
-        status = inspect.State.Status;
-      }
+
       //check if already there, if so, update size and state
-      const checkContainer = await pool.query('SELECT * from containers WHERE dockerId=$1', [dockerId]);
+      const checkContainer = await pool.query('SELECT * from containers WHERE dockerId=$1 AND owner=$2', [dockerId, owner]);
       if (checkContainer.rows.length) {
-        await pool.query('UPDATE containers SET size=$1, state=$2, status=$3', [size, state, status]);
+        await pool.query('UPDATE containers SET size=$1, state=$2', [size, state]);
         if (state === 'running') {
           await refreshStats(dockerId, checkContainer.rows[0].id);
         }
       } else {
-        const dbId = await pool.query(insertQuery, [dockerId, name, size, state, owner, status]);
+        const dbId = await pool.query(insertQuery, [dockerId, name, size, state, owner]);
         if (state === 'running') {
           await refreshStats(dockerId, dbId.rows[0].id);
         }
