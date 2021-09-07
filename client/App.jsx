@@ -24,8 +24,11 @@ const App = () => {
   const [userId, setUserId] = useState('');
   const [auth, setAuth] = useState(false); 
   console.log('user id within app.jsx', userId)
-  const Auth = React.useContext(AuthApi);
- 
+  console.log('auth within app.jsx', auth)
+  
+
+  React.useContext(AuthApi);
+  // if(localStorage.getItem('validToken')) setAuth(true);
   return ( 
     
       <DndProvider backend={HTML5Backend}>
@@ -34,12 +37,12 @@ const App = () => {
           <Switch>
             <Route exact path="/"><Login /></Route>
             <Route exact path="/nav" component={NavBar} />
-            <ProtectedRoute exact path="/dashboard" auth={auth} userId = {userId} component={DashboardContainer}/>
+            <ProtectedRoute exact path="/dashboard" component={DashboardContainer}/>
             <Route exact path="/login"><Login /></Route>
             <Route exact path="/signup"><Form /></Route>
-            <ProtectedRoute exact path="/containers"><ContainersContainer auth={auth} userId={userId} /> </ProtectedRoute>
-            <ProtectedRoute exact path="/settings"><SettingsContainer userId={userId} /> </ProtectedRoute>
-            <ProtectedRoute path="/notification"><NotificationsContainer userId={userId} /> </ProtectedRoute>
+            <Route exact path="/containers" component = {ContainersContainer}/> 
+            <ProtectedRoute exact path="/settings" component={SettingsContainer}/>
+            <ProtectedRoute path="/notification" component={NotificationsContainer}/>
             //if user tries to go to any other path that isn't defined
             <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
