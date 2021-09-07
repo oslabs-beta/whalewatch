@@ -1,9 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from "react-router-dom";
-
 import { useState, useEffect, useContext } from 'react';
 import Auth from "../Auth.js";
-
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -38,21 +36,16 @@ const GET_CONTAINERS = gql`
     }
 `;
 
+function forceRerender(){
+  const [forceRerender, setForceRerender] = useState(0);
+  return () => setForceRerender(forceRerender => forceRerender + 1)
+}
 
 
 const DashboardContainer = ({ validId }) => {
-  // const readCookie = () => {
-  //   const user = Cookies.get('refresh-token')
-  //    console.log('this is dashboard cookie', user)
-  //    if(user){
-  //      Auth.value[1](true)
-  //    }
-  //  }
 
+  const reRender = forceRerender();
 
-  //  useEffect(() =>{
-  //    readCookie();
-  //  })\
   console.log('This is validId', typeof localStorage.getItem('validId'))
   const Auth = React.useContext(AuthApi);
   const [listOfContainers, setListOfContainers] = useState([]);
@@ -137,7 +130,10 @@ const DashboardContainer = ({ validId }) => {
     <div className='dashbaordContainer'>
       <NavBar />
       <div className='dashbaordData'>
-        <div className='dashbaord-header'>Dashboard</div>
+        <div className='dashbaord-header'>
+          <p>Dashboard</p>
+          <button id = 'refresh-button' onClick = {reRender}>Refresh</button>
+        </div>
 
         {/* Whale Chart */}
         <div className="card1">
@@ -202,9 +198,6 @@ const DashboardContainer = ({ validId }) => {
             <PIDChart data={data} populateChart={populateChart} />
           </div>
         </div>
-
-
-
 
         {/* the below need to be passed the appropriate stats */}
         {/* <AverageCPUChart data={data} populateChart={populateChart} /> */}

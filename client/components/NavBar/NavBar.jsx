@@ -1,9 +1,15 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import logoNoText from '../../assets/logoNoText.png';
 import logoTextOnly from '../../assets/logoTextOnly.png';
 import logo from '../../assets/logo.gif';
 
 const NavBar = () => {
+  const removeCookies =  () => {
+    localStorage.removeItem('validId');
+    localStorage.removeItem('validAuth')
+  }
+
   return (
     <div>
       <nav className="vertical-nav" id="sidebar">
@@ -25,6 +31,10 @@ const NavBar = () => {
 
             <li className="nav-item">
               <a href="/settings" className="menulist"><i className="bi bi-sliders"></i>  Settings</a>
+            </li>
+
+            <li className="nav-item">
+              <Link to = "/login" className="menulist" onClick ={removeCookies}><i className="bi bi-sliders"></i>SignOut</Link>
             </li>
 
           </ul>

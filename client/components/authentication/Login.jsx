@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-import Auth from "../../Auth";
 import logo from '../../assets/logo.gif';
 import Cookies from 'js-cookie';
 import AuthApi from '../../Context.js'
@@ -23,7 +22,7 @@ const style = {
 
 
 
-  // token
+// token
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
     validateUser(username: $username, password: $password){
@@ -68,7 +67,7 @@ const Login = ({ setUserId }) => {
       onCompleted: (data) => {
         console.log(userData)
         console.log('this is data inside oncompleted', data)
-        if(data.validateUser){
+        if (data.validateUser) {
           Cookies.set('id', data.validateUser.id)
           localStorage.setItem('validId', data.validateUser.id)
           localStorage.setItem('validAuth', Cookies.get('access-token'))
@@ -78,12 +77,12 @@ const Login = ({ setUserId }) => {
           // console.log('this is my cookie refresh token', Cookies.get('refresh-token'))
           console.log(data.validateUser)
           Auth.value[1](true)
-          Auth.value2[1] (data.validateUser.id);
+          Auth.value2[1](data.validateUser.id);
           history.push('/dashboard')
         }
       }
     })
-  
+
   return (
     <div>
       <Link className="signupOrLogin" to='/signup' style={style.signupOrLogin}> Don't have an account?</Link>

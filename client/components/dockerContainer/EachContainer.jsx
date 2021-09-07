@@ -20,8 +20,11 @@ const EachContainer = ({info, handleDrop}) => {
 
     return (
         <div className="whale-display">
-        {info.status !== 'Bad' ? <img ref={drag} src={whaleBlue} className="whale" style={{opacity}}/> : <img src={whaleRed} ref={drag} className="whale" style={{opacity}} />}
+        
+        <div id="containersList" ref={drag} style={{opacity}}> 
+        Name: {info.name}<br/>ID: {info.id}<br/> Docker ID: {info.dockerid}<br/>Status: {info.status}<br/> Container Size:{info.size}
 
+        </div>
         {/* <br />Container {info.name}  <br />{info.size} MB */}
         </div>
 
