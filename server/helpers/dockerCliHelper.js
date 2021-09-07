@@ -37,6 +37,7 @@ dockerCliHelper.inspectContainer = async (id) => {
   return parseCliJSON(stdout)
 
 }
+// dockerCliHelper.inspectContainer('5e92d0ef966e');
 
 dockerCliHelper.getStats = async (id) => {
   const { stdout, stderr } = await exec(`docker stats --no-stream --format "{{json .}}" ${id}`)
