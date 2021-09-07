@@ -70,9 +70,13 @@ const Login = ({ setUserId }) => {
         console.log('this is data inside oncompleted', data)
         if(data.validateUser){
           Cookies.set('id', data.validateUser.id)
-          console.log('this is my cookie', Cookies.get('access-token'))
-          console.log('this is my cookie refresh token', Cookies.get('refresh-token'))
-          console.log(data.validateUser  )
+          localStorage.setItem('validId', data.validateUser.id)
+          localStorage.setItem('validAuth', Cookies.get('access-token'))
+          // console.log('this is localStorage', localStorage.getItem('validToken'))
+          // console.log('this is localStorage auth', localStorage.getItem('validAuth'))
+          // console.log('this is my cookie', Cookies.get('access-token'))
+          // console.log('this is my cookie refresh token', Cookies.get('refresh-token'))
+          console.log(data.validateUser)
           Auth.value[1](true)
           Auth.value2[1] (data.validateUser.id);
           history.push('/dashboard')
