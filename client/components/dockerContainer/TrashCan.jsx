@@ -36,7 +36,7 @@ function TrashCan({containerData, handleDrop}) {
         backgroundColor = 'darkkhaki';
     }
     return (<div ref={drop} role={'Dustbin'} style={{...style, backgroundColor}}>
-    {isActive ? 'Release to disactive your container' : 'Drag a cotainer'}
+    {isActive ? 'Release to disactive your container' : 'Drag a container'}
     </div>
     )
 }
