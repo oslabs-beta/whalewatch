@@ -40,7 +40,7 @@ const GET_CONTAINERS = gql`
 
 
 
-const DashboardContainer = (props) => {
+const DashboardContainer = ({validId}) => {
   // const readCookie = () => {
   //   const user = Cookies.get('refresh-token')
   //    console.log('this is dashboard cookie', user)
@@ -52,13 +52,12 @@ const DashboardContainer = (props) => {
 
   //  useEffect(() =>{
   //    readCookie();
-  //  })
-
-
+  //  })\
+  console.log('This is validId', typeof localStorage.getItem('validId'))
   const Auth = React.useContext(AuthApi);
   const [listOfContainers, setListOfContainers] = useState([]);
-  const variables = { id: Auth.value2[0] };
-  const id = Auth.value2[0];
+  const variables = { id: Number(localStorage.getItem('validId'))};
+  const id = localStorage.getItem('validId')
   const { loading, error, data } = useQuery(GET_CONTAINERS, {variables});
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
