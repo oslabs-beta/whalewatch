@@ -40,7 +40,7 @@ const GET_CONTAINERS = gql`
 
 
 
-const DashboardContainer = ({validId}) => {
+const DashboardContainer = ({ validId }) => {
   // const readCookie = () => {
   //   const user = Cookies.get('refresh-token')
   //    console.log('this is dashboard cookie', user)
@@ -56,9 +56,9 @@ const DashboardContainer = ({validId}) => {
   console.log('This is validId', typeof localStorage.getItem('validId'))
   const Auth = React.useContext(AuthApi);
   const [listOfContainers, setListOfContainers] = useState([]);
-  const variables = { id: Number(localStorage.getItem('validId'))};
+  const variables = { id: Number(localStorage.getItem('validId')) };
   const id = localStorage.getItem('validId')
-  const { loading, error, data } = useQuery(GET_CONTAINERS, {variables});
+  const { loading, error, data } = useQuery(GET_CONTAINERS, { variables });
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
@@ -127,7 +127,7 @@ const DashboardContainer = ({validId}) => {
       timestamp = new Date(timestamp)
       dataArr.push({ name: timestamp.getDate(), in: avgIn, out: avgOut })
     })
-    dataArr.sort((a, b) => a.timestamp - b.timestamp)
+    dataArr.sort((a, b) => a.name - b.name)
     return dataArr;
   }
 
