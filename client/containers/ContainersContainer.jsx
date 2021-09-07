@@ -34,7 +34,8 @@ const ContainersContainer = ({validId}) => {
       { id: 4, name: 'Item 4' },
     ]
 
-  const [containerData, setContainerData] = useState(fakeData)
+  // const [containerData, setContainerData] = useState(fakeData)
+
   //   const GET_CONTAINERS = gql`
   //   query containers {
   //     container(id:10) {
@@ -47,14 +48,18 @@ const ContainersContainer = ({validId}) => {
   //   }
   // `;
   const Auth = React.useContext(AuthApi);
-  const variables = { id: validId };
-  const { loading, error, data } = useQuery(GET_CONTAINERS, { variables });
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
-  // console.log("data:", data)
-  // console.log("data here", data.container[0])
+  const variables = { id: parseInt(localStorage.getItem('validId')) };
 
+  const [containerData, setContainerData] = useState([])
+  useEffect(() => {
+    const { loading, error, data } = useQuery(GET_CONTAINERS, { variables });
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    console.log(data)
+  })
 
+  
+  
   const handleDrop = (newValue) => {
     setContainerData(newValue)
   }
@@ -77,7 +82,7 @@ const ContainersContainer = ({validId}) => {
             {/* <!-- Card header --> */}
             <div className="card-header">
               {/* <!-- Title --> */}
-              <div className="each-container">Please drag your container here to</div>
+              <div className="each-container">Please drag your container here</div>
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">
