@@ -34,8 +34,11 @@ dbHelper.refreshContainerData = async (owner) => {
       const name = container.Names;
       const size = container.Size;
       const state = container.State;
-      const inspect = await dockerCliHelper.inspectContainer(dockerId);
-      const status = inspect.State.Status;
+      let status;
+      if (state === "running") {
+        const inspect = await dockerCliHelper.inspectContainer(dockerId);
+        status = inspect.State.Status;
+      }
       //check if already there, if so, update size and state
       const checkContainer = await pool.query('SELECT * from containers WHERE dockerId=$1', [dockerId]);
       if (checkContainer.rows.length) {
