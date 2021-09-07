@@ -48,9 +48,9 @@ const ContainersContainer = (props) => {
   // `;
   const Auth = React.useContext(AuthApi);
   const variables = { id: Auth.value2[0] };
-  const { loading, error, data } = useQuery(GET_CONTAINERS, { variables });
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
+  // const { loading, error, data } = useQuery(GET_CONTAINERS, { variables });
+  // if (loading) return 'Loading...';
+  // if (error) return `Error! ${error.message}`;
   // console.log("data:", data)
   // console.log("data here", data.container[0])
 
