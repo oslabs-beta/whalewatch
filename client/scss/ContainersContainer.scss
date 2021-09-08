@@ -17,16 +17,25 @@ $containerBlue:rgb(98, 189, 222);
   list-style-type: none;
   border: 1px solid $containerBlue;
   padding: 20px;
-  margin: 0 0 0 30px;
+  margin: 5px 5px 5px 5px;
   border-radius: 5px;
   background-color: $containerBlue;
   width: 30%;
-  text-align: center;
+  // text-align: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+
+
+#container-list-dnd{
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: wrap;
+  border-radius: 5px;
 }
 
 #containersList > li{
   margin: 0px;
- 
 }
 .value{
   display: inline;
@@ -100,3 +109,5 @@ height:500px;
 .restart-stop {
   right:5px;
 }
+
+

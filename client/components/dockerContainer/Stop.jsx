@@ -18,7 +18,7 @@ const style = {
 };
 
 const STOP_CONTAINER = gql`
-mutation stopContainer($id: Int) {
+mutation stopContainer($id: String) {
   container(id: $id) {
     id
   }
@@ -29,24 +29,46 @@ mutation stopContainer($id: Int) {
 
 function Stop({containerData, handleDrop}) {
 
-    const stopContainer = (id) => {
-        const { data, loading, error } = useMutation(STOP_CONTAINER, {
-            variables: {
-               id: id
-           },
-           onError: (err) => console.log('there is an error in stopping container', err),
-            onCompleted: (data) => {
-                console.log('finished mutating container stop')
-            },
-    })}
+    // const stopContainer = (id) => {
+    //     const { data, loading, error } = useMutation(STOP_CONTAINER, {
+    //         variables: {
+    //            id: id
+    //        },
+    //        onError: (err) => console.log('there is an error in stopping container', err),
+    //         onCompleted: (data) => {
+    //             console.log('finished mutating container stop')
+    //         },
+    // })}
+
+   
+
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: 'image',
         drop: (item) => {
             console.log('This is the item', item)
+            console.log('This is the item info', item.info)
             console.log('We are stopping on stop button')
             // stopContainer(item.id)
-            handleDrop(containerData.filter(container=> container.id !== item.info))  
-            stopContainer(item.id)  
+            fetch('/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: `
+                    mutation stopContainer ($id: String) { stopContainer(id: $id) {
+                        id
+                    }
+                }
+                    `,
+                    variables: {
+                        id: item.info
+                    }
+                })
+            }
+            )
+            handleDrop(containerData.filter(container=> container.dockerid !== item.info))  
+            // stopContainer(item.id)  
             }   
         ,
         collect: (monitor) => ({

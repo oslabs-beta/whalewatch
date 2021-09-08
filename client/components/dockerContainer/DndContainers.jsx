@@ -13,7 +13,7 @@ const DndContainers = ({listOfContainers, handleDrop, state}) => {
         }
     });
     return (
-        <div className='container' >
+        <div id="container-list-dnd" >
             {activateContainer}
         </div>
     )

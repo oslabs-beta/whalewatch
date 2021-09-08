@@ -69,7 +69,7 @@ font-weight: 700;
 // }
 
 .vertical-nav{
-    width: 200px;
+    width: 210px;
     height: 100%;
     background-color: white;
     display: flex;
@@ -174,7 +174,7 @@ a:hover {
     // flex-direction: column;
     align-items: center;
     margin-left:250px;
-    background-image: url('./assets/sea.gif')
+
 }
 
 // test
@@ -197,13 +197,13 @@ a:hover {
     border-radius: 25px;
 }
 
-.card-body{
-    // display: flex;
-    // flex-direction: row;
-    // align-items: flex-start;
-    // align-content: space-between;
-    // flex-wrap: wrap;
-}
+// .card-body{
+//     // display: flex;
+//     // flex-direction: row;
+//     // align-items: flex-start;
+//     // align-content: space-between;
+//     // flex-wrap: wrap;
+// }
 
 
 #whale-chart{
@@ -219,7 +219,8 @@ a:hover {
     border: solid lightblue .75px;
     align-content: space-between;    
     width: 275px;
-    border-radius: 10px;
+    border-radius: 20px;
+    box-shadow: 6px 6px 6px 3px rgb(250, 246, 246);
 }
 
 // whale display 126 x 103

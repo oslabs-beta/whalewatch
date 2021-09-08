@@ -58,7 +58,7 @@ const ContainersContainer = ({validId}) => {
             {/* <!-- Card header --> */}
             <div className="card-header">
               {/* <!-- Title --> */}
-              <div className="each-container">Active Containers</div>
+              <div className="metric-type">Active Containers</div>
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">

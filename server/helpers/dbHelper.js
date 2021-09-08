@@ -61,7 +61,7 @@ dbHelper.refreshContainerData = async (owner) => {
 dbHelper.stopContainer = async (id) => {
   try{
     await dockerCliHelper.stopContainer(id);
-    const stopQuery = 'UPDATE containers SET state=$1 WHERE id=$2';
+    const stopQuery = 'UPDATE containers SET state=$1 WHERE dockerid=$2';
     await pool.query(stopQuery, ['exited', id]);
   } catch (err) {console.log(err)}
 }
@@ -69,7 +69,7 @@ dbHelper.stopContainer = async (id) => {
 dbHelper.restartContainer = async (id) => {
   try{
     await dockerCliHelper.restartContainer(id);
-    const stopQuery = 'UPDATE containers SET state=$1 WHERE id=$2';
+    const stopQuery = 'UPDATE containers SET state=$1 WHERE dockerid=$2';
     await pool.query(stopQuery, ['running', id]);
   } catch (err) {console.log(err)}
 }
