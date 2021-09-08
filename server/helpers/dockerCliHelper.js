@@ -84,7 +84,7 @@ dockerCliHelper.restartContainer = async (id) => {
 }
 
 dockerCliHelper.removeContainer = async (id) => {
-  const { stdout, stderr } = await exec(`docker start ${id}`)
+  const { stdout, stderr } = await exec(`docker rm ${id}`)
 
   if (stderr) {
     console.log(stderr);
