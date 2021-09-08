@@ -7,7 +7,7 @@ import { useQuery, gql, useMutation} from '@apollo/client';
 const style = {
     height: '12rem',
     width: '12rem',
-    marginRight: '2rem',
+    marginRight: '2.5rem',
     marginBottom: '1rem',
     color: 'white',
     padding: '1rem',
