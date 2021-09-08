@@ -1,16 +1,19 @@
 import React from 'react'
 import EachContainer from './EachContainer';
-import { useDrag } from 'react-dnd'
+// import { useDrag } from 'react-dnd'
 
 
-const DndContainers = ({listOfContainers, handleDrop}) => {
+const DndContainers = ({listOfContainers, handleDrop, state}) => {
 
     const activateContainer = [];
     listOfContainers.map(container => {
-        activateContainer.push(<EachContainer key={container.id} info={container} handleDrop={handleDrop}/>);
+        if(container.state === state){
+
+            activateContainer.push(<EachContainer key={container.id} info={container} handleDrop={handleDrop}/>);
+        }
     });
     return (
-        <div className='container' >
+        <div id="container-list-dnd" >
             {activateContainer}
         </div>
     )

@@ -42,7 +42,7 @@ dbHelper.refreshContainerData = async (owner) => {
       //check if already there, if so, update size and state
       const checkContainer = await pool.query('SELECT * from containers WHERE dockerId=$1 AND owner=$2', [dockerId, owner]);
       if (checkContainer.rows.length) {
-        await pool.query('UPDATE containers SET size=$1, state=$2, status=$3 WHERE dockerId=$4', [size, state, status, dockerId]);
+        await pool.query('UPDATE containers SET size=$1, state=$2, status=$3 WHERE dockerId=$4 AND owner=$5', [size, state, status, dockerId, owner]);
         if (state === 'running') {
           await refreshStats(dockerId, checkContainer.rows[0].id);
         }
@@ -58,6 +58,20 @@ dbHelper.refreshContainerData = async (owner) => {
   }
 }
 
+dbHelper.stopContainer = async (id) => {
+  try{
+    await dockerCliHelper.stopContainer(id);
+    const stopQuery = 'UPDATE containers SET state=$1 WHERE dockerid=$2';
+    await pool.query(stopQuery, ['exited', id]);
+  } catch (err) {console.log(err)}
+}
 
+dbHelper.restartContainer = async (id) => {
+  try{
+    await dockerCliHelper.restartContainer(id);
+    const stopQuery = 'UPDATE containers SET state=$1 WHERE dockerid=$2';
+    await pool.query(stopQuery, ['running', id]);
+  } catch (err) {console.log(err)}
+}
 
 module.exports = dbHelper;

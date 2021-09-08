@@ -17,16 +17,25 @@ $containerBlue:rgb(98, 189, 222);
   list-style-type: none;
   border: 1px solid $containerBlue;
   padding: 20px;
-  margin: 0 0 0 30px;
+  margin: 5px 5px 5px 5px;
   border-radius: 5px;
   background-color: $containerBlue;
   width: 30%;
-  text-align: center;
+  // text-align: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+
+
+#container-list-dnd{
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: wrap;
+  border-radius: 5px;
 }
 
 #containersList > li{
   margin: 0px;
- 
 }
 .value{
   display: inline;
@@ -89,12 +98,16 @@ height:500px;
   // border: 1px solid rgba(180, 74, 74, 0.05);
   background-color: rgb(255, 255, 255);
   background-clip: border-box;
-  width:500px;
+  width:1250px;
   // margin-left: 15px;
   // box-shadow: 0px 5px 5px 5px rgb(209, 209, 209);
   border-radius: 0px 0px 15px 15px ;
   margin-bottom: 30px;
 }
 
+
+.restart-stop {
+  right:5px;
+}
 
 
