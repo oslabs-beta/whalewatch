@@ -9,7 +9,7 @@ const EachContainer = ({info, handleDrop}) => {
     const [{ isDragging }, drag] = useDrag(() => ({
 
         type: "image",
-        item: {info: info.id },
+        item: {info: info.dockerid },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -19,14 +19,15 @@ const EachContainer = ({info, handleDrop}) => {
     const opacity = isDragging ? 0 : 1;
 
     return (
-        <div className="whale-display">
+    
+
         
         <div id="containersList" ref={drag} style={{opacity}}> 
-        Name: {info.name}<br/>ID: {info.id}<br/> Docker ID: {info.dockerid}<br/>Status: {info.status}<br/> Container Size:{info.size}
+        Name: {info.name}<br/> Docker ID: {info.dockerid}<br/>Status: {info.status}<br/> Container Size:{info.size}
 
         </div>
-        {/* <br />Container {info.name}  <br />{info.size} MB */}
-        </div>
+
+
 
     )
 }

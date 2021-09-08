@@ -56,6 +56,7 @@ const ContainerType = new GraphQLObjectType({
     name: { type: GraphQLString },
     size: { type: GraphQLString },
     status: { type: GraphQLString },
+    state: {type: GraphQLString},
     stats: {
       type: new GraphQLList(StatsType),
       resolve: async (parent) => {
@@ -238,6 +239,28 @@ const RootMutationType = new GraphQLObjectType({
         const res = await pool.query(query, statEntry);
         console.log('this is response to adding a stat', res[0]);
         return res.rows[0];
+      }
+    },
+    stopContainer:{
+      type: ContainerType,
+      description: 'Stop a container',
+      args: {
+        id: {type: GraphQLString}
+      },
+      resolve: async (parent, args) => {
+        console.log('this is args.id: ', args.id)
+        await dbHelper.stopContainer(args.id);
+        return args.id;
+      }
+    },
+    restartContainer:{
+      type: ContainerType,
+      description: 'Restart a container',
+      args: {
+        id: {type: GraphQLInt}
+      },
+      resolve: async (parent, args) => {
+        return await dbHelper.restartContainer(args.id);
       }
     }
   })
