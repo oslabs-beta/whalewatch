@@ -257,10 +257,12 @@ const RootMutationType = new GraphQLObjectType({
       type: ContainerType,
       description: 'Restart a container',
       args: {
-        id: {type: GraphQLInt}
+        id: {type: GraphQLString}
       },
       resolve: async (parent, args) => {
-        return await dbHelper.restartContainer(args.id);
+        console.log('this is args.id:asfsdf ', args.id)
+        await dbHelper.restartContainer(args.id);
+        return args.id;
       }
     }
   })

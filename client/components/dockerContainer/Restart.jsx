@@ -22,7 +22,26 @@ function Restart({containerData, handleDrop}) {
         drop: (item) => {
             console.log('This is the item', item)
             console.log('We are restarting on restart button')
-            handleDrop(containerData.filter(container=> container.id !== item.info))
+            fetch('/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: `
+                    mutation restartContainer ($id: String) { restartContainer(id: $id) {
+                        id
+                    }
+                }
+                    `,
+                    variables: {
+                        id: item.info
+                    }
+                })
+            }
+            )
+            console.log('This is active containers',containerData.filter(container=> container.dockerid == item.info) )
+            handleDrop(containerData.filter(container=> container.dockerid !== item.info))
           },
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
