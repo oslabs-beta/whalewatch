@@ -5,10 +5,9 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 
 
 const AverageMemoryChart = ({ data, populateChart }) => {
-  //stats will be received from the container
 
+  //invoking the function to process the data for recharts
   const dataArr = populateChart('memusage', data);
-
 
   return (
     <>
