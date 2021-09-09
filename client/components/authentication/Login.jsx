@@ -20,7 +20,7 @@ const style = {
 
 
 
-// token
+// GraphQL login mutation query
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
     validateUser(username: $username, password: $password){
@@ -45,7 +45,7 @@ const Login = ({ setUserId }) => {
       ...userData, username: e.target.value,
     }));
   };
-
+  //function to handle changing password
   const handlePasswordInputChange = (e) => {
     e.persist();
     setUserData((userData) => ({

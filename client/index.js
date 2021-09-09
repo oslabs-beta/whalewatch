@@ -21,7 +21,7 @@ const enhancedFetch = (url, init) => {
   },
   ).then(response => response)
 }
-
+//set up of our apollo client
 const client = new ApolloClient({
   uri: '/graphql',
   cache: new InMemoryCache(),

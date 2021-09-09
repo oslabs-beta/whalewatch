@@ -5,8 +5,7 @@ import Whale from "./Whale";
 
 
 const WhaleChart = ({ listOfContainers }) => {
-  //we will need to pull in from props a list of containers
-  //then the whale chart will render whales based on that list
+
   const list = listOfContainers.container
   const whales = [];
   list.map(container => {
@@ -16,7 +15,7 @@ const WhaleChart = ({ listOfContainers }) => {
   return (
     <div id="container-list-dnd">
       {whales}
-      
+
     </div>
   )
 }

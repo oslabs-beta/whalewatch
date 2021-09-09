@@ -1,3 +1,6 @@
+//this file contains functions to use the docker engine API. we have refactored and are no longer using these
+//however, I have kept the file in case a future iteration prefers to refactor with these
+
 const dockerApiHelper = {};
 const fetch = require('node-fetch');
 const dockerPort = 'http://localhost:2375';

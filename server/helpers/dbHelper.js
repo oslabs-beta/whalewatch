@@ -6,6 +6,7 @@ const { dockerCliHelper } = require('./dockerCliHelper');
 
 //these functions will parse the docker data and add it to the database if not already there
 
+//this function takes in a given container's docker ID and database ID and queries for stats for the container, then adds them to the database
 const refreshStats = async (dockerId, id) => {
   try {
     const stats = await dockerCliHelper.getStats(dockerId);
@@ -22,6 +23,8 @@ const refreshStats = async (dockerId, id) => {
   }
 }
 
+//this function takes in a user's database id and retrieves a list of all containers on their computer. 
+//it then either updates or inserts each container
 dbHelper.refreshContainerData = async (owner) => {
   try {
     const containers = await dockerCliHelper.getContainerList();
@@ -55,20 +58,22 @@ dbHelper.refreshContainerData = async (owner) => {
   }
 }
 
+//this function stops a container by docker id and updates the database with its stopped state
 dbHelper.stopContainer = async (id) => {
-  try{
+  try {
     await dockerCliHelper.stopContainer(id);
     const stopQuery = 'UPDATE containers SET state=$1 WHERE dockerid=$2';
     await pool.query(stopQuery, ['exited', id]);
-  } catch (err) {console.log(err)}
+  } catch (err) { console.log(err) }
 }
 
+//this function restarts a container by docker id and updates the database with its running state
 dbHelper.restartContainer = async (id) => {
-  try{
+  try {
     await dockerCliHelper.restartContainer(id);
     const stopQuery = 'UPDATE containers SET state=$1 WHERE dockerid=$2';
     await pool.query(stopQuery, ['running', id]);
-  } catch (err) {console.log(err)}
+  } catch (err) { console.log(err) }
 }
 
 module.exports = dbHelper;

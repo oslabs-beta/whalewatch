@@ -1,6 +1,7 @@
+//setting up connection to the database
+require('dotenv').config();
 const { Pool } = require('pg');
-const uri = 'postgres://xhvnddmn:JF9lN_N9dhSib-oqRKUPFuSEyVMMopcg@chunee.db.elephantsql.com/xhvnddmn'
-
+const uri = process.env.DB_URI;
 const pool = new Pool({
   connectionString: uri,
   max: 3
