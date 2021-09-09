@@ -31,7 +31,8 @@
 2. Run `npm install`
 3. Create a `.env` file in your top level folder and add your Postgres DB_URI as a variable
 4. Run the following command in your Postgres instance:
-```CREATE TABLE IF NOT EXISTS users (
+```
+CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username varchar(50) UNIQUE NOT NULL,
   email varchar(100) UNIQUE NOT NULL,
