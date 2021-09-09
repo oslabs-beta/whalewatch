@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS stats (
 
 <h2 id='team'> Meet the Team </h2>
 <ul>
-  <li><a href='#'>Annie Pan - LinkedIn</a></li>
-  <li><a href='#'>Matilda Wang - LinkedIn</a></li>
+  <li><a href='https://www.linkedin.com/in/annie-pan825/'>Annie Pan - LinkedIn</a></li>
+  <li><a href='https://www.linkedin.com/in/matilda-wang-1438191b1/'>Matilda Wang - LinkedIn</a></li>
   <li><a href='https://www.linkedin.com/in/pkmi/'>Phil Kang - LinkedIn</a></li>
-  <li><a href='#'>Rachel Patterson - LinkedIn</a></li>
+  <li><a href='https://www.linkedin.com/in/racheljpatterson/'>Rachel Patterson - LinkedIn</a></li>
 </ul>
