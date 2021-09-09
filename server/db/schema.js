@@ -1,7 +1,3 @@
-// import{
-//   GraphQLID, // more flexible to use for IDs than strings
-//   GraphQLSchema, // needed to export our schema
-// }from 'graphql';
 const pool = require('./connect.js');
 const bcrypt = require('bcrypt');
 const graphql = require('graphql');
@@ -62,7 +58,6 @@ const ContainerType = new GraphQLObjectType({
       resolve: async (parent) => {
         const vals = [parent.id];
         const query = `SELECT * from stats WHERE container=$1`;
-        //return containerData.filter(container => container.user_id  === parent.id);
         const res = await pool.query(query, vals);
         return res.rows;
       }
@@ -105,8 +100,6 @@ const RootQueryType = new GraphQLObjectType({
       args: {
         id: { type: GraphQLInt }
       },
-      //resolve: (parent, args) => usersData.find(oneUser => oneUser.id === args.id)
-
       resolve: async (parent, args) => {
         const vals = [args.id]
         const query = `SELECT * from "users" WHERE id = $1`
@@ -121,11 +114,9 @@ const RootQueryType = new GraphQLObjectType({
         id: { type: GraphQLInt }
       },
       resolve: async (parent, args) => {
-        console.log('args.id: ', args.id)
         await dbHelper.refreshContainerData(args.id);
         const res = await pool.query(`SELECT * from "containers" WHERE owner = $1`, [args.id]);
         return res.rows;
-
       }
     },
     oneContainer: {
@@ -164,27 +155,14 @@ const RootMutationType = new GraphQLObjectType({
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
-        // containerName: {
-        //   type: new GraphQLList(ContainerType),
-        //   resolve: async (parent) => {
-        //     const vals = [parent.id];
-        //     const query = `SELECT * from containers WHERE owner=$1`;
-        //     //return containerData.filter(container => container.user_id  === parent.id);
-        //     const res = await pool.query(query,vals);
-        //     return res.rows;
-        //   
-        // },
+       
       },
       resolve: async (parent, args) => {
-        console.log('this is parent', parent)
         const password = await bcrypt.hash(args.password, 10);
         const user = [args.username, args.email, password]
         const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *'
-        const res = await pool.query(query, user);
-        console.log('this is response to adding a user', res);
-        console.log('this is createuser args', args)
+        const res = await pool.query(query, user);      
         return res.rows[0];
-        //return res.rows;
       }
     },
     validateUser: {
@@ -199,21 +177,14 @@ const RootMutationType = new GraphQLObjectType({
         const username = [args.username]
         const query = `SELECT password from users WHERE username = $1`;
         const result = await pool.query(query, username)
-        // console.log('this is user password', result.rows[0].password)
         const comparingPassword = await bcrypt.compare(args.password, result.rows[0].password);
         if (comparingPassword === true) {
           const finalResult = await pool.query(`SELECT * from users where username = $1`, username);
-
           const accessToken = jwt.sign({ userId: finalResult.rows[0].id }, 'Dockerpalsarecuties', { expiresIn: '15min' });
           const refreshToken = jwt.sign({ userId: finalResult.rows[0].id }, 'Dockerpalsarecuties', { expiresIn: '7d' });
-
           const refresh = res.cookie('refresh-token', refreshToken, { expire: 60 * 60 * 27 * 7 })
           const access = res.cookie('access-token', accessToken, { expire: 60 * 15 })
-
-          console.log('this is access token', accessToken)
-
           return finalResult.rows[0];
-          return accessToken;
 
         }
       }
@@ -237,7 +208,6 @@ const RootMutationType = new GraphQLObjectType({
         const statEntry = [args.container, args.timestamp, args.cpuusage, args.memusage, args.netio, args.blockio, args.pids, args.reqpermin]
         const query = 'INSERT INTO stats (container, timestamp, cpuusage, memusage, netio, blockio, pids, reqpermin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
         const res = await pool.query(query, statEntry);
-        console.log('this is response to adding a stat', res[0]);
         return res.rows[0];
       }
     },
@@ -247,9 +217,8 @@ const RootMutationType = new GraphQLObjectType({
       args: {
         id: {type: GraphQLString}
       },
-      resolve: async (parent, args) => {
-        console.log('this is args.id: ', args.id)
-        await dbHelper.stopContainer(args.id);
+      resolve: (parent, args) => {
+        dbHelper.stopContainer(args.id);
         return args.id;
       }
     },
@@ -260,14 +229,11 @@ const RootMutationType = new GraphQLObjectType({
         id: {type: GraphQLString}
       },
       resolve: async (parent, args) => {
-        console.log('this is args.id:asfsdf ', args.id)
         await dbHelper.restartContainer(args.id);
         return args.id;
       }
     }
   })
-
-
 });
 
 const schema = new GraphQLSchema({

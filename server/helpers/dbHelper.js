@@ -6,12 +6,10 @@ const { dockerCliHelper } = require('./dockerCliHelper');
 
 //these functions will parse the docker data and add it to the database if not already there
 
-
 const refreshStats = async (dockerId, id) => {
   try {
     const stats = await dockerCliHelper.getStats(dockerId);
     let timestamp = new Date(Date.now());
-    // timestamp = timestamp.
     const cpuUsage = stats[0].CPUPerc.slice(0, -1);
     const memUsage = stats[0].MemPerc.slice(0, -1);
     const netIo = stats[0].NetIO
@@ -25,7 +23,6 @@ const refreshStats = async (dockerId, id) => {
 }
 
 dbHelper.refreshContainerData = async (owner) => {
-  console.log('owner id is: ', owner)
   try {
     const containers = await dockerCliHelper.getContainerList();
     const insertQuery = 'INSERT INTO containers (dockerId, name, size, state, owner, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';

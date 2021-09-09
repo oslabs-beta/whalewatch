@@ -34,7 +34,7 @@ const NavBar = () => {
             </li>
 
             <li className="nav-item">
-              <Link to = "/login" className="menulist" onClick ={removeCookies}><i className="bi bi-sliders"></i>SignOut</Link>
+              <Link to = "/login" className="menulist" onClick ={removeCookies}><i className="bi bi-sliders"></i>Sign Out</Link>
             </li>
 
           </ul>

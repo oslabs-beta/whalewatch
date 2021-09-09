@@ -9,23 +9,9 @@ const {ApolloServer,gql} = require('apollo-server-express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-
-//need cors to connect our front end + back
 app.use(express.json());
 app.use(express.static('build'));
 app.use(cookieParser());
-// const authMiddleware = expressJwt({
-//   secret: "Dockerpalsarecuties",
-//   algorithms: ['HS256'],
-//   credentialsRequired: false
-// })
-
-//app.use(authMiddleware);
-
-// const context = async(req) =>{
-//   const{authorization: token} = req.headers;
-//   return {token}
-// }
 //use our graphql middleware. only to one endpoint
 app.use('/graphql', (req,res) => {
   return graphqlHTTP({
@@ -49,7 +35,6 @@ if (process.env.NODE_ENV === 'production') {
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
-  console.log('This is __dirname', __dirname)
 })
 
 module.exports = app;
