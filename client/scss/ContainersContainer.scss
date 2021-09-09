@@ -1,0 +1,123 @@
+$containerBlue:rgb(98, 189, 222);
+
+#allContainers{
+  display: flex;
+  height: 100%;
+}
+
+#containersPage{
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 200px;
+}
+
+#containersList{
+  padding: 25px;
+  margin: 10px;
+  font-size:16px;
+  border: solid lightblue .75px;
+  align-content: space-between;    
+  width: 275px;
+  border-radius: 20px;
+  box-shadow: 6px 6px 6px 3px rgb(250, 246, 246);
+}
+
+
+
+#container-list-dnd{
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: wrap;
+  border-radius: 5px;
+}
+
+#containersList > li{
+  margin: 0px;
+}
+.value{
+  display: inline;
+}
+
+
+#actions{
+  display: flex;
+  width: 35%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+.containers{
+  margin: 30px 0 30px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+  height: 50%;
+  align-items: flex-start;
+}
+#icons{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  border: 2px solid $containerBlue;
+  padding: 20px;
+  border-radius: 10%;
+}
+
+#icons > img {
+  margin-bottom: 10px;
+}
+
+.containerTitle{
+  margin-top: 30px;
+}
+
+.value{
+  color: white;
+}
+
+#inactiveContainer{
+  height: 50%;
+}
+
+
+// Re-edited
+
+.dnd-board {
+height:50%;
+}
+
+.card2{
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // border: 1px solid rgba(180, 74, 74, 0.05);
+  background-color: rgb(255, 255, 255);
+  background-clip: border-box;
+  width:80%;
+  // margin-left: 15px;
+  // box-shadow: 0px 5px 5px 5px rgb(209, 209, 209);
+  border-radius: 0px 0px 15px 15px ;
+  margin-bottom: 30px;
+}
+
+
+.restart-stop {
+  display:flex;
+  margin-left: 20rem;
+  align-items: center;
+  // justify-content: center;
+  div {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+
