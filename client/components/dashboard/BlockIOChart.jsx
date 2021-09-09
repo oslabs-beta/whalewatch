@@ -8,11 +8,8 @@ const BlockIOChart = ({ data, populateBarChart }) => {
 
   //invoking the function to process the data for recharts
   const dataArr = populateBarChart('blockio', data);
-
   return (
     <>
-      {/* <h3>Average Block I/O</h3> */}
-
       <BarChart width={600} height={300} data={dataArr}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />

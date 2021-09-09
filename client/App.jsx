@@ -18,7 +18,6 @@ const App = () => {
   const [auth, setAuth] = useState(false); 
 
   return ( 
-    
       <DndProvider backend={HTML5Backend}>
         <Router>
           <Switch>
@@ -35,7 +34,6 @@ const App = () => {
           </Switch>
         </Router>
       </DndProvider>
-    
   );
 };
 

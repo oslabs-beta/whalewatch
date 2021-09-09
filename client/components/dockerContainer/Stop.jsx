@@ -17,7 +17,7 @@ const style = {
   float: 'left',
 };
 
-function Stop({containerData, handleDrop, refetch}) {
+function Stop({containerData, refetch}) {
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'image',
@@ -39,8 +39,7 @@ function Stop({containerData, handleDrop, refetch}) {
           }
         })
       })
-      .then(data => refetch())
-      //handleDrop(containerData.filter(container=> container.dockerid !== item.info))  
+      .then(data => refetch()) 
       },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),

@@ -8,11 +8,9 @@ const PIDChart = ({ data, populateChart }) => {
 
   //invoking the function to process the data for recharts
   const dataArr = populateChart('pids', data);
-
+  
   return (
     <>
-      {/* <h3>Average PIDs</h3> */}
-
       <LineChart width={600} height={300} data={dataArr} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
         <Line type="monotone" dataKey="datatype" stroke="#149ce4" />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
@@ -22,7 +20,6 @@ const PIDChart = ({ data, populateChart }) => {
       </LineChart>
     </>
   )
-
 }
 
 export default PIDChart;

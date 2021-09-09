@@ -39,9 +39,7 @@ function forceRerender() {
   return () => setForceRerender(forceRerender => forceRerender + 1)
 }
 
-
 const DashboardContainer = ({ validId }) => {
-
   const reRender = forceRerender();
   //currently, user id is held in local storage
   const variables = { id: Number(localStorage.getItem('validId')) };
@@ -147,10 +145,8 @@ const DashboardContainer = ({ validId }) => {
           {/* <!-- Card header --> */}
           <div className="card-header">
             {/* <!-- Title --> */}
-            <div className="metric-type">Container Health Overview</div>
-            <button className='refresh-button' onClick={reRender}>Refresh</button>
-            {/* <button className = 'form-button btn btn-info' onClick = {reRender}>Refresh</button> */}
-
+            <div className="metric-type">Container Health Overview </div>
+            <button className = 'refresh-button' onClick = {reRender}>Refresh</button>
           </div>
           {/* <!-- Card body --> */}
           <div className="card-body">
@@ -172,7 +168,7 @@ const DashboardContainer = ({ validId }) => {
         {/* AverageMemoryChart */}
         <div className="card1">
           <div className="card-header">
-            <div className="metric-type">Average Memory Usage</div>
+            <div className="metric-type">Average Memory Usage </div>
           </div>
           <div className="card-body">
             {loading ? <div>Loading...</div> : <AverageMemoryChart data={data} populateChart={populateChart} />}
@@ -208,7 +204,6 @@ const DashboardContainer = ({ validId }) => {
             {loading ? <div>Loading...</div> : <PIDChart data={data} populateChart={populateChart} />}
           </div>
         </div>
-
       </div>
     </div>
   )

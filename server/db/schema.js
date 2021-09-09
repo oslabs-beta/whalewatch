@@ -13,10 +13,11 @@ const {
   GraphQLFloat,
   GraphQLScalarType,
   Kind
-  // needed to export our schema  
 } = graphql;
+
 const jwt = require('jsonwebtoken')
 //graphqlobjecttype is function from graphql
+//schema for Users
 const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'Users data in our app',
@@ -27,7 +28,6 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    //token: {type: GraphQLString},
     containerName: {
       type: new GraphQLList(ContainerType),
       resolve: async (parent) => {
@@ -42,7 +42,7 @@ const UserType = new GraphQLObjectType({
   })
 })
 
-//query for containers 
+//schema for containers 
 const ContainerType = new GraphQLObjectType({
   name: 'Containers',
   description: 'Our containers',
@@ -143,10 +143,12 @@ const RootQueryType = new GraphQLObjectType({
   })
 })
 
+//mutation functions
 const RootMutationType = new GraphQLObjectType({
   name: 'Mutations',
   description: 'Manipulation of user data',
   fields: () => ({
+    //functionality to add user into database
     addUser: {
       type: UserType,
       description: 'Add a user',
@@ -158,8 +160,10 @@ const RootMutationType = new GraphQLObjectType({
 
       },
       resolve: async (parent, args) => {
+        //hash and salt returning pw
         const password = await bcrypt.hash(args.password, 10);
         const user = [args.username, args.email, password]
+        //insert into database user information
         const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *'
         const res = await pool.query(query, user);
         return res.rows[0];

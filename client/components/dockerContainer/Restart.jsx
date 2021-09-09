@@ -14,8 +14,7 @@ const style = {
   float: 'left',
 };
 
-
-function Restart({containerData, handleDrop, state, refetch}) {   
+function Restart({containerData, state, refetch}) {   
   
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'image',
@@ -38,7 +37,6 @@ function Restart({containerData, handleDrop, state, refetch}) {
         })
       })
       .then(data => refetch())  
-      //handleDrop(containerData.filter(container=> container.dockerid !== item.info))
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -51,7 +49,6 @@ function Restart({containerData, handleDrop, state, refetch}) {
   if (isActive) {
     backgroundColor = 'lightblue';
   }
-
   return (
     <div>
       <img src={restart} ref={drop} role={'restart'} style={{...style, backgroundColor}}/>

@@ -30,6 +30,7 @@ mutation addUser ($username: String!, $email: String!, $password: String!) {
 }
 `;
 
+// create a sign-up form
 const SignUpForm = ({ submitForm }) => {
   const [inputValues, setValues] = useState({
     username: '',
@@ -37,21 +38,20 @@ const SignUpForm = ({ submitForm }) => {
     password: ''
   });
 
-  const [errors, setErrors] = useState({});
-  const [dataIsCorrect, setDataIsCorrect] = useState(false);
-  const history = useHistory();
+ 
+const [errors, setErrors] = useState({});
+const [dataIsCorrect, setDataIsCorrect] = useState(false);
+const history = useHistory();
 
-  const handleChange = (event) => {
-    //same as writing setValues({username: e.target.value})
+// handle changes on the input fields    
+const handleChange = (event) => {
     setValues({
       ...inputValues,
-      // Note: need to understand this line better to match Rachel's
       [event.target.name]: event.target.value,
-    })
-
+    });
   };
 
-  const [addUser, { data, loading, error }] = useMutation(REGISTER_USER, {
+const [addUser, { data, loading, error }] = useMutation(REGISTER_USER, {
     variables: inputValues,
     onCompleted: (data) => {
       if (data.addUser) {
@@ -61,26 +61,22 @@ const SignUpForm = ({ submitForm }) => {
         history.push('/dashboard')
       }
     }
-
-  })
-
-  const handleFormSubmit = (event) => {
+  });
+  
+// handle submit button
+const handleFormSubmit = (event) => {
     event.preventDefault();
-    // Note: need to understand this line better to match Rachel's
-    setErrors(Validation(inputValues))
+    setErrors(Validation(inputValues));
     setDataIsCorrect(true);
     addUser();
-
   };
 
-  useEffect(() => {
+ // handle error message for the input fields
+useEffect(() => {
     if (Object.keys(errors).length === 0 && dataIsCorrect) {
       submitForm(true);
-    }
-  }, [errors])
-
-
-
+    };
+  }, [errors]);
 
   return (
     <div>
@@ -89,11 +85,8 @@ const SignUpForm = ({ submitForm }) => {
         <div className='authen-box-color'>
           <img src={logo} className='logo' />
           <h1 className='welcome'>Welcome! Create Your Account.</h1>
-
           <div className='login-page container'>
-
             <form className='form-group col-md-8 col-lg-8 mx-auto text-center'>
-
               <div className='form-control-sm'>
                 <label className='label'>Username</label>
                 <input className='form-field form-control' type='text' name='username' value={inputValues.username} onChange={handleChange} />
@@ -109,13 +102,11 @@ const SignUpForm = ({ submitForm }) => {
                 <input className='form-field form-control' type='password' name='password' value={inputValues.password} onChange={handleChange} />
                 {errors.password && <p className='error-message'>{errors.password}</p>}
               </div>
-              <br />
-
+              <br/>
               <div>
                 <button className='form-button btn btn-primary' onClick={handleFormSubmit}>Sign Up</button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
@@ -125,4 +116,4 @@ const SignUpForm = ({ submitForm }) => {
 
 
 
-export default SignUpForm
+export default SignUpForm;
