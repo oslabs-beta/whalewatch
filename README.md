@@ -1,6 +1,6 @@
 # WhaleWatch
 <p align='center'>
-<img src='./client/assets/logoNoText.png' />
+<img src='https://live.staticflickr.com/65535/51440879168_1b0caa26ed_o.png' />
 </p>
 
 <h1> Table of Contents </h1>
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS stats (
   reqPerMin integer
 )
 ```
-
-5. Run `npm run dev`
+5. Ensure Docker Daemon is running on your computer.
+6. Run `npm run dev`
 
 <h2 id='how'>Navigating and Using WhaleWatch</h2>
 <p>WhaleWatch is a tool that developers will be able to utilize through their browsers as a web application.</p>
