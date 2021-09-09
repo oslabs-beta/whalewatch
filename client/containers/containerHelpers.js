@@ -1,4 +1,8 @@
-//helper func to format bytes 
+/* 
+  input: integer and optional decimals integer
+  output: float
+  this function formats bytes to kilobytes for a cleaner display
+*/
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
 
@@ -6,9 +10,9 @@ function formatBytes(bytes, decimals = 2) {
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  // const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) // + ' ' + sizes[i];
+  return parseFloat((bytes / Math.pow(k, 1)).toFixed(dm)) // + ' ' + sizes[i];
 }
 
 export default formatBytes

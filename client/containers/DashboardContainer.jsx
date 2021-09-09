@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from "react-router-dom";
-import { useState, useEffect, useContext } from 'react';
-import Auth from "../Auth.js";
+import { useState, useEffect} from 'react';
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -10,11 +9,10 @@ import BlockIOChart from "../components/dashboard/BlockIOChart";
 import { useQuery, gql } from '@apollo/client';
 import NavBar from "../components/NavBar/NavBar";
 import PIDChart from "../components/dashboard/PIDChart";
-import AuthApi from '../Context.js'
 import Cookies from 'js-cookie';
 import formatBytes from "./containerHelpers";
 
-
+//get containers is a query that requests container data from our GraphQL endpoint
 const GET_CONTAINERS = gql`
     query Containers ($id: Int) {
       container(id: $id) {
@@ -45,17 +43,17 @@ function forceRerender(){
 const DashboardContainer = ({ validId }) => {
 
   const reRender = forceRerender();
-
-  console.log('This is validId', typeof localStorage.getItem('validId'))
-  const Auth = React.useContext(AuthApi);
-  const [listOfContainers, setListOfContainers] = useState([]);
+  //currently, user id is held in local storage
   const variables = { id: Number(localStorage.getItem('validId')) };
-  const id = localStorage.getItem('validId')
+  //we are using Apollo useQuery hooks to fetch the data
   const { loading, error, data } = useQuery(GET_CONTAINERS, { variables });
-  if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  //function to parse the data for the line charts
+  /*
+  function to parse the data for the line charts
+    inputs: datatype string, data object from graphql
+    output: an array of data, formatted properly for recharts
+  */
   const populateChart = (datatype, data) => {
 
     const array = data.container;
@@ -83,7 +81,11 @@ const DashboardContainer = ({ validId }) => {
   }
 
 
-  //function to parse data for the bar charts
+  /*function to parse data for the bar charts
+    inputs: datatype string, data object from graphql
+    output: an array of data, formatted properly for recharts
+    in future, I'd like to refactor this to be more dry (one chart func with helper funcs)
+  */
   const populateBarChart = (datatype, data) => {
     const arr = data.container;
     const dataArr = [];
@@ -132,7 +134,6 @@ const DashboardContainer = ({ validId }) => {
       <div className='dashbaordData'>
         <div className='dashbaord-header'>
           <p>Dashboard</p>
-          <button id = 'refresh-button' onClick = {reRender}>Refresh</button>
         </div>
 
         {/* Whale Chart */}
@@ -141,11 +142,14 @@ const DashboardContainer = ({ validId }) => {
           <div className="card-header">
             {/* <!-- Title --> */}
             <div className="metric-type">Container Health Overview</div>
+            <button className = 'refresh-button' onClick = {reRender}>Refresh</button>
+            {/* <button className = 'form-button btn btn-info' onClick = {reRender}>Refresh</button> */}
+            
           </div>
           {/* <!-- Card body --> */}
           <div className="card-body">
             {/* <!-- Chart wrapper --> */}
-            <WhaleChart className='whalechart' listOfContainers={data} />
+            {loading ? <div>Loading...</div> : <WhaleChart className='whalechart' listOfContainers={data} />}
           </div>
         </div>
 
@@ -155,7 +159,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average CPU Usage</div>
           </div>
           <div className="card-body">
-            <AverageCPUChart data={data} populateChart={populateChart} />
+          {loading ? <div>Loading...</div> : <AverageCPUChart data={data} populateChart={populateChart} />}
           </div>
         </div>
 
@@ -165,7 +169,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average Memory Usage</div>
           </div>
           <div className="card-body">
-            <AverageMemoryChart data={data} populateChart={populateChart} />
+          {loading ? <div>Loading...</div> : <AverageMemoryChart data={data} populateChart={populateChart} />}
           </div>
         </div>
 
@@ -175,7 +179,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average Net I/O</div>
           </div>
           <div className="card-body">
-            <NetIOChart data={data} populateBarChart={populateBarChart} />
+          {loading ? <div>Loading...</div> : <NetIOChart data={data} populateBarChart={populateBarChart} />}
           </div>
         </div>
 
@@ -185,7 +189,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average Block I/O</div>
           </div>
           <div className="card-body">
-            <BlockIOChart data={data} populateBarChart={populateBarChart} />
+          {loading ? <div>Loading...</div> : <BlockIOChart data={data} populateBarChart={populateBarChart} />}
           </div>
         </div>
 
@@ -195,17 +199,9 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average PIDs</div>
           </div>
           <div className="card-body">
-            <PIDChart data={data} populateChart={populateChart} />
+          {loading ? <div>Loading...</div> : <PIDChart data={data} populateChart={populateChart} />}
           </div>
         </div>
-
-        {/* the below need to be passed the appropriate stats */}
-        {/* <AverageCPUChart data={data} populateChart={populateChart} /> */}
-        {/* <AverageMemoryChart data={data} populateChart={populateChart} /> */}
-        {/* <NetIOChart data={data} populateChart={populateChart} /> */}
-        {/* <BlockIOChart data={data} populateChart={populateChart} />
-          <PIDChart data={data} populateChart={populateChart} /> */}
-
 
       </div>
     </div>

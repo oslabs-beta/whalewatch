@@ -4,7 +4,6 @@ const dockerPort = 'http://localhost:2375';
 
 //all docker API calls will go here
 
-
 //fetch a list of running containers from the docker engine API
 dockerApiHelper.getContainerList = async () => {
   try {

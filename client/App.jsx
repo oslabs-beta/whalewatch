@@ -8,31 +8,18 @@ import NotificationsContainer from './containers/NotificationsContainer';
 import SettingsContainer from './containers/SettingsContainer';
 import NavBar from './components/NavBar/NavBar';
 import ProtectedRoute from './ProtectedRoute.jsx';
-//import Auth from './Auth.js';
-// import listOfContainers from './components/afterLogin/listOfContainers';
-// import dashBoard from './components/afterLogin/dashBoard';
-// import notification from './components/afterLogin/notification';
 import Form from './components/authentication/form'
 import './styles.scss';
-import AuthApi from './Context.js'
-
-////for drag and drop 
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const App = () => {
   const [userId, setUserId] = useState('');
   const [auth, setAuth] = useState(false); 
-  console.log('user id within app.jsx', userId)
-  console.log('auth within app.jsx', auth)
-  
 
-  React.useContext(AuthApi);
-  // if(localStorage.getItem('validToken')) setAuth(true);
   return ( 
     
       <DndProvider backend={HTML5Backend}>
-      <AuthApi.Provider value = {{value: [auth, setAuth], value2: [userId, setUserId]}}>   
         <Router>
           <Switch>
             <Route exact path="/"><Login /></Route>
@@ -47,7 +34,6 @@ const App = () => {
             <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </Router>
-      </AuthApi.Provider>
       </DndProvider>
     
   );

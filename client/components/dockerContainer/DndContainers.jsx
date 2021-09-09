@@ -5,16 +5,17 @@ import EachContainer from './EachContainer';
 
 const DndContainers = ({listOfContainers, handleDrop, state}) => {
 
-    const activateContainer = [];
+    const allContainer = [];
     listOfContainers.map(container => {
         if(container.state === state){
 
-            activateContainer.push(<EachContainer key={container.id} info={container} handleDrop={handleDrop}/>);
+            allContainer.push(<EachContainer key={container.id} info={container} handleDrop={handleDrop}/>);
         }
     });
+    
     return (
-        <div id="container-list-dnd" >
-            {activateContainer}
+        <div id="container-list-dnd">
+            {allContainer}
         </div>
     )
 }

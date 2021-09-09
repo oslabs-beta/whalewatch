@@ -4,8 +4,6 @@ import { useMutation, gql } from '@apollo/client';
 import { Link, useHistory } from "react-router-dom";
 import logo from '../../assets/logo.gif';
 import Cookies from 'js-cookie';
-import AuthApi from '../../Context.js'
-
 
 
 const style = {
@@ -33,8 +31,6 @@ mutation addUser ($username: String!, $email: String!, $password: String!) {
 `;
 
 const SignUpForm = ({ submitForm }) => {
-  const Auth = React.useContext(AuthApi);
-
   const [inputValues, setValues] = useState({
     username: '',
     email: '',
@@ -58,13 +54,10 @@ const SignUpForm = ({ submitForm }) => {
   const [addUser, { data, loading, error }] = useMutation(REGISTER_USER, {
     variables: inputValues,
     onCompleted: (data) => {
-      console.log(data)
       if (data.addUser) {
         Cookies.set('id', data.addUser.id)
         localStorage.setItem('validId', data.addUser.id)
         localStorage.setItem('validAuth', Cookies.get('access-token'))
-        Auth.value[1](true)
-        Auth.value2[1](data.addUser.id);
         history.push('/dashboard')
       }
     }

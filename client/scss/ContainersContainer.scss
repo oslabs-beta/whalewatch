@@ -14,15 +14,14 @@ $containerBlue:rgb(98, 189, 222);
 }
 
 #containersList{
-  list-style-type: none;
-  border: 1px solid $containerBlue;
-  padding: 20px;
-  margin: 5px 5px 5px 5px;
-  border-radius: 5px;
-  background-color: $containerBlue;
-  width: 30%;
-  // text-align: center;
-  font-family: 'Nunito Sans', sans-serif;
+  padding: 25px;
+  margin: 10px;
+  font-size:16px;
+  border: solid lightblue .75px;
+  align-content: space-between;    
+  width: 275px;
+  border-radius: 20px;
+  box-shadow: 6px 6px 6px 3px rgb(250, 246, 246);
 }
 
 
@@ -48,6 +47,7 @@ $containerBlue:rgb(98, 189, 222);
   justify-content: center;
   align-items: center;
   height: 100vh;
+  
 }
 
 .containers{
@@ -89,16 +89,17 @@ $containerBlue:rgb(98, 189, 222);
 // Re-edited
 
 .dnd-board {
-height:500px;
+height:50%;
 }
 
 .card2{
   display: flex;
   flex-direction: column;
+  // align-items: center;
   // border: 1px solid rgba(180, 74, 74, 0.05);
   background-color: rgb(255, 255, 255);
   background-clip: border-box;
-  width:1250px;
+  width:80%;
   // margin-left: 15px;
   // box-shadow: 0px 5px 5px 5px rgb(209, 209, 209);
   border-radius: 0px 0px 15px 15px ;
@@ -107,7 +108,16 @@ height:500px;
 
 
 .restart-stop {
-  right:5px;
+  display:flex;
+  margin-left: 20rem;
+  align-items: center;
+  // justify-content: center;
+  div {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 

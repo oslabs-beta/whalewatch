@@ -8,12 +8,7 @@ const BlockIOChart = ({ data, populateBarChart }) => {
   //stats will be received from the container
 
   const dataArr = populateBarChart('blockio', data);
-  // console.log('block IO data', dataArr)
-
-
-
-
-
+  
   return (
     <>
       {/* <h3>Average Block I/O</h3> */}
@@ -29,7 +24,6 @@ const BlockIOChart = ({ data, populateBarChart }) => {
       </BarChart>
     </>
   )
-
 }
 
 export default BlockIOChart;

@@ -1,11 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import NavBar from '../components/NavBar/NavBar';
 import { useQuery, gql, useLazyQuery} from '@apollo/client';
-
-import AuthApi from '../Context.js'
 import Cookies from 'js-cookie';
-import Auth from "../Auth.js";
-
 import deleteContainer from "../assets/delete.png";
 import stopContainer from "../assets/stop.png";
 import restartContainer from "../assets/restart.png";
@@ -29,20 +25,13 @@ query Containers ($id: Int) {
 
 const ContainersContainer = ({validId}) => {
   
-  const Auth = React.useContext(AuthApi);
   const variables = { id: parseInt(localStorage.getItem('validId')) };
-  const { loading, data, error } = useQuery(GET_CONTAINERS, {variables})
+  const { loading, error, data, refetch } = useQuery(GET_CONTAINERS, {variables})
   const [containerData, setContainerData] = useState([])
 
-  useEffect(() => {
-  // do some checking here to ensure data exist
-  if (data) {
-    setContainerData(data.container)
-  }
-  }, [data])
-  
   const handleDrop = (newValue) => {
     setContainerData(newValue)
+    
   }
 
   return (
@@ -51,7 +40,7 @@ const ContainersContainer = ({validId}) => {
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Containers</div>
 
-
+  
         {/* Active Containers */}
         <div className="card2">
           <div className='dnd-board'>
@@ -62,17 +51,16 @@ const ContainersContainer = ({validId}) => {
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">
-              <DndContainers listOfContainers={containerData} handleDrop={handleDrop} state={'running'} />
+              {loading ? <div>Loading...</div> : <DndContainers listOfContainers={data.container} handleDrop={setContainerData} state={'running'} refetch={refetch}/>}
             </div>
-            
           </div>
         </div>
 
 
-            <div className="restart-stop">
-              <Stop containerData={containerData} handleDrop={handleDrop} />
-              <Restart containerData={containerData} handleDrop={handleDrop} />
-            </div>
+        <div className="restart-stop">
+          <div><Stop containerData={containerData} handleDrop={setContainerData} refetch={refetch} /></div>
+          <div><Restart containerData={containerData} handleDrop={setContainerData} refetch={refetch} /></div>
+        </div> 
 
         {/* InActive Containers */}
          <div className="card2">
@@ -80,19 +68,20 @@ const ContainersContainer = ({validId}) => {
             {/* <!-- Card header --> */}
             <div className="card-header">
               {/* <!-- Title --> */}
-              <div className="each-container">Inactive Containers</div>
+              <div className="metric-type">Inactive Containers</div>
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">
-              <DndContainers listOfContainers={containerData} handleDrop={handleDrop} state={'exited'} />
+              {loading ? <div>Loading...</div> : <DndContainers listOfContainers={data.container} handleDrop={setContainerData} state={'exited'} refetch={refetch} /> }
             </div>
             
           </div>
         </div>
 
 
+        </div>
       </div>
-    </div>
+
   )
 }
 
