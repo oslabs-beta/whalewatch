@@ -3,7 +3,7 @@ const path = require('path');
 const url = require('url');
 
 // SET ENV
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
@@ -20,6 +20,10 @@ app.on('ready', function () {
   });
   // Load HTML file into the window
   console.log(__dirname)
+<<<<<<< HEAD
   mainWindow.loadfile('./build/index.html');
+=======
+  mainWindow.loadURL('http://localhost:8080');
+>>>>>>> parent of 6215850... trying electron
 })
 
