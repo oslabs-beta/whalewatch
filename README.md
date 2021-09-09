@@ -25,10 +25,47 @@
 </ul>
 
 <h2 id='install'>Installation and Setup</h2>
-<p> WhaleWatch can be downloaded via <a href='http://whalewatchapp.com/'>whalewatchapp.com</a>. Upon downloading, users will be asked to create an account or to sign-in if the user has an existing account. </p>
+<p> WhaleWatch can be installed and set up with the following steps: </p>
+
+1. Fork and clone the repo
+2. Run `npm install`
+3. Create a `.env` file in your top level folder and add your Postgres DB_URI as a variable
+3:44
+4. Run the following command in your Postgres instance:
+```CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username varchar(50) UNIQUE NOT NULL,
+  email varchar(100) UNIQUE NOT NULL,
+  password varchar(100) NOT NULL
+)
+
+CREATE TABLE IF NOT EXISTS containers (
+  id SERIAL PRIMARY KEY,
+  dockerId varchar(100) NOT NULL,
+  name varchar(100) NOT NULL,
+  size varchar(50),
+  status varchar(50),
+  state varchar(50),
+  owner integer REFERENCES users(id) NOT NULL
+)
+
+CREATE TABLE IF NOT EXISTS stats (
+  id SERIAL PRIMARY KEY,
+  container integer REFERENCES containers(id) NOT NULL,
+  timestamp date NOT NULL,
+  cpuUsage decimal NOT NULL,
+  memUsage decimal NOT NULL,
+  netIo varchar(50) NOT NULL,
+  blockIo varchar(50) NOT NULL,
+  pids integer NOT NULL,
+  reqPerMin integer
+)
+```
+
+5. Run `npm run dev`
 
 <h2 id='how'>Navigating and Using WhaleWatch</h2>
-<p>WhaleWatch is a tool that developers will be able to utilize from their desktops directly and is available to download as an Electron based application.</p>
+<p>WhaleWatch is a tool that developers will be able to utilize through their browsers as a web application.</p>
 
 ![Dashboard](https://media.giphy.com/media/wXFxM1EuviUlgpLQYU/giphy.gif?cid=790b76113869a667a527e5322a3e9cfd16baedc2adfa9ea4&rid=giphy.gif&ct=g)
 
