@@ -13,7 +13,7 @@
 </ul>
 
 <h2 id='what'>What is WhaleWatch?</h2>
-<p> WhaleWatch is a lightweight, open-source monitoring tool for Dockers. WhaleWatch enables developers to monitor Dockers containers through a dashboard that delivers real-time metrics backed by intuitive data visualizations. Developers will be able to keep an eye on the containers that are critical for smooth technical and business operations and also proactively take action before troubles arise. </p>
+<p> WhaleWatch is a lightweight, open-source monitoring tool for Docker. WhaleWatch enables developers to monitor Dockers containers through a dashboard that delivers real-time metrics backed by intuitive data visualizations. Developers will be able to keep an eye on the containers that are critical for smooth technical and business operations and also proactively take action before troubles arise. </p>
 
 <h2 id='features'>WhaleWatch Features</h2>
 
