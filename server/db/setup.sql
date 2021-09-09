@@ -1,3 +1,4 @@
+-- tables to create for database setup
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username varchar(50) UNIQUE NOT NULL,

@@ -18,7 +18,13 @@ const style = {
   }
 };
 
+<<<<<<< HEAD
 // mutation to use upon attempting to login 
+=======
+
+
+// GraphQL login mutation query
+>>>>>>> dev
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
     validateUser(username: $username, password: $password){
@@ -40,7 +46,7 @@ const Login = ({ setUserId }) => {
       ...userData, username: e.target.value,
     }));
   };
-
+  //function to handle changing password
   const handlePasswordInputChange = (e) => {
     e.persist();
     setUserData((userData) => ({

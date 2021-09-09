@@ -52,7 +52,7 @@ const ContainerType = new GraphQLObjectType({
     name: { type: GraphQLString },
     size: { type: GraphQLString },
     status: { type: GraphQLString },
-    state: {type: GraphQLString},
+    state: { type: GraphQLString },
     stats: {
       type: new GraphQLList(StatsType),
       resolve: async (parent) => {
@@ -157,7 +157,7 @@ const RootMutationType = new GraphQLObjectType({
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
-       
+
       },
       resolve: async (parent, args) => {
         //hash and salt returning pw
@@ -165,7 +165,7 @@ const RootMutationType = new GraphQLObjectType({
         const user = [args.username, args.email, password]
         //insert into database user information
         const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *'
-        const res = await pool.query(query, user);      
+        const res = await pool.query(query, user);
         return res.rows[0];
       }
     },
@@ -215,22 +215,22 @@ const RootMutationType = new GraphQLObjectType({
         return res.rows[0];
       }
     },
-    stopContainer:{
+    stopContainer: {
       type: ContainerType,
       description: 'Stop a container',
       args: {
-        id: {type: GraphQLString}
+        id: { type: GraphQLString }
       },
       resolve: (parent, args) => {
         dbHelper.stopContainer(args.id);
         return args.id;
       }
     },
-    restartContainer:{
+    restartContainer: {
       type: ContainerType,
       description: 'Restart a container',
       args: {
-        id: {type: GraphQLString}
+        id: { type: GraphQLString }
       },
       resolve: async (parent, args) => {
         await dbHelper.restartContainer(args.id);
@@ -249,43 +249,4 @@ const schema = new GraphQLSchema({
 module.exports = schema;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-  Phil Notes - schema file: define types, define relationships between types, and define root query: define how user can jump into graph and grab dat
-// dummy data to test schema
-// let usersData = [
-//   {id: 1, username: 'phil', email: 'phil@email.com', password: 'pass1'},
-//   {id: 2, username: 'joe', email: 'joe@email.com', password: 'pass2'},
-//   {id: 3, username: 'steve', email: 'steve@email.com', password: 'pass3'}
-// ]
-
-// // dummy data for stats
-// const statsData = [
-//   // { stats_id: 1, container_id: 1, timestamp: 20210823, cpu_usage: 100, memory_usuage: 100, net_io: 100, block_io: 20, p_id: 15, req_per_min: 50},
-//   // { stats_id: 2, container_id: 2, timestamp: 20210823, cpu_usage: 50, mem_usage: 50, net_io: 50, block_io: 10, p_id: 10, req_per_min: 50},
-//   // { stats_id: 3, container_id: 3, timestamp: 20210823, cpu_usage: 25, mem_usage: 25, net_io: 25, block_io: 5, p_id: 5, req_per_min: 50},
-//   { id: 1, container_id: 1, cpu_usage: 100, mem_usage: 100, net_io: 100, block_io: 20, p_id: 15, req_per_min: 50},
-//   { id: 2, container_id: 2, cpu_usage: 50, mem_usage: 50, net_io: 50, block_io: 10, p_id: 10, req_per_min: 50},
-//   { id: 3, container_id: 3, cpu_usage: 25, mem_usage: 25, net_io: 25, block_io: 5, p_id: 5, req_per_min: 50},
-// ]
-
-// const containerData = [
-//   {id: 1, dockerID: 1, name: 'hello', size: 455, status: 'Good', user_id: 1},
-//   {id: 2, dockerID: 2, name: 'hey', size: 55, status: 'Ight', user_id: 2},
-//   {id: 3, dockerID: 3, name: 'ello', size: 45, status: 'Bad', user_id: 3}
-// ]
-*/
 

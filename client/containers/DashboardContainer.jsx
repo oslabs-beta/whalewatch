@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from "react-router-dom";
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import WhaleChart from "../components/dashboard/WhaleChart";
 import AverageCPUChart from "../components/dashboard/AverageCPUChart";
 import AverageMemoryChart from "../components/dashboard/AverageMemoryChart";
@@ -34,7 +34,7 @@ const GET_CONTAINERS = gql`
     }
 `;
 
-function forceRerender(){
+function forceRerender() {
   const [forceRerender, setForceRerender] = useState(0);
   return () => setForceRerender(forceRerender => forceRerender + 1)
 }
@@ -53,11 +53,10 @@ const DashboardContainer = ({ validId }) => {
     output: an array of data, formatted properly for recharts
   */
   const populateChart = (datatype, data) => {
-
     const array = data.container;
     const dataArr = [];
     const dataCache = {};
-
+    //loop through the container data and add the appropriate data points to the cache (grouped by timestamp)
     array.forEach(container => {
       const stats = container.stats;
       stats.forEach(stat => {
@@ -67,15 +66,17 @@ const DashboardContainer = ({ validId }) => {
         dataCache[stat.timestamp].push(stat[datatype]);
       })
     })
-
+    //loop through the cache and average the values at each timestamp
     Object.keys(dataCache).forEach(time => {
       let total = 0;
       dataCache[time].forEach(entry => total += entry);
       const avg = total / dataCache[time].length;
       let timestamp = Number(time);
       timestamp = new Date(timestamp)
+      //timestamp (which is our x axis label) is currently the numerical date - would refactor to a time instead
       dataArr.push({ timestamp: timestamp.getDate(), datatype: avg.toFixed(2) });
     })
+    //sort the resulting array by time
     dataArr.sort((a, b) => a.timestamp - b.timestamp)
     return dataArr;
   }
@@ -90,7 +91,7 @@ const DashboardContainer = ({ validId }) => {
     const arr = data.container;
     const dataArr = [];
     const dataCache = {};
-
+    //loop through the container data and add the appropriate data points to the cache (grouped by timestamp)
     arr.forEach(container => {
       const stats = container.stats;
       stats.forEach(stat => {
@@ -100,29 +101,31 @@ const DashboardContainer = ({ validId }) => {
         dataCache[stat.timestamp].push(stat[datatype]);
       })
     })
-
+    //loop through the cache and average the values at each timestamp
     Object.keys(dataCache).forEach(time => {
       const timeArr = dataCache[time];
       const inputArr = [];
       const outputArr = [];
       timeArr.forEach(el => {
         const idx = el.indexOf('B');
+        //the bar chart data is in strings with numbers of bytes, so we need to slice up to grab input and output numbers
         inputArr.push(el.slice(0, idx));
         const out = el.slice(idx + 4, -1)
         outputArr.push(out === '' ? '0' : out)
       })
+      //averaging input and output
       const totalIn = inputArr.reduce((a, c) => Number(a) + Number(c))
-
       const totalOut = outputArr.reduce((a, c) => Number(a) + Number(c))
-
       let avgIn = totalIn / inputArr.length;
       avgIn = isNaN(avgIn) ? 0 : formatBytes(avgIn);
       let avgOut = totalOut / outputArr.length;
       avgOut = isNaN(avgOut) ? 0 : formatBytes(avgOut);
       let timestamp = Number(time);
       timestamp = new Date(timestamp)
+      //pushing data in the correct format for recharts to the output array
       dataArr.push({ name: timestamp.getDate(), in: avgIn, out: avgOut })
     })
+    //sorting by date
     dataArr.sort((a, b) => a.name - b.name)
     return dataArr;
   }
@@ -145,7 +148,6 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Container Health Overview </div>
             <button className = 'refresh-button' onClick = {reRender}>Refresh</button>
           </div>
-
           {/* <!-- Card body --> */}
           <div className="card-body">
             {/* <!-- Chart wrapper --> */}
@@ -202,7 +204,6 @@ const DashboardContainer = ({ validId }) => {
             {loading ? <div>Loading...</div> : <PIDChart data={data} populateChart={populateChart} />}
           </div>
         </div>
-
       </div>
     </div>
   )

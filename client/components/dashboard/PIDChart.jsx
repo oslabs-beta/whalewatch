@@ -6,6 +6,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 
 const PIDChart = ({ data, populateChart }) => {
 
+  //invoking the function to process the data for recharts
   const dataArr = populateChart('pids', data);
   
   return (

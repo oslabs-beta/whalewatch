@@ -5,8 +5,8 @@ import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'rec
 import formatBytes from "../../containers/containerHelpers";
 
 const NetIOChart = ({ data, populateBarChart }) => {
-  //stats will be received from the container
 
+  //invoking the function to process the data for recharts
   const dataArr = populateBarChart('netio', data);
   return (
     <>
