@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS users (
   username varchar(50) UNIQUE NOT NULL,
   email varchar(100) UNIQUE NOT NULL,
   password varchar(100) NOT NULL
-)
+);
 
 CREATE TABLE IF NOT EXISTS containers (
   id SERIAL PRIMARY KEY,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS containers (
   status varchar(50),
   state varchar(50),
   owner integer REFERENCES users(id) NOT NULL
-)
+);
 
 CREATE TABLE IF NOT EXISTS stats (
   id SERIAL PRIMARY KEY,
