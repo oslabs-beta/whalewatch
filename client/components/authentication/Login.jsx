@@ -18,13 +18,10 @@ const style = {
   }
 };
 
-<<<<<<< HEAD
 // mutation to use upon attempting to login 
-=======
 
 
 // GraphQL login mutation query
->>>>>>> dev
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!){
     validateUser(username: $username, password: $password){
@@ -64,7 +61,7 @@ const Login = ({ setUserId }) => {
       onError: (err) => console.log('there is an error', err),
       onCompleted: (data) => {
         if (data.validateUser) {
-        //if user validated, set a cookie using jwt from backend and store in localStorage
+          //if user validated, set a cookie using jwt from backend and store in localStorage
           Cookies.set('id', data.validateUser.id)
           localStorage.setItem('validId', data.validateUser.id)
           localStorage.setItem('validAuth', Cookies.get('access-token'))

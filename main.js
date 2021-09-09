@@ -3,7 +3,7 @@ const path = require('path');
 const url = require('url');
 
 // SET ENV
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
@@ -20,6 +20,6 @@ app.on('ready', function () {
   });
   // Load HTML file into the window
   console.log(__dirname)
-  mainWindow.loadURL('http://localhost:8080');
+  mainWindow.loadFile('./client/index.html');
 })
 
