@@ -3,17 +3,26 @@
 <img src='./client/assets/logoNoText.png' />
 </p>
 
-<h1> Table of Content </h1>
+<h1> Table of Contents </h1>
 <ul>
   <li><a href='#what'>What is WhaleWatch?</a></li>
   <li><a href='#install'>Installation and Setup</a></li>
   <li><a href='#how'>Navigating and Using WhaleWatch</a></li>
   <li><a href='#features'>WhaleWatch Features</a></li>
-  <li><a href='#demo'>Demo</a></li>
+  <li><a href='#team'>Meet the Team</a></li>
 </ul>
 
 <h2 id='what'>What is WhaleWatch?</h2>
 <p> WhaleWatch is a lightweight, open-source monitoring tool for Dockers. WhaleWatch enables developers to monitor Dockers containers through a dashboard that delivers real-time metrics backed by intuitive data visualizations. Developers will be able to keep an eye on the containers that are critical for smooth technical and business operations and also proactively take action before troubles arise. </p>
+
+<h2 id='features'>WhaleWatch Features</h2>
+
+<ul>
+  <li>The ability to collect and display Docker metrics</li>
+  <li>Monitor containers and identify trends through data visualizations</li>
+  <li>Connect to Docker Daemon</li>
+  <li>Drag and drop functionality to stop, start, and restart containers</li>
+</ul>
 
 <h2 id='install'>Installation and Setup</h2>
 <p> WhaleWatch can be downloaded via <a href='http://whalewatchapp.com/'>whalewatchapp.com</a>. Upon downloading, users will be asked to create an account or to sign-in if the user has an existing account. </p>
@@ -39,15 +48,10 @@
 
 <p> Within the Containers component, developers have the ability to easily start, stop and restart containers with ease through intuitive drag and drop functionality.  The containers are displayed and organized categorically by “Active” and “Inactive” containers. </p>
 
-<h2 id='features'>WhaleWatch Features</h2>
-
+<h2 id='team'> Meet the Team </h2>
 <ul>
-  <li>The ability to collect and display Docker metrics</li>
-  <li>Monitor containers and identify trends through data visualizations</li>
-  <li>Connect to Docker Daemon</li>
-  <li>Drag and drop functionality to stop, start, and restart containers</li>
+  <li><a href='#'>Annie Pan - LinkedIn</a></li>
+  <li><a href='#'>Matilda Wang - LinkedIn</a></li>
+  <li><a href='https://www.linkedin.com/in/pkmi/'>Phil Kang - LinkedIn</a></li>
+  <li><a href='#'>Rachel Patterson - LinkedIn</a></li>
 </ul>
-
-
-
-
