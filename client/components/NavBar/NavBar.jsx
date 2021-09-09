@@ -25,13 +25,13 @@ const NavBar = () => {
               <a href="/containers" className="menulist"><i className="bi bi-box"></i>  Containers</a>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a href="/notification" className="menulist"><i className="bi bi-menu-down"></i>  Notifications</a>
             </li>
 
             <li className="nav-item">
               <a href="/settings" className="menulist"><i className="bi bi-sliders"></i>  Settings</a>
-            </li>
+            </li> */}
 
             <li className="nav-item">
               <Link to = "/login" className="menulist" onClick ={removeCookies}><i className="bi bi-sliders"></i>Sign Out</Link>

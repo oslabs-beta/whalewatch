@@ -39,9 +39,7 @@ function forceRerender(){
   return () => setForceRerender(forceRerender => forceRerender + 1)
 }
 
-
 const DashboardContainer = ({ validId }) => {
-
   const reRender = forceRerender();
   //currently, user id is held in local storage
   const variables = { id: Number(localStorage.getItem('validId')) };
@@ -59,6 +57,7 @@ const DashboardContainer = ({ validId }) => {
     const array = data.container;
     const dataArr = [];
     const dataCache = {};
+
     array.forEach(container => {
       const stats = container.stats;
       stats.forEach(stat => {
@@ -68,6 +67,7 @@ const DashboardContainer = ({ validId }) => {
         dataCache[stat.timestamp].push(stat[datatype]);
       })
     })
+
     Object.keys(dataCache).forEach(time => {
       let total = 0;
       dataCache[time].forEach(entry => total += entry);
@@ -90,6 +90,7 @@ const DashboardContainer = ({ validId }) => {
     const arr = data.container;
     const dataArr = [];
     const dataCache = {};
+
     arr.forEach(container => {
       const stats = container.stats;
       stats.forEach(stat => {
@@ -99,6 +100,7 @@ const DashboardContainer = ({ validId }) => {
         dataCache[stat.timestamp].push(stat[datatype]);
       })
     })
+
     Object.keys(dataCache).forEach(time => {
       const timeArr = dataCache[time];
       const inputArr = [];
@@ -110,7 +112,6 @@ const DashboardContainer = ({ validId }) => {
         outputArr.push(out === '' ? '0' : out)
       })
       const totalIn = inputArr.reduce((a, c) => Number(a) + Number(c))
-
 
       const totalOut = outputArr.reduce((a, c) => Number(a) + Number(c))
 
@@ -141,11 +142,10 @@ const DashboardContainer = ({ validId }) => {
           {/* <!-- Card header --> */}
           <div className="card-header">
             {/* <!-- Title --> */}
-            <div className="metric-type">Container Health Overview</div>
+            <div className="metric-type">Container Health Overview </div>
             <button className = 'refresh-button' onClick = {reRender}>Refresh</button>
-            {/* <button className = 'form-button btn btn-info' onClick = {reRender}>Refresh</button> */}
-            
           </div>
+
           {/* <!-- Card body --> */}
           <div className="card-body">
             {/* <!-- Chart wrapper --> */}
@@ -159,17 +159,17 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average CPU Usage</div>
           </div>
           <div className="card-body">
-          {loading ? <div>Loading...</div> : <AverageCPUChart data={data} populateChart={populateChart} />}
+            {loading ? <div>Loading...</div> : <AverageCPUChart data={data} populateChart={populateChart} />}
           </div>
         </div>
 
         {/* AverageMemoryChart */}
         <div className="card1">
           <div className="card-header">
-            <div className="metric-type">Average Memory Usage</div>
+            <div className="metric-type">Average Memory Usage </div>
           </div>
           <div className="card-body">
-          {loading ? <div>Loading...</div> : <AverageMemoryChart data={data} populateChart={populateChart} />}
+            {loading ? <div>Loading...</div> : <AverageMemoryChart data={data} populateChart={populateChart} />}
           </div>
         </div>
 
@@ -179,7 +179,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average Net I/O</div>
           </div>
           <div className="card-body">
-          {loading ? <div>Loading...</div> : <NetIOChart data={data} populateBarChart={populateBarChart} />}
+            {loading ? <div>Loading...</div> : <NetIOChart data={data} populateBarChart={populateBarChart} />}
           </div>
         </div>
 
@@ -189,7 +189,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average Block I/O</div>
           </div>
           <div className="card-body">
-          {loading ? <div>Loading...</div> : <BlockIOChart data={data} populateBarChart={populateBarChart} />}
+            {loading ? <div>Loading...</div> : <BlockIOChart data={data} populateBarChart={populateBarChart} />}
           </div>
         </div>
 
@@ -199,7 +199,7 @@ const DashboardContainer = ({ validId }) => {
             <div className="metric-type">Average PIDs</div>
           </div>
           <div className="card-body">
-          {loading ? <div>Loading...</div> : <PIDChart data={data} populateChart={populateChart} />}
+            {loading ? <div>Loading...</div> : <PIDChart data={data} populateChart={populateChart} />}
           </div>
         </div>
 

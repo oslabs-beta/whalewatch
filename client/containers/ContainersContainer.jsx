@@ -29,18 +29,12 @@ const ContainersContainer = ({validId}) => {
   const { loading, error, data, refetch } = useQuery(GET_CONTAINERS, {variables})
   const [containerData, setContainerData] = useState([])
 
-  const handleDrop = (newValue) => {
-    setContainerData(newValue)
-    
-  }
-
   return (
     <div className='dashbaordContainer'>
       <NavBar />
       <div className='dashbaordData'>
         <div className='dashbaord-header'>Containers</div>
 
-  
         {/* Active Containers */}
         <div className="card2">
           <div className='dnd-board'>
@@ -51,15 +45,15 @@ const ContainersContainer = ({validId}) => {
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">
-              {loading ? <div>Loading...</div> : <DndContainers listOfContainers={data.container} handleDrop={setContainerData} state={'running'} refetch={refetch}/>}
+              {loading ? <div>Loading...</div> : <DndContainers listOfContainers={data.container} state={'running'} refetch={refetch}/>}
             </div>
           </div>
         </div>
 
 
         <div className="restart-stop">
-          <div><Stop containerData={containerData} handleDrop={setContainerData} refetch={refetch} /></div>
-          <div><Restart containerData={containerData} handleDrop={setContainerData} refetch={refetch} /></div>
+          <div><Stop containerData={containerData} refetch={refetch} /></div>
+          <div><Restart containerData={containerData} refetch={refetch} /></div>
         </div> 
 
         {/* InActive Containers */}
@@ -72,12 +66,11 @@ const ContainersContainer = ({validId}) => {
             </div>
             {/* <!-- Card body --> */}
             <div className="card-body">
-              {loading ? <div>Loading...</div> : <DndContainers listOfContainers={data.container} handleDrop={setContainerData} state={'exited'} refetch={refetch} /> }
+              {loading ? <div>Loading...</div> : <DndContainers listOfContainers={data.container} state={'exited'} refetch={refetch} /> }
             </div>
             
           </div>
         </div>
-
 
         </div>
       </div>

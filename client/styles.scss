@@ -34,10 +34,6 @@ font-weight: 700;
     margin-top:3%;
 }
 
-// signupOrLogin {
-//     font-size:30px;
-//     color: #5bc0de;
-// }
 
 .authen-box-color{
     margin-top: 40px;
@@ -46,13 +42,8 @@ font-weight: 700;
     align-items: center;
     width:600px;
     height:700px;
-    // background-color: #ffffff;
-    // border-radius: 25px;
-    // box-shadow: 15px 15px 15px 2px rgb(207, 204, 204);
-    
+
 }
-
-
 
 // Nav Bar Section
 // .vertical-nav{
@@ -63,9 +54,7 @@ font-weight: 700;
 //     flex-direction: column;
 //     align-items: center;
 //     // border-radius: 15px;
-//     box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);
-    
-
+//     box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);  
 // }
 
 .vertical-nav{
@@ -75,12 +64,9 @@ font-weight: 700;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border-radius: 15px;
     box-shadow: 5px 5px 5px 1px rgb(207, 204, 204);
     position:fixed;
-
 }
-
 
 //logo real size: 396 × 302 (25%)
 .logo-small{
@@ -89,21 +75,15 @@ font-weight: 700;
     width: 99px;
     height: 75.5px;
     position: fixed;
-    
 }
 
-
-
-
 .menulist{
-    // margin:50px;
     margin-bottom: 200px;
 }
 
 li {
     margin-top: 40px;
     width: 100%;
-  
 }
 
 i {
@@ -152,13 +132,6 @@ a:hover {
     bottom: 15px;
 }
 
-//logo real size: 
-// .logo-text-only {
-//     margin-top:90%;
-//     margin-left:10%;
-// }
-
-
 
 // Data Section
 .dashbaordContainer {
@@ -166,12 +139,9 @@ a:hover {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    
 }
 
 .dashbaordData{
-    // display: flex;
-    // flex-direction: column;
     align-items: center;
     margin-left:250px;
     min-height:50rem;
@@ -179,17 +149,11 @@ a:hover {
 
 // test
 .card1{
-    // display: flex;
-    // flex-direction: column;
-    // border: 1px solid rgba(180, 74, 74, 0.05);
     background-color: rgb(255, 255, 255);
     background-clip: border-box;
     width:1200px;
-    // margin-left: 15px;
-    // box-shadow: 0px 5px 5px 5px rgb(209, 209, 209);
     border-radius: 0px 0px 15px 15px ;
     margin-bottom: 30px;
-
 }
 
 .top-card-header{
@@ -203,10 +167,6 @@ a:hover {
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
 }
-
-// .card-body{
-//     max-width: 1000px;
-// }
 
 
 #whale-chart{
@@ -238,7 +198,6 @@ a:hover {
     font-weight: 650;
     font-size:18px;
     margin:3.5px;
-
 }
 
 .top-metric-type {
@@ -249,7 +208,6 @@ a:hover {
     margin:3.5px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .dashbaord-header {
@@ -261,8 +219,6 @@ a:hover {
     font-size:1.2em;
 }
 
-
-
 // Settings
 .settingsContainer {
     display: flex;
@@ -270,7 +226,6 @@ a:hover {
     align-items: stretch;
     
 }
-
 .refresh-button {
     margin-top:5px;
     margin-bottom: 5px;
