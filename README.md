@@ -6,9 +6,9 @@
 <h1> Table of Contents </h1>
 <ul>
   <li><a href='#what'>What is WhaleWatch?</a></li>
+  <li><a href='#features'>WhaleWatch Features</a></li>
   <li><a href='#install'>Installation and Setup</a></li>
   <li><a href='#how'>Navigating and Using WhaleWatch</a></li>
-  <li><a href='#features'>WhaleWatch Features</a></li>
   <li><a href='#team'>Meet the Team</a></li>
 </ul>
 
