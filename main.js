@@ -20,6 +20,6 @@ app.on('ready', function () {
   });
   // Load HTML file into the window
   console.log(__dirname)
-  mainWindow.loadfile('./build/index.html');
+  mainWindow.loadURL('http://localhost:8080');
 })
 
